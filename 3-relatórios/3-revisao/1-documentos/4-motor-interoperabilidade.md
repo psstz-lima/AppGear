@@ -126,7 +126,7 @@ Tabela completa contendo:
 ### BLOCOS_YAML
 Blocos prontos para colar em:
 
-`docs/interoperability/modulos.yaml`
+`1-documentos/2-interoperabilidade/modulos.yaml`
 
 Com o seguinte formato:
 
@@ -170,7 +170,7 @@ Com o seguinte formato:
 MAPA_GLOBAL_COMPONENTES
 Bloco destinado a:
 
-docs/interoperability/mapa-global.md
+1-documentos/2-interoperabilidade/mapa-global.md
 
 Gerando:
 
@@ -185,7 +185,7 @@ notas de compatibilidade Topologia A/B.
 FLUXOS_AI_FIRST
 Bloco destinado a:
 
-docs/interoperability/fluxos-ai-first.md
+1-documentos/2-interoperabilidade/fluxos-ai-first.md
 
 Gerando fluxos, por exemplo:
 
