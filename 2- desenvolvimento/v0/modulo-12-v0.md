@@ -42,7 +42,7 @@ Abaixo está o \*\*Módulo 12 – Suíte Guardian (v0.1 Retrofit)\*\* em formato
 
 
 
-A \*\*Suíte Guardian\*\* é a suíte de \*\*Security \& Governance\*\* da plataforma WEBAPP IA / AppGear.
+A \*\*Suíte Guardian\*\* é a suíte de \*\*Security \& Governance\*\* da plataforma AppGear / AppGear.
 
 Ela é responsável por:
 
@@ -336,9 +336,9 @@ O diagnóstico do `Módulo 12 v0.py` apontou:
 
 
 
-&nbsp;    \* `webapp-ia-gitops-core`.
+&nbsp;    \* `appgear-gitops-core`.
 
-&nbsp;    \* `webapp-ia-gitops-suites`.
+&nbsp;    \* `appgear-gitops-suites`.
 
 &nbsp;    \* `appgear-backstage`.
 
@@ -352,7 +352,7 @@ O diagnóstico do `Módulo 12 v0.py` apontou:
 
 &nbsp;  \* Host Ubuntu LTS com Docker + docker-compose e Traefik.
 
-&nbsp;  \* `.env` central em `/opt/webapp-ia/.env`.
+&nbsp;  \* `.env` central em `/opt/appgear/.env`.
 
 
 
@@ -490,13 +490,13 @@ para Browser Isolation, e valores proporcionais para scanners.
 
 
 
-No repo `webapp-ia-gitops-suites`:
+No repo `appgear-gitops-suites`:
 
 
 
 ```bash
 
-cd webapp-ia-gitops-suites
+cd appgear-gitops-suites
 
 mkdir -p apps/guardian/security-suite/pentest-ai
 
@@ -918,7 +918,7 @@ EOF
 
 
 
-\#### 4.5.1 Serviços core (em `webapp-ia-gitops-core`)
+\#### 4.5.1 Serviços core (em `appgear-gitops-core`)
 
 
 
@@ -928,7 +928,7 @@ Aqui só um exemplo de Tika com label de tenant e resources:
 
 ```bash
 
-cd ../webapp-ia-gitops-core
+cd ../appgear-gitops-core
 
 mkdir -p apps/core/legal
 
@@ -1030,7 +1030,7 @@ EOF
 
 
 
-\#### 4.5.2 Add-on Legal AI (em `webapp-ia-gitops-suites`)
+\#### 4.5.2 Add-on Legal AI (em `appgear-gitops-suites`)
 
 
 
@@ -1040,7 +1040,7 @@ De volta ao repo de suítes:
 
 ```bash
 
-cd ../webapp-ia-gitops-suites
+cd ../appgear-gitops-suites
 
 mkdir -p apps/guardian/legal-ai
 
@@ -1598,7 +1598,7 @@ Apenas demo local, sem Kong, mas mantendo `.env` e recursos separados.
 
 ```bash
 
-cd /opt/webapp-ia
+cd /opt/appgear
 
 mkdir -p guardian
 
@@ -1876,7 +1876,7 @@ EOF
 
 
 
-&nbsp;  \* Repo: `webapp-ia-gitops-core`
+&nbsp;  \* Repo: `appgear-gitops-core`
 
 &nbsp;  \* Pastas:
 
@@ -1890,7 +1890,7 @@ EOF
 
 
 
-&nbsp;  \* Repo: `webapp-ia-gitops-suites`
+&nbsp;  \* Repo: `appgear-gitops-suites`
 
 &nbsp;  \* Pastas:
 
@@ -1924,9 +1924,9 @@ EOF
 
 
 
-&nbsp;    \* `/opt/webapp-ia/.env`
+&nbsp;    \* `/opt/appgear/.env`
 
-&nbsp;    \* `/opt/webapp-ia/guardian/docker-compose.guardian.yml`
+&nbsp;    \* `/opt/appgear/guardian/docker-compose.guardian.yml`
 
 
 

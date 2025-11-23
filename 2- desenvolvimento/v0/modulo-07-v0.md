@@ -108,7 +108,7 @@ O **Módulo 07 – Portal Backstage e Integrações Core** define o **Portal Uni
 
 * Cluster `ag-<regiao>-core-<env>` com:
 
-  * **Argo CD** configurado para o repo `webapp-ia-gitops-core`;
+  * **Argo CD** configurado para o repo `appgear-gitops-core`;
   * **Istio** com mTLS STRICT nos namespaces de plataforma;
   * Cadeia **Traefik → Coraza → Kong → Istio** ativa;
   * Namespaces: `backstage`, `appgear-core`, `argocd`, `observability`, `security` etc.
@@ -135,13 +135,13 @@ O **Módulo 07 – Portal Backstage e Integrações Core** define o **Portal Uni
 * `@backstage/create-app` disponível (via npx).
 * Acesso Git a:
 
-  * `webapp-ia-gitops-core` (infra GitOps);
+  * `appgear-gitops-core` (infra GitOps);
   * `appgear-backstage` (código do Portal).
 
 ### Topologia A (opcional, Dev/PoC)
 
 * Ubuntu LTS com Docker + docker-compose;
-* Diretório base `/opt/webapp-ia` com `.env` central padrão.
+* Diretório base `/opt/appgear` com `.env` central padrão.
 
 ---
 
@@ -149,10 +149,10 @@ O **Módulo 07 – Portal Backstage e Integrações Core** define o **Portal Uni
 
 ### 1. Estrutura GitOps do Módulo 07
 
-No repositório `webapp-ia-gitops-core`:
+No repositório `appgear-gitops-core`:
 
 ```bash
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 
 mkdir -p apps/core/backstage
 mkdir -p apps/core/openmetadata
@@ -687,11 +687,11 @@ No backend, endpoint `/scaffolder/workspace` chama o webhook do N8n (M14) que cr
 
 ### 8. Topologia A – Docker Compose (Dev/PoC)
 
-Em `/opt/webapp-ia/backstage`:
+Em `/opt/appgear/backstage`:
 
 ```bash
-mkdir -p /opt/webapp-ia/backstage
-cd /opt/webapp-ia/backstage
+mkdir -p /opt/appgear/backstage
+cd /opt/appgear/backstage
 ```
 
 `.env`:
@@ -902,7 +902,7 @@ cat /vault/secrets/db-creds
 
 * **GitOps Infra**
 
-  * Repositório: `webapp-ia-gitops-core`
+  * Repositório: `appgear-gitops-core`
   * Estrutura:
 
     ```text

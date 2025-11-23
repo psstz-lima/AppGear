@@ -110,7 +110,7 @@ A \*\*Suíte Factory\*\* é a Suíte 1 da plataforma (Núcleo de Construção) e
 
 
 
-&nbsp; \* Suíte Factory declarada via \*\*GitOps/Argo CD\*\* no repo `webapp-ia-gitops-suites`.
+&nbsp; \* Suíte Factory declarada via \*\*GitOps/Argo CD\*\* no repo `appgear-gitops-suites`.
 
 &nbsp; \* CDEs/Builder/Multiplayer rodando em `ws-<workspace\_id>-factory` (vClusters).
 
@@ -352,9 +352,9 @@ A \*\*Suíte Factory\*\* é a Suíte 1 da plataforma (Núcleo de Construção) e
 
 
 
-&nbsp; \* `webapp-ia-gitops-core`;
+&nbsp; \* `appgear-gitops-core`;
 
-&nbsp; \* `webapp-ia-gitops-suites`.
+&nbsp; \* `appgear-gitops-suites`.
 
 
 
@@ -364,7 +364,7 @@ A \*\*Suíte Factory\*\* é a Suíte 1 da plataforma (Núcleo de Construção) e
 
 \* Host Ubuntu LTS com Docker + docker-compose;
 
-\* Estrutura `/opt/webapp-ia` criada:
+\* Estrutura `/opt/appgear` criada:
 
 
 
@@ -388,13 +388,13 @@ A \*\*Suíte Factory\*\* é a Suíte 1 da plataforma (Núcleo de Construção) e
 
 
 
-No repo `webapp-ia-gitops-suites`:
+No repo `appgear-gitops-suites`:
 
 
 
 ```bash
 
-cd webapp-ia-gitops-suites
+cd appgear-gitops-suites
 
 
 
@@ -480,7 +480,7 @@ spec:
 
 &nbsp; source:
 
-&nbsp;   repoURL: https://git.example.com/webapp-ia-gitops-suites.git
+&nbsp;   repoURL: https://git.example.com/appgear-gitops-suites.git
 
 &nbsp;   targetRevision: main
 
@@ -2036,9 +2036,9 @@ No host:
 
 ```bash
 
-sudo mkdir -p /opt/webapp-ia/config/cde
+sudo mkdir -p /opt/appgear/config/cde
 
-cd /opt/webapp-ia
+cd /opt/appgear
 
 ```
 
@@ -2130,7 +2130,7 @@ services:
 
 &nbsp;  ```bash
 
-&nbsp;  cd webapp-ia-gitops-suites
+&nbsp;  cd appgear-gitops-suites
 
 &nbsp;  tree apps/factory
 
@@ -2376,7 +2376,7 @@ services:
 
 &nbsp;  \* Efeito: confusão de responsabilidade e risco de rollback errado.
 
-&nbsp;  \* Correção: manter este módulo apenas em `webapp-ia-gitops-suites` na pasta `apps/factory`.
+&nbsp;  \* Correção: manter este módulo apenas em `appgear-gitops-suites` na pasta `apps/factory`.
 
 
 
@@ -2416,7 +2416,7 @@ services:
 
 
 
-&nbsp;  No repo `webapp-ia-gitops-suites`:
+&nbsp;  No repo `appgear-gitops-suites`:
 
 
 
@@ -2442,11 +2442,11 @@ services:
 
 
 
-&nbsp;  \* `/opt/webapp-ia/.env`;
+&nbsp;  \* `/opt/appgear/.env`;
 
-&nbsp;  \* `/opt/webapp-ia/docker-compose.yml`;
+&nbsp;  \* `/opt/appgear/docker-compose.yml`;
 
-&nbsp;  \* `/opt/webapp-ia/config/cde/`.
+&nbsp;  \* `/opt/appgear/config/cde/`.
 
 
 

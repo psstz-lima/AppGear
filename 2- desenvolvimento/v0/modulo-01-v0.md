@@ -13,9 +13,9 @@ Vou reescrever o **Módulo 01** já com esse ajuste, deixando o módulo 100% ade
 
 ## O que é
 
-O **Módulo 01 – Bootstrap GitOps e Argo CD** define a fundação GitOps da plataforma AppGear / WEBAPP IA na **Topologia B (Kubernetes)**, padronizada em `/opt/appgear`, com:
+O **Módulo 01 – Bootstrap GitOps e Argo CD** define a fundação GitOps da plataforma AppGear / AppGear na **Topologia B (Kubernetes)**, padronizada em `/opt/appgear`, com:
 
-1. **Argo CD instalado via manifesto vendorizado** no repositório `webapp-ia-infra-bootstrap`, com:
+1. **Argo CD instalado via manifesto vendorizado** no repositório `appgear-infra-bootstrap`, com:
 
    * versão pinada (ex.: `v2.11.0`);
    * recursos (CPU/memória) configurados;
@@ -47,12 +47,12 @@ O **Módulo 01 – Bootstrap GitOps e Argo CD** define a fundação GitOps da pl
 
    * `Applications`:
 
-     * `root-core-ag-br-core-dev`   → aciona Core via `webapp-ia-gitops-core`.
-     * `root-suites-ag-br-core-dev` → aciona Suites via `webapp-ia-gitops-suites`.
+     * `root-core-ag-br-core-dev`   → aciona Core via `appgear-gitops-core`.
+     * `root-suites-ag-br-core-dev` → aciona Suites via `appgear-gitops-suites`.
 
    * `ApplicationSet`:
 
-     * `workspaces-appset` → gera 1 `Application` por workspace a partir de `webapp-ia-gitops-workspaces`.
+     * `workspaces-appset` → gera 1 `Application` por workspace a partir de `appgear-gitops-workspaces`.
 
 ---
 
@@ -120,10 +120,10 @@ Repositórios locais:
 
 ```bash
 mkdir -p /opt/appgear/git/\
-webapp-ia-infra-bootstrap \
-webapp-ia-gitops-core \
-webapp-ia-gitops-suites \
-webapp-ia-gitops-workspaces
+appgear-infra-bootstrap \
+appgear-gitops-core \
+appgear-gitops-suites \
+appgear-gitops-workspaces
 ```
 
 ---
@@ -135,15 +135,15 @@ webapp-ia-gitops-workspaces
 ```dotenv
 APPGEAR_GIT_ROOT=/opt/appgear/git
 
-APPGEAR_INFRA_BOOTSTRAP_LOCAL=${APPGEAR_GIT_ROOT}/webapp-ia-infra-bootstrap
-APPGEAR_GITOPS_CORE_LOCAL=${APPGEAR_GIT_ROOT}/webapp-ia-gitops-core
-APPGEAR_GITOPS_SUITES_LOCAL=${APPGEAR_GIT_ROOT}/webapp-ia-gitops-suites
-APPGEAR_GITOPS_WORKSPACES_LOCAL=${APPGEAR_GIT_ROOT}/webapp-ia-gitops-workspaces
+APPGEAR_INFRA_BOOTSTRAP_LOCAL=${APPGEAR_GIT_ROOT}/appgear-infra-bootstrap
+APPGEAR_GITOPS_CORE_LOCAL=${APPGEAR_GIT_ROOT}/appgear-gitops-core
+APPGEAR_GITOPS_SUITES_LOCAL=${APPGEAR_GIT_ROOT}/appgear-gitops-suites
+APPGEAR_GITOPS_WORKSPACES_LOCAL=${APPGEAR_GIT_ROOT}/appgear-gitops-workspaces
 
-APPGEAR_INFRA_BOOTSTRAP_REMOTE=git@git.example.com:appgear/webapp-ia-infra-bootstrap.git
-APPGEAR_GITOPS_CORE_REMOTE=git@git.example.com:appgear/webapp-ia-gitops-core.git
-APPGEAR_GITOPS_SUITES_REMOTE=git@git.example.com:appgear/webapp-ia-gitops-suites.git
-APPGEAR_GITOPS_WORKSPACES_REMOTE=git@git.example.com:appgear/webapp-ia-gitops-workspaces.git
+APPGEAR_INFRA_BOOTSTRAP_REMOTE=git@git.example.com:appgear/appgear-infra-bootstrap.git
+APPGEAR_GITOPS_CORE_REMOTE=git@git.example.com:appgear/appgear-gitops-core.git
+APPGEAR_GITOPS_SUITES_REMOTE=git@git.example.com:appgear/appgear-gitops-suites.git
+APPGEAR_GITOPS_WORKSPACES_REMOTE=git@git.example.com:appgear/appgear-gitops-workspaces.git
 
 # Versão pinada do Argo CD
 ARGOCD_VERSION=v2.11.0
@@ -184,10 +184,10 @@ ssh-keygen -t ed25519 -C "argocd@appgear" -f /opt/appgear/keys/argocd -N ""
 
 Cadastrar `/opt/appgear/keys/argocd.pub` como Deploy Key (read-only) nos remotos:
 
-* `webapp-ia-infra-bootstrap`
-* `webapp-ia-gitops-core`
-* `webapp-ia-gitops-suites`
-* `webapp-ia-gitops-workspaces`
+* `appgear-infra-bootstrap`
+* `appgear-gitops-core`
+* `appgear-gitops-suites`
+* `appgear-gitops-workspaces`
 
 ---
 
@@ -344,28 +344,28 @@ metadata:
     appgear.io/tenant-id: global
 data:
   repositories: |
-    - url: git@git.example.com:appgear/webapp-ia-infra-bootstrap.git
+    - url: git@git.example.com:appgear/appgear-infra-bootstrap.git
       name: infra-bootstrap
       type: git
       sshPrivateKeySecret:
         name: argocd-repo-cred
         key: sshPrivateKey
 
-    - url: git@git.example.com:appgear/webapp-ia-gitops-core.git
+    - url: git@git.example.com:appgear/appgear-gitops-core.git
       name: gitops-core
       type: git
       sshPrivateKeySecret:
         name: argocd-repo-cred
         key: sshPrivateKey
 
-    - url: git@git.example.com:appgear/webapp-ia-gitops-suites.git
+    - url: git@git.example.com:appgear/appgear-gitops-suites.git
       name: gitops-suites
       type: git
       sshPrivateKeySecret:
         name: argocd-repo-cred
         key: sshPrivateKey
 
-    - url: git@git.example.com:appgear/webapp-ia-gitops-workspaces.git
+    - url: git@git.example.com:appgear/appgear-gitops-workspaces.git
       name: gitops-workspaces
       type: git
       sshPrivateKeySecret:
@@ -608,7 +608,7 @@ Esperado: conter pelo menos:
 
 * **Manifests:**
 
-  * `webapp-ia-infra-bootstrap` (mesma estrutura anterior), com o texto do comando do Secret ajustado no próprio módulo como referência operacional.
+  * `appgear-infra-bootstrap` (mesma estrutura anterior), com o texto do comando do Secret ajustado no próprio módulo como referência operacional.
 
 Com essa alteração específica no comando do `argocd-repo-cred`, você fecha a pendência de:
 

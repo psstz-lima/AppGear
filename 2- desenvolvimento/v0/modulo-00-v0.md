@@ -39,7 +39,7 @@ Ele é a **base**: qualquer módulo técnico (01..N) que não respeitar este mó
    Topologia A (host único, Docker Compose) é excelente para DEV, mas **não** é adequada para produção. Produção deve ser Topologia B (Swarm/K8s) com HA e auto-recuperação.
 
 3. **Migração de redes com segurança**
-   A migração de nomes de rede (ex.: `core-net` → `appgear-net-core`) exige cuidado em ambientes existentes. É necessário planejar **janela de manutenção** para evitar interrupções inesperadas.
+   A migração de nomes de rede (ex.: legado `core-net` → padrão `appgear-net-core`) exige cuidado em ambientes existentes. É necessário planejar **janela de manutenção** para evitar interrupções inesperadas.
 
 4. **Governança de metadados forte também em Kubernetes**
    Sem labels/annotations padronizadas, Topologia B fica cega para observabilidade, FinOps e auditoria. Este módulo corrige isso de forma explícita.
@@ -144,7 +144,6 @@ touch "docs/architecture/0 - Contrato v0.md"
 touch "docs/architecture/1 - Desenvolvimento v0.md"
 touch "docs/architecture/2 - Auditoria v0.md"
 touch "docs/architecture/3 - Interoperabilidade v0.md"
-touch "docs/architecture/4 - Comercial v0.md"
 
 touch "docs/interoperabilidade/mapa-global.md"
 touch "docs/interoperabilidade/modulos.yaml"
@@ -234,7 +233,7 @@ Se já existir ambiente rodando com redes antigas (`core-net`, `apps-net` ou sim
 2. Identifique redes legadas:
 
    ```bash
-   docker network ls | egrep "core-net|apps-net|webapp-ia-net"
+   docker network ls | egrep "core-net|apps-net|appgear-net-core|appgear-net-apps"
    ```
 
 3. Atualize o `docker-compose.yml` para usar apenas `appgear-net-core` e `appgear-net-apps`.
@@ -249,7 +248,7 @@ Se já existir ambiente rodando com redes antigas (`core-net`, `apps-net` ou sim
 
    ```bash
    docker network rm core-net apps-net 2>/dev/null || true
-   docker network rm webapp-ia-net-core webapp-ia-net-apps 2>/dev/null || true
+   docker network rm appgear-net-core appgear-net-apps 2>/dev/null || true
    ```
 
 6. Suba novamente a stack com as redes novas:

@@ -56,7 +56,7 @@ O \*\*Módulo 13\*\* define como a plataforma AppGear trata:
 
 
 
-&nbsp;  \* Repositório Git dedicado: `webapp-ia-gitops-workspaces`.
+&nbsp;  \* Repositório Git dedicado: `appgear-gitops-workspaces`.
 
 &nbsp;  \* Estrutura `workspaces/<workspace\_id>/` com arquivos declarativos do workspace (vCluster, quotas, NetworkPolicies, metadata).
 
@@ -66,7 +66,7 @@ O \*\*Módulo 13\*\* define como a plataforma AppGear trata:
 
 
 
-&nbsp;  \* Um único \*\*ApplicationSet\*\* no `webapp-ia-gitops-core` lê o repositório `webapp-ia-gitops-workspaces` e cria automaticamente os \*\*Applications de cada workspace\*\*, sem edição manual do Core.
+&nbsp;  \* Um único \*\*ApplicationSet\*\* no `appgear-gitops-core` lê o repositório `appgear-gitops-workspaces` e cria automaticamente os \*\*Applications de cada workspace\*\*, sem edição manual do Core.
 
 &nbsp;  \* Cada novo diretório em `workspaces/` → novo workspace provisionado.
 
@@ -106,15 +106,15 @@ O \*\*Módulo 13\*\* define como a plataforma AppGear trata:
 
 
 
-&nbsp;  \* v0 (NOK): para cada cliente era criado manualmente um arquivo `workspace-acme-erp-apps.yaml` dentro de `webapp-ia-gitops-core`.
+&nbsp;  \* v0 (NOK): para cada cliente era criado manualmente um arquivo `workspace-acme-erp-apps.yaml` dentro de `appgear-gitops-core`.
 
-&nbsp;  \* v0.1 (OK): um único `ApplicationSet` (`workspaces-appset`) gera \*\*automaticamente\*\* os Applications de workspaces a partir do repositório `webapp-ia-gitops-workspaces`.
+&nbsp;  \* v0.1 (OK): um único `ApplicationSet` (`workspaces-appset`) gera \*\*automaticamente\*\* os Applications de workspaces a partir do repositório `appgear-gitops-workspaces`.
 
 &nbsp;  \* Resultado:
 
 
 
-&nbsp;    \* Novo workspace = novo diretório em `webapp-ia-gitops-workspaces`, sem mexer no Core.
+&nbsp;    \* Novo workspace = novo diretório em `appgear-gitops-workspaces`, sem mexer no Core.
 
 
 
@@ -172,7 +172,7 @@ O \*\*Módulo 13\*\* define como a plataforma AppGear trata:
 
 
 
-&nbsp;    \* O plugin de Workspaces comita em `webapp-ia-gitops-workspaces`, não em `webapp-ia-gitops-core`.
+&nbsp;    \* O plugin de Workspaces comita em `appgear-gitops-workspaces`, não em `appgear-gitops-core`.
 
 &nbsp;  \* \*\*M09/M10/M11/M12 – Suítes:\*\*
 
@@ -250,15 +250,15 @@ O \*\*Módulo 13\*\* define como a plataforma AppGear trata:
 
 \* `appgear-contracts`
 
-\* `webapp-ia-gitops-core`
+\* `appgear-gitops-core`
 
-\* `webapp-ia-gitops-suites`
+\* `appgear-gitops-suites`
 
 \* `appgear-backstage`
 
 \* `appgear-workspace-template` (template base por workspace)
 
-\* \*\*Novo:\*\* `webapp-ia-gitops-workspaces` (registro GitOps de workspaces).
+\* \*\*Novo:\*\* `appgear-gitops-workspaces` (registro GitOps de workspaces).
 
 
 
@@ -290,21 +290,21 @@ No host de desenvolvimento:
 
 ```bash
 
-mkdir -p ~/git/webapp-ia-gitops-workspaces
+mkdir -p ~/git/appgear-gitops-workspaces
 
-cd ~/git/webapp-ia-gitops-workspaces
+cd ~/git/appgear-gitops-workspaces
 
 
 
 git init
 
-git remote add origin git@github.com:appgear/webapp-ia-gitops-workspaces.git
+git remote add origin git@github.com:appgear/appgear-gitops-workspaces.git
 
 
 
 cat > README.md << 'EOF'
 
-\# webapp-ia-gitops-workspaces
+\# appgear-gitops-workspaces
 
 
 
@@ -354,7 +354,7 @@ git push -u origin main
 
 ```bash
 
-cd ~/git/webapp-ia-gitops-workspaces
+cd ~/git/appgear-gitops-workspaces
 
 
 
@@ -954,7 +954,7 @@ EOF
 
 ```bash
 
-cd ~/git/webapp-ia-gitops-workspaces
+cd ~/git/appgear-gitops-workspaces
 
 git add workspaces/acme-erp
 
@@ -974,13 +974,13 @@ git push
 
 
 
-No repositório `webapp-ia-gitops-core`:
+No repositório `appgear-gitops-core`:
 
 
 
 ```bash
 
-cd ~/git/webapp-ia-gitops-core
+cd ~/git/appgear-gitops-core
 
 
 
@@ -1032,7 +1032,7 @@ spec:
 
 &nbsp; sourceRepos:
 
-&nbsp;   - git@github.com:appgear/webapp-ia-gitops-workspaces.git
+&nbsp;   - git@github.com:appgear/appgear-gitops-workspaces.git
 
 &nbsp; destinations:
 
@@ -1094,7 +1094,7 @@ kubectl apply -f apps/core/workspaces/argocd-project-workspaces.yaml -n argocd
 
 
 
-Ainda em `webapp-ia-gitops-core`:
+Ainda em `appgear-gitops-core`:
 
 
 
@@ -1140,7 +1140,7 @@ spec:
 
 &nbsp;   - git:
 
-&nbsp;       repoURL: git@github.com:appgear/webapp-ia-gitops-workspaces.git
+&nbsp;       repoURL: git@github.com:appgear/appgear-gitops-workspaces.git
 
 &nbsp;       revision: main
 
@@ -1178,7 +1178,7 @@ spec:
 
 &nbsp;     source:
 
-&nbsp;       repoURL: git@github.com:appgear/webapp-ia-gitops-workspaces.git
+&nbsp;       repoURL: git@github.com:appgear/appgear-gitops-workspaces.git
 
 &nbsp;       targetRevision: main
 
@@ -1236,7 +1236,7 @@ kubectl apply -f apps/core/workspaces/workspaces-appset.yaml -n argocd
 
 
 
-A partir deste ponto, \*\*qualquer novo diretório\*\* em `webapp-ia-gitops-workspaces/workspaces/<workspace\_id>` será descoberto automaticamente e terá um `Application ws-<workspace\_id>` criado pelo Argo CD.
+A partir deste ponto, \*\*qualquer novo diretório\*\* em `appgear-gitops-workspaces/workspaces/<workspace\_id>` será descoberto automaticamente e terá um `Application ws-<workspace\_id>` criado pelo Argo CD.
 
 
 
@@ -1248,7 +1248,7 @@ A partir deste ponto, \*\*qualquer novo diretório\*\* em `webapp-ia-gitops-work
 
 
 
-1\. No repositório `webapp-ia-gitops-workspaces`:
+1\. No repositório `appgear-gitops-workspaces`:
 
 
 
@@ -1286,7 +1286,7 @@ A partir deste ponto, \*\*qualquer novo diretório\*\* em `webapp-ia-gitops-work
 
 &nbsp;  \* Recebe `tenant\_id`, `workspace\_id`, `display\_name`.
 
-&nbsp;  \* Scaffolder copia o template do `appgear-workspace-template` para `webapp-ia-gitops-workspaces/workspaces/<workspace\_id>`.
+&nbsp;  \* Scaffolder copia o template do `appgear-workspace-template` para `appgear-gitops-workspaces/workspaces/<workspace\_id>`.
 
 &nbsp;  \* Faz commit \& push (automatizando o passo 1).
 
@@ -1568,17 +1568,17 @@ Esperado dentro do vCluster:
 
 
 
-7\. \*\*Misturar manifests de workspace no `webapp-ia-gitops-core`\*\*
+7\. \*\*Misturar manifests de workspace no `appgear-gitops-core`\*\*
 
 
 
-&nbsp;  \* Sintoma: diretórios `apps/workspaces` dentro de `webapp-ia-gitops-core` começam a conter configurações específicas de cliente.
+&nbsp;  \* Sintoma: diretórios `apps/workspaces` dentro de `appgear-gitops-core` começam a conter configurações específicas de cliente.
 
 &nbsp;  \* Correção:
 
 
 
-&nbsp;    \* M13 v0.1 define que \*\*todo\*\* conteúdo de workspace mora em `webapp-ia-gitops-workspaces`; o Core apenas referencia via ApplicationSet.
+&nbsp;    \* M13 v0.1 define que \*\*todo\*\* conteúdo de workspace mora em `appgear-gitops-workspaces`; o Core apenas referencia via ApplicationSet.
 
 
 
@@ -1608,7 +1608,7 @@ Esperado dentro do vCluster:
 
 
 
-&nbsp;  \* `webapp-ia-gitops-core`
+&nbsp;  \* `appgear-gitops-core`
 
 
 
@@ -1620,7 +1620,7 @@ Esperado dentro do vCluster:
 
 
 
-&nbsp;  \* `webapp-ia-gitops-workspaces`
+&nbsp;  \* `appgear-gitops-workspaces`
 
 
 
@@ -1644,7 +1644,7 @@ Esperado dentro do vCluster:
 
 
 
-&nbsp;    \* Pipelines de provisionamento de clientes devem operar exclusivamente via edit/commit no `webapp-ia-gitops-workspaces`, nunca aplicando manifests diretamente via `kubectl`.
+&nbsp;    \* Pipelines de provisionamento de clientes devem operar exclusivamente via edit/commit no `appgear-gitops-workspaces`, nunca aplicando manifests diretamente via `kubectl`.
 
 
 

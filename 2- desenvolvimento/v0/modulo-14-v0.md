@@ -54,7 +54,7 @@ Fluxo canônico:
 
 
 
-\*\*N8n (AI-First Generator) → Git (webapp-ia-gitops-workspaces) → Argo Events → Argo Workflows → Argo CD → vCluster (M13)\*\*
+\*\*N8n (AI-First Generator) → Git (appgear-gitops-workspaces) → Argo Events → Argo Workflows → Argo CD → vCluster (M13)\*\*
 
 
 
@@ -62,13 +62,13 @@ Pontos-chave:
 
 
 
-\* O \*\*N8n não aplica nada no cluster\*\* e \*\*não toca o repositório core\*\* (`webapp-ia-gitops-core`).
+\* O \*\*N8n não aplica nada no cluster\*\* e \*\*não toca o repositório core\*\* (`appgear-gitops-core`).
 
 
 
-&nbsp; \* Ele \*\*apenas escreve/commita\*\* na árvore do repositório `webapp-ia-gitops-workspaces` (uma pasta `ws-<workspace\_id>`).
+&nbsp; \* Ele \*\*apenas escreve/commita\*\* na árvore do repositório `appgear-gitops-workspaces` (uma pasta `ws-<workspace\_id>`).
 
-\* O \*\*M13\*\* (Workspaces/vCluster) define um \*\*ApplicationSet\*\* que lê dinamicamente as pastas de workspaces no repo `webapp-ia-gitops-workspaces`.
+\* O \*\*M13\*\* (Workspaces/vCluster) define um \*\*ApplicationSet\*\* que lê dinamicamente as pastas de workspaces no repo `appgear-gitops-workspaces`.
 
 
 
@@ -244,7 +244,7 @@ Pontos-chave:
 
 
 
-&nbsp;   \* Assumimos que o ApplicationSet observa \*\*subpastas de `workspaces/`\*\* no repo `webapp-ia-gitops-workspaces`.
+&nbsp;   \* Assumimos que o ApplicationSet observa \*\*subpastas de `workspaces/`\*\* no repo `appgear-gitops-workspaces`.
 
 &nbsp;   \* Assumimos convenção: `workspaces/ws-<workspace\_id>/k8s/vcluster/...`.
 
@@ -256,19 +256,19 @@ Pontos-chave:
 
 
 
-\* `webapp-ia-gitops-core` (Infra Core + App-of-Apps).
+\* `appgear-gitops-core` (Infra Core + App-of-Apps).
 
-\* `webapp-ia-gitops-suites` (Suítes Factory/Brain/Operations/Guardian).
+\* `appgear-gitops-suites` (Suítes Factory/Brain/Operations/Guardian).
 
-\* `webapp-ia-gitops-workspaces` (Workspaces/vCluster por cliente/workspace).
+\* `appgear-gitops-workspaces` (Workspaces/vCluster por cliente/workspace).
 
 
 
 > Regra de ouro deste módulo:
 
-> \*\*N8n só escreve no `webapp-ia-gitops-workspaces`.\*\*
+> \*\*N8n só escreve no `appgear-gitops-workspaces`.\*\*
 
-> `webapp-ia-gitops-core` e `webapp-ia-gitops-suites` são editados apenas por equipe de plataforma / automação infra, nunca pelo N8n.
+> `appgear-gitops-core` e `appgear-gitops-suites` são editados apenas por equipe de plataforma / automação infra, nunca pelo N8n.
 
 
 
@@ -290,7 +290,7 @@ Pontos-chave:
 
 
 
-\### 4.1 Estrutura do repositório `webapp-ia-gitops-workspaces`
+\### 4.1 Estrutura do repositório `appgear-gitops-workspaces`
 
 
 
@@ -300,9 +300,9 @@ Pontos-chave:
 
 ```bash
 
-mkdir -p ~/workspace/webapp-ia-gitops-workspaces
+mkdir -p ~/workspace/appgear-gitops-workspaces
 
-cd ~/workspace/webapp-ia-gitops-workspaces
+cd ~/workspace/appgear-gitops-workspaces
 
 git init
 
@@ -386,7 +386,7 @@ git add .
 
 git commit -m "mod14: estrutura base workspaces (v0.1)"
 
-git remote add origin git@github.com:appgear/webapp-ia-gitops-workspaces.git
+git remote add origin git@github.com:appgear/appgear-gitops-workspaces.git
 
 git push -u origin main
 
@@ -408,13 +408,13 @@ git push -u origin main
 
 
 
-No repo `webapp-ia-gitops-core`, crie os templates de pipeline.
+No repo `appgear-gitops-core`, crie os templates de pipeline.
 
 
 
 ```bash
 
-cd ~/workspace/webapp-ia-gitops-core
+cd ~/workspace/appgear-gitops-core
 
 mkdir -p apps/core/gitops/pipeline-templates
 
@@ -1158,7 +1158,7 @@ git push origin main
 
 
 
-> Este webhook será chamado exclusivamente pelo N8n, após o commit no repo `webapp-ia-gitops-workspaces`.
+> Este webhook será chamado exclusivamente pelo N8n, após o commit no repo `appgear-gitops-workspaces`.
 
 
 
@@ -1186,7 +1186,7 @@ com chave:
 
 
 
-\* `ssh\_private\_key`: conteúdo da chave privada usada para acesso `git@github.com:appgear/webapp-ia-gitops-workspaces.git`.
+\* `ssh\_private\_key`: conteúdo da chave privada usada para acesso `git@github.com:appgear/appgear-gitops-workspaces.git`.
 
 
 
@@ -1232,7 +1232,7 @@ env:
 
 &nbsp; - name: AI\_FIRST\_WORKSPACES\_REPO\_SSH
 
-&nbsp;   value: git@github.com:appgear/webapp-ia-gitops-workspaces.git
+&nbsp;   value: git@github.com:appgear/appgear-gitops-workspaces.git
 
 &nbsp; - name: AI\_FIRST\_WORKSPACES\_BRANCH
 
@@ -1358,7 +1358,7 @@ Fluxo lógico (o JSON export oficial do N8n deve ser versionado em repo próprio
 
 
 
-&nbsp;  \* Clona `webapp-ia-gitops-workspaces` usando `AI\_FIRST\_WORKSPACES\_REPO\_SSH`.
+&nbsp;  \* Clona `appgear-gitops-workspaces` usando `AI\_FIRST\_WORKSPACES\_REPO\_SSH`.
 
 &nbsp;  \* Copia/atualiza a pasta do workspace.
 
@@ -1456,7 +1456,7 @@ git rev-parse HEAD > /tmp/ai-first\_last\_commit
 
 &nbsp; "workspace\_id": "ws-123",
 
-&nbsp; "repo\_url": "git@github.com:appgear/webapp-ia-gitops-workspaces.git",
+&nbsp; "repo\_url": "git@github.com:appgear/appgear-gitops-workspaces.git",
 
 &nbsp; "git\_revision": "{{conteúdo de /tmp/ai-first\_last\_commit}}"
 
@@ -1466,7 +1466,7 @@ git rev-parse HEAD > /tmp/ai-first\_last\_commit
 
 
 
-> \*\*N8n nunca escreve em `webapp-ia-gitops-core`.\*\*
+> \*\*N8n nunca escreve em `appgear-gitops-core`.\*\*
 
 > Eventuais ajustes em ApplicationSet, Argo CD, etc., são responsabilidade da equipe de plataforma (M01/M13).
 
@@ -1496,9 +1496,9 @@ Exemplo mínimo:
 
 ```bash
 
-mkdir -p /opt/webapp-ia/ai-first
+mkdir -p /opt/appgear/ai-first
 
-cd /opt/webapp-ia/ai-first
+cd /opt/appgear/ai-first
 
 ```
 
@@ -1658,7 +1658,7 @@ Você deve ver:
 
 ```bash
 
-cd ~/workspace/webapp-ia-gitops-workspaces
+cd ~/workspace/appgear-gitops-workspaces
 
 git pull
 
@@ -1702,13 +1702,13 @@ kubectl get pods -n argocd -l appgear.io/tenant-id=t-<tenant\_id>
 
 
 
-\* Em `webapp-ia-gitops-core`, veja o log:
+\* Em `appgear-gitops-core`, veja o log:
 
 
 
 ```bash
 
-cd ~/workspace/webapp-ia-gitops-core
+cd ~/workspace/appgear-gitops-core
 
 git log --oneline | head
 
@@ -1756,7 +1756,7 @@ git log --oneline | head
 
 
 
-&nbsp; \* Commits automáticos no `webapp-ia-gitops-core` (ex.: modificando ApplicationSet, apps-core, etc.).
+&nbsp; \* Commits automáticos no `appgear-gitops-core` (ex.: modificando ApplicationSet, apps-core, etc.).
 
 \* Correção:
 
@@ -1764,7 +1764,7 @@ git log --oneline | head
 
 &nbsp; \* Remover qualquer passo no fluxo N8n que clone/commit no repo core.
 
-&nbsp; \* Garantir que o N8n só conhece `webapp-ia-gitops-workspaces`.
+&nbsp; \* Garantir que o N8n só conhece `appgear-gitops-workspaces`.
 
 
 
@@ -1906,7 +1906,7 @@ git log --oneline | head
 
 
 
-\* Repositório: `webapp-ia-gitops-core`
+\* Repositório: `appgear-gitops-core`
 
 \* Estrutura:
 
@@ -1940,7 +1940,7 @@ apps/core/gitops/
 
 
 
-\* Repositório: `webapp-ia-gitops-workspaces`
+\* Repositório: `appgear-gitops-workspaces`
 
 \* Estrutura:
 
