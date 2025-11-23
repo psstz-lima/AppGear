@@ -32,11 +32,11 @@ Os objetivos desta diretriz de auditoria são:
    - outputs do `Prompt-Motor-Auditoria-v1` em YAML;
    - checklists e relatórios formais de auditoria.
 
-> **Guia para chats – Seção 1 (Objetivo)**  
-> - **0 – Contrato:** use esta seção como base para saber “para que serve” a auditoria na visão da plataforma.  
-> - **1 – Desenvolvimento:** garanta que cada módulo possa ser auditado contra estes objetivos.  
-> - **2 – Auditoria:** trate esta seção como o “escopo-mãe” de qualquer checklist.  
-> - **3 – Interoperabilidade e 4 – Comercial:** use esta seção para justificar auditorias técnicas perante áreas de negócio ou parceiros.
+> **Guia para chats – Seção 1 (Objetivo)**
+> - **0 – Contrato:** use esta seção como base para saber “para que serve” a auditoria na visão da plataforma.
+> - **1 – Desenvolvimento:** garanta que cada módulo possa ser auditado contra estes objetivos.
+> - **2 – Auditoria:** trate esta seção como o “escopo-mãe” de qualquer checklist.
+> - **3 – Interoperabilidade:** use esta seção para justificar auditorias técnicas perante áreas de negócio ou parceiros.
 
 ---
 
@@ -49,8 +49,7 @@ Esta diretriz cobre:
 - Auditoria de **documentação**:
   - `0 – Contrato v0`;
   - `1 – Desenvolvimento v0.x` (módulos 00–17);
-  - `3 – Interoperabilidade v0`;
-  - `4 – Comercial v0`.
+  - `3 – Interoperabilidade v0`.
 - Auditoria de **infraestrutura e implantação**:
   - Stack Core (Traefik, Kong, Istio, Tailscale, Ceph, Vault, Observabilidade, FinOps etc.);
   - Suítes add-ons (Factory, Brain, Operations, Guardian);
@@ -64,25 +63,24 @@ Esta diretriz cobre:
 
 A auditoria deve sempre considerar:
 
-- `docs/architecture/0-contrato/0-Contrato-v0.md` – **Contrato de Arquitetura AppGear v0**.  
+- `1-documentos/0-contrato/0-contrato-v0.md` – **Contrato de Arquitetura AppGear v0**.
 - Módulos de desenvolvimento (v0.x/v0.1):
 
   ```text
-  docs/architecture/1-desenvolvimento/v0.1-raw/Modulo-XX-v0.1.md
+  2- desenvolvimento/v0/modulo-XX-v0.md
   ```
 
 - Módulos já retrofitados (v1.x):
 
   ```text
-  docs/architecture/1-desenvolvimento/v1.0-retrofit/Modulo-XX-v1.0.md
+  2- desenvolvimento/v1.0-retrofit/modulo-XX-v1.0.md
   ```
 
-- `docs/architecture/3-interoperabilidade/3-Interoperabilidade-v0.md` – integrações.  
-- `docs/architecture/4-comercial/4-Comercial-v0.md` – visão de produto, limites e planos.  
-- `docs/retrofit/Manifesto-Coordenacao-Retrofit-v1.md` – regras globais de retrofit.  
-- `docs/retrofit/Prompt-Motor-Retrofit-v1.md` – motor de retrofit de módulos.  
-- `docs/retrofit/Prompt-Motor-Auditoria-v1.md` – motor de auditoria por módulo.  
-- `docs/retrofit/auditoria-modulos.yaml` – mapa de NCs por módulo.
+- `1-documentos/2-interoperabilidade/2-interoperabilidade-v0.md` – integrações.
+- `1-documentos/retrofit/Manifesto-Coordenacao-Retrofit-v1.md` – regras globais de retrofit.
+- `1-documentos/retrofit/Prompt-Motor-Retrofit-v1.md` – motor de retrofit de módulos.
+- `1-documentos/retrofit/Prompt-Motor-Auditoria-v1.md` – motor de auditoria por módulo.
+- `1-documentos/retrofit/auditoria-modulos.yaml` – mapa de NCs por módulo.
 
 > **Guia para chats – Seção 2 (Escopo e referências)**  
 > - **2 – Auditoria:** sempre ancorar qualquer parecer nesses arquivos; se um item não estiver mapeado em nenhum deles, registrar como lacuna de documentação.  
@@ -100,8 +98,7 @@ Antes de iniciar a auditoria, garanta:
 - Versão atual de **2 – Auditoria v0** (este documento).  
 - Acesso aos módulos de desenvolvimento v0.1 e, quando existirem, v1.x retrabalhados.  
 - (Opcional, mas recomendado) acesso a:
-  - **3 – Interoperabilidade v0**;
-  - **4 – Comercial v0**.
+  - **3 – Interoperabilidade v0**.
 
 ### 3.2. Repositórios e código
 
@@ -189,8 +186,8 @@ Nesta fase você avalia a **arquitetura como um todo**, independente de módulos
 1. Verificar a presença de:
    - Prometheus, Grafana, Loki, OpenCost, Lago (ou equivalentes).  
 2. Validar:
-   - `ScaledObjects` KEDA para add-ons pesados, exceto se explicitamente 24/7 em **4 – Comercial**;
-   - dashboards de custo por workspace/suíte.
+  - `ScaledObjects` KEDA para add-ons pesados, com exceções documentadas no Contrato v0;
+  - dashboards de custo por workspace/suíte.
 
 #### 4.2.5. Governança, segurança e identidade
 
@@ -208,7 +205,7 @@ Nesta fase você avalia a **arquitetura como um todo**, independente de módulos
 1. Confirmar que:
    - `0 – Contrato v0` está versionado em `docs/architecture/0-contrato/0-Contrato-v0.md`;
    - `2 – Auditoria v0` está em `docs/architecture/2-auditoria/2-Auditoria-v0.md`;
-   - `3 – Interoperabilidade v0` e `4 – Comercial v0` estão em suas respectivas pastas.  
+   - `3 – Interoperabilidade v0` está em sua pasta correspondente.
 2. Verificar:
    - se todos os documentos referenciam explicitamente o Contrato v0;
    - se a versão (`v0`) está correta nos cabeçalhos.  
@@ -339,22 +336,27 @@ Principais erros recorrentes:
 - Este arquivo deve ser salvo como:
 
   ```text
-  appgear-docs/docs/architecture/2-auditoria/2-Auditoria-v0.md
+  1-documentos/1-auditoria/1-auditoria-v0.md
   ```
 
 - Ele referencia e depende de:
 
   ```text
-  appgear-docs/docs/architecture/0-contrato/0-Contrato-v0.md
-  appgear-docs/docs/architecture/3-interoperabilidade/3-Interoperabilidade-v0.md
-  appgear-docs/docs/architecture/4-comercial/4-Comercial-v0.md
+  1-documentos/0-contrato/0-contrato-v0.md
+  1-documentos/2-interoperabilidade/2-interoperabilidade-v0.md
+  1-documentos/4-comercial/4-comercial-v0.md
   ```
 
 - Os módulos de desenvolvimento são mantidos como:
 
   ```text
-  appgear-docs/docs/architecture/1-desenvolvimento/v0.1-raw/Modulo-XX-v0.1.md
-  appgear-docs/docs/architecture/1-desenvolvimento/v1.0-retrofit/Modulo-XX-v1.0.md
+  2- desenvolvimento/v0/modulo-XX-v0.md
+  ```
+
+- Módulos retrofitados são mantidos como:
+
+  ```text
+  2- desenvolvimento/v1.0-retrofit/modulo-XX-v1.0.md
   ```
 
 - Em repositórios externos (clientes, parceiros), manter:
@@ -379,8 +381,8 @@ Principais erros recorrentes:
 | G03 | GitOps como fonte de verdade (Argo), sem bypass manual em produção                                   | Contrato v0 / M01, M02           |    |     |      |                          |
 | G04 | Multi-tenancy implementado (tenant/workspace/vCluster)                                               | Contrato v0 / M02                |    |     |      |                          |
 | G05 | LiteLLM como gateway único para LLMs (sem chamadas diretas)                                          | Contrato v0 / IA/RAG             |    |     |      |                          |
-| G06 | KEDA/Scale-to-Zero para add-ons pesados, salvo exceções documentadas em 4 – Comercial                | Contrato v0 / M03 / Comercial    |    |     |      |                          |
-| G07 | Documentação 0–4 versionada e referenciando explicitamente o Contrato v0                             | 0,1,2,3,4                        |    |     |      |                          |
+| G06 | KEDA/Scale-to-Zero para add-ons pesados, conforme exceções documentadas no Contrato v0               | Contrato v0 / M03        |    |     |      |                          |
+| G07 | Documentação 0–3 versionada e referenciando explicitamente o Contrato v0                             | 0,1,2,3                  |    |     |      |                          |
 
 ### 8.2. Checklist por Módulo (MXX)
 
