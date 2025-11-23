@@ -1,14 +1,14 @@
 # AppGear – Contrato de Arquitetura v0
 
-Este repositório centraliza a documentação oficial de arquitetura da plataforma **AppGear**, incluindo o **Contrato de Arquitetura v0** e os documentos derivados de desenvolvimento, auditoria, interoperabilidade e visão comercial.
+Este repositório centraliza a documentação oficial de arquitetura da plataforma **AppGear**, incluindo o **Contrato de Arquitetura v0** e os documentos derivados de desenvolvimento, auditoria e interoperabilidade.
 
-A AppGear é uma plataforma de **construção de ecossistemas de negócios orientada por IA**, focada em geração **AI-First** ponta a ponta (Backend, Frontend, BI, processos), modularidade via 4 Suítes e eficiência de nuvem via **Scale-to-Zero (KEDA)**.
+A AppGear é uma plataforma de **construção de ecossistemas de negócios orientada por IA**, focada em geração **AI-First** ponta a ponta (Backend, Frontend, BI e processos), modularidade via 4 Suítes e eficiência de nuvem via **Scale-to-Zero (KEDA)**.
 
 ---
 
 ## Visão geral
 
-O **0 – Contrato de Arquitetura v0** é a **fonte da verdade arquitetural** da AppGear. Ele estabelece regras obrigatórias para:
+O **0 – Contrato de Arquitetura** é a **fonte da verdade arquitetural** da AppGear. Ele estabelece regras obrigatórias para:
 
 - Stack de infraestrutura **Core** e **Add-ons** (Kubernetes, GitOps, Service Mesh, Storage, DR).
 - Serviços de dados, IA, automação, UI e SSO.
@@ -26,7 +26,7 @@ Este README serve como porta de entrada para quem precisa **entender, evoluir ou
 A família de documentos é organizada em 4 arquivos principais:
 
 - `0-Contrato` – Contrato de Arquitetura (documento de referência principal).
-- `1-Desenvolvimento` – Implantação técnica por módulos (00 a 16).
+- `1-Desenvolvimento` – Implantação técnica por módulos (00 a 17).
 - `2-Auditoria` – Checklist de aderência ao contrato.
 - `3-Interoperabilidade` – Parecer sobre integrações entre serviços.
 
@@ -34,10 +34,10 @@ Sugestão de localização:
 
 ```text
 appgear-docs/
-  docs/architecture/0-contrato/0-contrato-v0.md
-  docs/architecture/1-desenvolvimento-v0.md
-  docs/architecture/2-auditoria-v0.md
-  docs/architecture/3-interoperabilidade-v0.md
+  documentos/0-contrato/0-contrato-v0.md
+  documentos/2-desenvolvimento/v0/modulo-00-v0.md
+  documentos/1-auditoria/1-auditoria-v0.md
+  documentos/2-interoperabikidade/2-interoperabilidade-v0.md
 ```
 
 ---
@@ -162,7 +162,7 @@ appgear-suites/
     docs/architecture/3-interoperabilidade-v0.md
   ```
 
-Este repositório (onde este README reside) normalmente corresponde ao **`appgear-docs`** ou a um monorepo equivalente, contendo a pasta `docs/architecture/`.
+Este repositório (onde este README reside) normalmente corresponde ao **`appgear-docs`** ou a um monorepo equivalente, contendo a estrutura raiz de pastas.
 
 ---
 
@@ -174,7 +174,7 @@ Sugestão de leitura/uso:
    Entenda o produto (Business Ecosystem Generator), as Suítes, o Stack Core/Add-on, Topologias A/B, multi-tenancy e restrições estruturais.
 
 2. **Vá para `1-Desenvolvimento`**
-   Veja como o contrato é implementado em **módulos 00–16** (GitOps, Service Mesh, Storage, Segurança, Suítes etc).
+   Veja como o contrato é implementado em **módulos 00–17** (GitOps, Service Mesh, Storage, Segurança, Suítes etc).
 
 3. **Use `2-Auditoria`**
    Para validar se um ambiente ou implantação está aderente ao contrato (checklist técnico).
