@@ -17,7 +17,7 @@ Você pode substituir diretamente a seção do Módulo 2 em `1 - Desenvolvimento
 
 ## O que é
 
-Este módulo define a **rede core** da plataforma AppGear/WEBAPP IA na **Topologia B (Kubernetes)**, estabelecendo que:
+Este módulo define a **rede core** da plataforma AppGear na **Topologia B (Kubernetes)**, estabelecendo que:
 
 1. Todo tráfego **interno** (Leste–Oeste) passa pela **malha de serviço Istio**, com **mTLS em modo STRICT**.
 

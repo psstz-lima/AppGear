@@ -13,7 +13,7 @@ Vou reescrever o **Módulo 01** já com esse ajuste, deixando o módulo 100% ade
 
 ## O que é
 
-O **Módulo 01 – Bootstrap GitOps e Argo CD** define a fundação GitOps da plataforma AppGear / WEBAPP IA na **Topologia B (Kubernetes)**, padronizada em `/opt/appgear`, com:
+O **Módulo 01 – Bootstrap GitOps e Argo CD** define a fundação GitOps da plataforma AppGear na **Topologia B (Kubernetes)**, padronizada em `/opt/appgear`, com:
 
 1. **Argo CD instalado via manifesto vendorizado** no repositório `webapp-ia-infra-bootstrap`, com:
 
