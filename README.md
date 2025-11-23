@@ -23,13 +23,12 @@ Este README serve como porta de entrada para quem precisa **entender, evoluir ou
 
 ## Documentos oficiais
 
-A família de documentos é organizada em 5 arquivos principais:
+A família de documentos é organizada em 4 arquivos principais:
 
 - `0-Contrato` – Contrato de Arquitetura (documento de referência principal).
 - `1-Desenvolvimento` – Implantação técnica por módulos (00 a 16).
 - `2-Auditoria` – Checklist de aderência ao contrato.
 - `3-Interoperabilidade` – Parecer sobre integrações entre serviços.
-- `4-Comercial` – Visão de produto, planos e limites de oferta.
 
 Sugestão de localização:
 
@@ -39,7 +38,6 @@ appgear-docs/
   docs/architecture/1-desenvolvimento-v0.md
   docs/architecture/2-auditoria-v0.md
   docs/architecture/3-interoperabilidade-v0.md
-  docs/architecture/4-comercial-v0.md
 ```
 
 ---
@@ -157,13 +155,12 @@ appgear-suites/
   operations/
   guardian/
 
-appgear-docs/
-  docs/architecture/0-contrato/0-Contrato-v0.md
-  docs/architecture/1-desenvolvimento-v0.md
-  docs/architecture/2-auditoria-v0.md
-  docs/architecture/3-interoperabilidade-v0.md
-  docs/architecture/4-comercial-v0.md
-```
+  appgear-docs/
+    docs/architecture/0-contrato/0-Contrato-v0.md
+    docs/architecture/1-desenvolvimento-v0.md
+    docs/architecture/2-auditoria-v0.md
+    docs/architecture/3-interoperabilidade-v0.md
+  ```
 
 Este repositório (onde este README reside) normalmente corresponde ao **`appgear-docs`** ou a um monorepo equivalente, contendo a pasta `docs/architecture/`.
 
@@ -173,20 +170,17 @@ Este repositório (onde este README reside) normalmente corresponde ao **`appgea
 
 Sugestão de leitura/uso:
 
-1. **Comece em `0-Contrato`**  
+1. **Comece em `0-Contrato`**
    Entenda o produto (Business Ecosystem Generator), as Suítes, o Stack Core/Add-on, Topologias A/B, multi-tenancy e restrições estruturais.
 
-2. **Vá para `1-Desenvolvimento`**  
+2. **Vá para `1-Desenvolvimento`**
    Veja como o contrato é implementado em **módulos 00–16** (GitOps, Service Mesh, Storage, Segurança, Suítes etc).
 
-3. **Use `2-Auditoria`**  
+3. **Use `2-Auditoria`**
    Para validar se um ambiente ou implantação está aderente ao contrato (checklist técnico).
 
-4. **Consulte `3-Interoperabilidade`**  
+4. **Consulte `3-Interoperabilidade`**
    Quando precisar entender integrações entre serviços (por exemplo, Backstage ↔ Flowise ↔ N8n ↔ Suítes).
-
-5. **Leia `4-Comercial`**  
-   Para mapear limitações de oferta, planos e definição de quais serviços podem ser 24/7 vs Scale-to-Zero.
 
 ---
 
@@ -218,7 +212,7 @@ Este repositório é direcionado a:
 
 - Arquitetos de software e de plataforma.
 - Engenheiros de infraestrutura / SRE / DevOps.
-- Times de produto responsáveis por AppGear / WEBAPP IA.
+- Times de produto responsáveis por AppGear.
 - Auditores técnicos e consultores de segurança.
 - Parceiros e integradores que precisam aderir ao contrato da plataforma.
 

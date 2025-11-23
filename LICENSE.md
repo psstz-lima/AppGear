@@ -1,4 +1,4 @@
-APPGEAR / WEBAPP IA – LICENÇA PROPRIETÁRIA v0
+APPGEAR – LICENÇA PROPRIETÁRIA v0
 
 VERSÃO: 0
 DATA: 20/11/2025
@@ -8,7 +8,7 @@ CONTATO: eu.plima@outlook.com.br
 
 1. OBJETO
 
-1.1. Este instrumento ("LICENÇA") regula o uso do código-fonte, artefatos, documentações, scripts de automação, manifests, modelos de infraestrutura e demais ativos de software relacionados à plataforma APPGEAR / WEBAPP IA (coletivamente, o "SOFTWARE"), desenvolvidos e detidos pelo TITULAR.
+1.1. Este instrumento ("LICENÇA") regula o uso do código-fonte, artefatos, documentações, scripts de automação, manifests, modelos de infraestrutura e demais ativos de software relacionados à plataforma APPGEAR (coletivamente, o "SOFTWARE"), desenvolvidos e detidos pelo TITULAR.
 
 1.2. Esta LICENÇA se aplica a todos os arquivos deste repositório e de repositórios correlatos indicados como parte da "Arquitetura AppGear", exceto quando um arquivo contiver de forma explícita outra licença aplicável.
 
@@ -33,7 +33,7 @@ CONTATO: eu.plima@outlook.com.br
      (c) intransferível;
      (d) revogável;
 para instalar, configurar e executar o SOFTWARE, exclusivamente para:
-     (i) desenvolvimento, testes, operação e manutenção de ambientes que utilizem a plataforma APPGEAR / WEBAPP IA; e
+     (i) desenvolvimento, testes, operação e manutenção de ambientes que utilizem a plataforma APPGEAR; e
      (ii) fins internos do LICENCIADO ou do cliente final identificado em CONTRATO COMERCIAL.
 
 3.2. É vedado qualquer uso do SOFTWARE fora do escopo contratado ou desta LICENÇA, incluindo, sem limitação:
@@ -49,14 +49,14 @@ para instalar, configurar e executar o SOFTWARE, exclusivamente para:
      (b) publicar, disponibilizar ou expor o SOFTWARE em repositórios públicos, fóruns, marketplaces ou quaisquer meios que permitam o acesso não autorizado a código, manifests ou documentação proprietária;
      (c) modificar, adaptar, traduzir, fazer engenharia reversa, descompilar, desmontar ou de qualquer forma tentar obter o código-fonte de partes do SOFTWARE que não foram disponibilizadas como tal;
      (d) remover, ocultar ou alterar avisos de direitos autorais, marcas, logotipos, avisos de confidencialidade ou quaisquer notas de propriedade incluídas no SOFTWARE ou na sua documentação;
-     (e) utilizar o SOFTWARE para desenvolver, treinar ou auxiliar na construção de produtos/serviços concorrentes que repliquem substancialmente a arquitetura, os fluxos ou as funcionalidades centrais da plataforma APPGEAR / WEBAPP IA;
+     (e) utilizar o SOFTWARE para desenvolver, treinar ou auxiliar na construção de produtos/serviços concorrentes que repliquem substancialmente a arquitetura, os fluxos ou as funcionalidades centrais da plataforma APPGEAR;
      (f) utilizar o SOFTWARE em violação à legislação aplicável, incluindo, mas não se limitando a, normas de proteção de dados, privacidade, segurança da informação e propriedade intelectual.
 
 4.2. Qualquer uso não autorizado do SOFTWARE constituirá infração contratual e violação de direitos de propriedade intelectual, sujeitando o infrator às sanções civis, administrativas e criminais cabíveis.
 
 5. COMPONENTES DE TERCEIROS E MICROSSERVIÇOS
 
-5.1. A plataforma APPGEAR / WEBAPP IA integra e orquestra diversos componentes de terceiros, tais como, a título exemplificativo: Traefik, Istio, Keycloak, midPoint, Vault, OpenFGA, OPA, Falco, Ceph, Postgres/PostGIS, Redis, Qdrant, RabbitMQ, Redpanda, Meilisearch, Backstage, Tailscale, n8n, Flowise, LiteLLM, Directus, Appsmith, Metabase, Airbyte, JupyterHub, MLflow, ThingsBoard, Robocorp, LitmusChaos, entre outros.
+5.1. A plataforma APPGEAR integra e orquestra diversos componentes de terceiros, tais como, a título exemplificativo: Traefik, Istio, Keycloak, midPoint, Vault, OpenFGA, OPA, Falco, Ceph, Postgres/PostGIS, Redis, Qdrant, RabbitMQ, Redpanda, Meilisearch, Backstage, Tailscale, n8n, Flowise, LiteLLM, Directus, Appsmith, Metabase, Airbyte, JupyterHub, MLflow, ThingsBoard, Robocorp, LitmusChaos, entre outros.
 
 5.2. Esses componentes de terceiros podem ser:
      (a) distribuídos juntamente com o SOFTWARE; ou
@@ -142,4 +142,4 @@ sem prejuízo dos direitos mínimos já concedidos ao LICENCIADO nos CONTRATOS C
 ---
 
 © 2025-2025 APPGEAR. Todos os direitos reservados.
-APPGEAR / WEBAPP IA é marca e plataforma proprietária do TITULAR ou de seus licenciadores.
+APPGEAR é marca e plataforma proprietária do TITULAR ou de seus licenciadores.
