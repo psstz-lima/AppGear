@@ -129,8 +129,8 @@ Na **Topologia B (Kubernetes)**, é esperado:
 * `kubectl`, `kustomize`, `argocd`, `git` instalados na estação de operação.
 * Permissão de escrita nos repositórios Git:
 
-  * `webapp-ia-gitops-core` (infra/core).
-  * `webapp-ia-gitops-suites` (aplicações/suítes).
+  * `appgear-gitops-core` (infra/core).
+  * `appgear-gitops-suites` (aplicações/suítes).
   * `appgear-contracts` (documentação).
 
 ---
@@ -175,7 +175,7 @@ Na **Topologia B (Kubernetes)**, é esperado:
 No repositório GitOps Core:
 
 ```bash
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 ```
 
 Exemplo de Application para **Keycloak** (wave -2):
@@ -199,7 +199,7 @@ metadata:
 spec:
   project: appgear-core
   source:
-    repoURL: https://git.example.com/webapp-ia-gitops-core.git
+    repoURL: https://git.example.com/appgear-gitops-core.git
     targetRevision: main
     path: apps/core/identity/keycloak
   destination:
@@ -219,10 +219,10 @@ Aplicar o mesmo padrão para:
 * `core-opa`, `core-openfga` – `-2`.
 * `core-istio`, `core-traefik`, `core-coraza`, `core-kong`, `core-litelm` – `-1`.
 
-Nos repositórios de Suítes (`webapp-ia-gitops-suites`), aplicar **wave 0** para Backstage, Flowise, N8n, Directus, Appsmith, Metabase e demais Suítes.
+Nos repositórios de Suítes (`appgear-gitops-suites`), aplicar **wave 0** para Backstage, Flowise, N8n, Directus, Appsmith, Metabase e demais Suítes.
 
 ```bash
-cd webapp-ia-gitops-suites
+cd appgear-gitops-suites
 # Ajustar annotations argocd.argoproj.io/sync-wave: "0" em cada Application de suíte
 ```
 
@@ -331,7 +331,7 @@ E aplicar via `patchesStrategicMerge` em cada kustomization.
 No repositório Core:
 
 ```bash
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 mkdir -p apps/core/reloader
 ```
 
@@ -425,7 +425,7 @@ Aplicar em:
 No repositório Core:
 
 ```bash
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 mkdir -p apps/core/observability/rules
 ```
 
@@ -643,7 +643,7 @@ resources:
 
 3. **Repositórios GitOps**
 
-   * **Core (`webapp-ia-gitops-core`)**
+   * **Core (`appgear-gitops-core`)**
 
      * Applications com Sync Waves:
 
@@ -659,7 +659,7 @@ resources:
 
        * `apps/core/observability/rules/dependency-alerts.yaml`
 
-   * **Suítes (`webapp-ia-gitops-suites`)**
+   * **Suítes (`appgear-gitops-suites`)**
 
      * Ajustes de Sync Waves e Init Containers nos manifests de:
 

@@ -234,7 +234,7 @@ O \*\*Módulo 16 – Conectividade Híbrida\*\* entrega a camada de \*\*VPN/Tún
 
 \* Host Ubuntu LTS com Docker / docker-compose.
 
-\* Estrutura básica em `/opt/webapp-ia/`:
+\* Estrutura básica em `/opt/appgear/`:
 
 
 
@@ -262,7 +262,7 @@ No host (Topologia A):
 
 ```bash
 
-cd /opt/webapp-ia
+cd /opt/appgear
 
 
 
@@ -328,7 +328,7 @@ vault kv put kv/appgear/connectivity/tailscale \\
 
 
 
-\### 4.2 Estrutura GitOps – `webapp-ia-gitops-core`
+\### 4.2 Estrutura GitOps – `appgear-gitops-core`
 
 
 
@@ -338,7 +338,7 @@ No repositório GitOps:
 
 ```bash
 
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 
 
 
@@ -942,7 +942,7 @@ spec:
 
 &nbsp; source:
 
-&nbsp;   repoURL: git@github.com:appgear/webapp-ia-gitops-core.git
+&nbsp;   repoURL: git@github.com:appgear/appgear-gitops-core.git
 
 &nbsp;   targetRevision: main
 
@@ -998,7 +998,7 @@ No host de demo:
 
 ```bash
 
-cd /opt/webapp-ia
+cd /opt/appgear
 
 
 
@@ -1346,7 +1346,7 @@ ping -c3 <ip-do-host>
 
 
 
-\* \*\*Repositório GitOps Core (`webapp-ia-gitops-core`)\*\*
+\* \*\*Repositório GitOps Core (`appgear-gitops-core`)\*\*
 
 
 
@@ -1396,9 +1396,9 @@ ping -c3 <ip-do-host>
 
 
 
-&nbsp; \* `/opt/webapp-ia/.env` – variáveis Tailscale.
+&nbsp; \* `/opt/appgear/.env` – variáveis Tailscale.
 
-&nbsp; \* `/opt/webapp-ia/docker-compose.yml` – serviço `vpn-gateway`.
+&nbsp; \* `/opt/appgear/docker-compose.yml` – serviço `vpn-gateway`.
 
 
 

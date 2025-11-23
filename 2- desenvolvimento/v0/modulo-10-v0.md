@@ -118,7 +118,7 @@ A \*\*Suíte Brain\*\* é a suíte de inteligência da plataforma, composta por 
 
 
 
-&nbsp; \* Implementada via GitOps em `webapp-ia-gitops-suites/apps/brain`;
+&nbsp; \* Implementada via GitOps em `appgear-gitops-suites/apps/brain`;
 
 &nbsp; \* Exposição externa SEMPRE passa por:
 
@@ -296,9 +296,9 @@ A \*\*Suíte Brain\*\* é a suíte de inteligência da plataforma, composta por 
 
 
 
-&nbsp; \* `webapp-ia-gitops-suites` (Suítes);
+&nbsp; \* `appgear-gitops-suites` (Suítes);
 
-&nbsp; \* `webapp-ia-gitops-core` (Core).
+&nbsp; \* `appgear-gitops-core` (Core).
 
 
 
@@ -308,7 +308,7 @@ A \*\*Suíte Brain\*\* é a suíte de inteligência da plataforma, composta por 
 
 \* Host Linux com Docker + docker-compose;
 
-\* Diretório base `/opt/webapp-ia/brain`;
+\* Diretório base `/opt/appgear/brain`;
 
 \* .env central compartilhado com outros módulos (se desejado).
 
@@ -328,7 +328,7 @@ A \*\*Suíte Brain\*\* é a suíte de inteligência da plataforma, composta por 
 
 ```bash
 
-cd webapp-ia-gitops-suites
+cd appgear-gitops-suites
 
 
 
@@ -1910,15 +1910,15 @@ EOF
 
 
 
-Em `/opt/webapp-ia/brain`:
+Em `/opt/appgear/brain`:
 
 
 
 ```bash
 
-mkdir -p /opt/webapp-ia/brain
+mkdir -p /opt/appgear/brain
 
-cd /opt/webapp-ia/brain
+cd /opt/appgear/brain
 
 ```
 
@@ -2072,7 +2072,7 @@ docker compose -f docker-compose.brain.yml up -d
 
 ```bash
 
-cd webapp-ia-gitops-suites
+cd appgear-gitops-suites
 
 tree apps/brain
 
@@ -2312,7 +2312,7 @@ curl -k https://brain.dev.appgear.local/agents/ws-<workspace\_id>/health -H "Aut
 
 
 
-\* `webapp-ia-gitops-suites/apps/brain/\*\*` conforme comandos acima.
+\* `appgear-gitops-suites/apps/brain/\*\*` conforme comandos acima.
 
 
 
@@ -2320,11 +2320,11 @@ curl -k https://brain.dev.appgear.local/agents/ws-<workspace\_id>/health -H "Aut
 
 
 
-\* `/opt/webapp-ia/brain/.env`
+\* `/opt/appgear/brain/.env`
 
-\* `/opt/webapp-ia/brain/docker-compose.brain.yml`
+\* `/opt/appgear/brain/docker-compose.brain.yml`
 
-\* `/opt/webapp-ia/brain/data`, `/opt/webapp-ia/brain/notebooks`, `/opt/webapp-ia/brain/mlruns`.
+\* `/opt/appgear/brain/data`, `/opt/appgear/brain/notebooks`, `/opt/appgear/brain/mlruns`.
 
 
 

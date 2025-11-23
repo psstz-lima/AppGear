@@ -152,10 +152,10 @@ Atende diretamente às exigências do **0 - Contrato v0** e corrige os pontos le
 
 ### 4.1 Estrutura GitOps do Módulo 06
 
-No repositório `webapp-ia-gitops-core`:
+No repositório `appgear-gitops-core`:
 
 ```bash
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 
 mkdir -p apps/core/identity
 mkdir -p apps/core/keycloak
@@ -866,11 +866,11 @@ EOF
 
 ### 4.6 Topologia A – Docker/Legacy (laboratório)
 
-Em `/opt/webapp-ia/sso`:
+Em `/opt/appgear/sso`:
 
 ```bash
-sudo mkdir -p /opt/webapp-ia/sso
-cd /opt/webapp-ia/sso
+sudo mkdir -p /opt/appgear/sso
+cd /opt/appgear/sso
 ```
 
 `.env` (apenas para laboratório):
@@ -911,7 +911,7 @@ services:
     volumes:
       - ../data/postgres-sso:/var/lib/postgresql/data
     networks:
-      - webapp-ia
+      - appgear
 
   core-keycloak:
     image: quay.io/keycloak/keycloak:24.0
@@ -932,7 +932,7 @@ services:
     ports:
       - "8082:8080"
     networks:
-      - webapp-ia
+      - appgear
 
   core-midpoint:
     image: evolveum/midpoint:4.8
@@ -951,10 +951,10 @@ services:
     ports:
       - "8083:8080"
     networks:
-      - webapp-ia
+      - appgear
 
 networks:
-  webapp-ia:
+  appgear:
     driver: bridge
 EOF
 ```
@@ -1120,7 +1120,7 @@ curl -s -X POST "${OPENFGA_ENDPOINT}/stores/<STORE_ID>/check" \
 
 ## 7. Onde salvar
 
-1. **Repositório GitOps Core – `webapp-ia-gitops-core`**
+1. **Repositório GitOps Core – `appgear-gitops-core`**
 
    * `apps/core/identity/`
 
@@ -1164,7 +1164,7 @@ curl -s -X POST "${OPENFGA_ENDPOINT}/stores/<STORE_ID>/check" \
      spec:
        project: default
        source:
-         repoURL: https://github.com/appgear/webapp-ia-gitops-core.git
+         repoURL: https://github.com/appgear/appgear-gitops-core.git
          targetRevision: main
          path: apps/core/identity
        destination:
@@ -1186,9 +1186,9 @@ curl -s -X POST "${OPENFGA_ENDPOINT}/stores/<STORE_ID>/check" \
 
    * Servidor Linux:
 
-     * `/opt/webapp-ia/sso/.env`
-     * `/opt/webapp-ia/sso/docker-compose.sso.yml`
-     * `/opt/webapp-ia/data/postgres-sso/` (dados locais).
+     * `/opt/appgear/sso/.env`
+     * `/opt/appgear/sso/docker-compose.sso.yml`
+     * `/opt/appgear/data/postgres-sso/` (dados locais).
 
 Com este retrofit, o **Módulo 06** passa a estar **conforme** em:
 

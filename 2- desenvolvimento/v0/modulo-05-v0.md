@@ -148,10 +148,10 @@ Este módulo define, em formato GitOps, a camada de **Segurança e Segredos** da
 
 ### 1. Estrutura de diretórios GitOps
 
-No repositório `webapp-ia-gitops-core`:
+No repositório `appgear-gitops-core`:
 
 ```bash
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 
 mkdir -p apps/core/security/{vault,opa,falco,openfga}
 ```
@@ -835,7 +835,7 @@ metadata:
 spec:
   project: appgear-core
   source:
-    repoURL: git@github.com:appgear/webapp-ia-gitops-core.git
+    repoURL: git@github.com:appgear/appgear-gitops-core.git
     targetRevision: main
     path: apps/core/security
   destination:
@@ -977,7 +977,7 @@ spec:
   (ajustar caminho conforme padrão real do seu monorepo de documentação).
 
 * **Local dos manifests (GitOps):**
-  Repositório `webapp-ia-gitops-core/`:
+  Repositório `appgear-gitops-core/`:
 
   * `apps/core/security/namespace.yaml`
   * `apps/core/security/kustomization.yaml`

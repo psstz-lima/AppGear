@@ -366,9 +366,9 @@ A Suíte Operations opera em:
 
 
 
-&nbsp; \* `webapp-ia-gitops-core`
+&nbsp; \* `appgear-gitops-core`
 
-&nbsp; \* `webapp-ia-gitops-suites`
+&nbsp; \* `appgear-gitops-suites`
 
 &nbsp; \* Repositórios de serviços `appgear/ops-\*`.
 
@@ -402,7 +402,7 @@ A Suíte Operations opera em:
 
 ```bash
 
-cd webapp-ia-gitops-suites
+cd appgear-gitops-suites
 
 
 
@@ -492,7 +492,7 @@ spec:
 
 &nbsp; source:
 
-&nbsp;   repoURL: https://git.example.com/webapp-ia-gitops-suites.git
+&nbsp;   repoURL: https://git.example.com/appgear-gitops-suites.git
 
 &nbsp;   targetRevision: main
 
@@ -2176,11 +2176,11 @@ EOF
 
 ```bash
 
-mkdir -p /opt/webapp-ia/operations
+mkdir -p /opt/appgear/operations
 
 
 
-cat > /opt/webapp-ia/operations/docker-compose.operations.yml << 'EOF'
+cat > /opt/appgear/operations/docker-compose.operations.yml << 'EOF'
 
 version: "3.9"
 
@@ -2278,7 +2278,7 @@ EOF
 
 ```bash
 
-cat >> /opt/webapp-ia/.env << 'EOF'
+cat >> /opt/appgear/.env << 'EOF'
 
 OPS\_THINGSBOARD\_DB\_PASSWORD=trocar-para-senha-segura
 
@@ -2306,7 +2306,7 @@ EOF
 
 &nbsp;  ```bash
 
-&nbsp;  cd webapp-ia-gitops-suites
+&nbsp;  cd appgear-gitops-suites
 
 &nbsp;  tree apps/operations
 
@@ -2592,7 +2592,7 @@ EOF
 
 
 
-&nbsp;  \* `webapp-ia-gitops-suites/apps/operations/\*\*`
+&nbsp;  \* `appgear-gitops-suites/apps/operations/\*\*`
 
 &nbsp;    contendo todos os YAMLs mostrados neste módulo.
 
@@ -2606,9 +2606,9 @@ EOF
 
 
 
-&nbsp;  \* `/opt/webapp-ia/.env` (central).
+&nbsp;  \* `/opt/appgear/.env` (central).
 
-&nbsp;  \* `/opt/webapp-ia/operations/docker-compose.operations.yml` e subpastas `data/`.
+&nbsp;  \* `/opt/appgear/operations/docker-compose.operations.yml` e subpastas `data/`.
 
 
 

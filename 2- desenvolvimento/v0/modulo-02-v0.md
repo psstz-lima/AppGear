@@ -17,7 +17,7 @@ Você pode substituir diretamente a seção do Módulo 2 em `1 - Desenvolvimento
 
 ## O que é
 
-Este módulo define a **rede core** da plataforma AppGear/WEBAPP IA na **Topologia B (Kubernetes)**, estabelecendo que:
+Este módulo define a **rede core** da plataforma AppGear na **Topologia B (Kubernetes)**, estabelecendo que:
 
 1. Todo tráfego **interno** (Leste–Oeste) passa pela **malha de serviço Istio**, com **mTLS em modo STRICT**.
 
@@ -99,7 +99,7 @@ Este módulo define a **rede core** da plataforma AppGear/WEBAPP IA na **Topolog
 
 3. **Repositório GitOps**
 
-   Repositório (ex.: `appgear-infra-core` ou `webapp-ia-gitops-core`) com ao menos:
+   Repositório (ex.: `appgear-infra-core` ou `appgear-gitops-core`) com ao menos:
 
    ```text
    clusters/
@@ -154,7 +154,7 @@ Este módulo define a **rede core** da plataforma AppGear/WEBAPP IA na **Topolog
 #### 3.1.1 Namespace e Kustomization
 
 ```bash
-cd appgear-infra-core   # ou webapp-ia-gitops-core
+cd appgear-infra-core   # ou appgear-gitops-core
 
 mkdir -p apps/core/istio
 ```

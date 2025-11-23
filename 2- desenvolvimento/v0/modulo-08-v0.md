@@ -17,7 +17,7 @@ Você pode salvar este conteúdo como:
 
 # Módulo 08 – Serviços de Aplicação Core (LiteLLM, Flowise, N8n, BPMN, Directus, Appsmith, Metabase) – v0.2
 
-> Este módulo define e implanta os **Serviços de Aplicação Core** da plataforma WEBAPP IA/AppGear, em **Topologia B (Kubernetes + GitOps)**:
+> Este módulo define e implanta os **Serviços de Aplicação Core** da plataforma AppGear, em **Topologia B (Kubernetes + GitOps)**:
 >
 > * IA & Agentes: **LiteLLM** (Gateway de IA), **Flowise** (orquestrador de agentes/Translation Layer);
 > * Automação: **N8n** (workflows AI-First), **BPMN/Camunda** (processos humanos);
@@ -170,7 +170,7 @@ Este módulo descreve a **infraestrutura** para a camada de **Serviços de Aplic
 ### 3.4 Topologia A (Docker – opcional/dev)
 
 * Servidor Linux com Docker + docker-compose;
-* Diretório base `/opt/webapp-ia` com `.env` central de desenvolvimento (não produção).
+* Diretório base `/opt/appgear` com `.env` central de desenvolvimento (não produção).
 
 ---
 
@@ -178,10 +178,10 @@ Este módulo descreve a **infraestrutura** para a camada de **Serviços de Aplic
 
 ### 4.1 Estrutura GitOps do módulo
 
-No repositório `webapp-ia-gitops-core`:
+No repositório `appgear-gitops-core`:
 
 ```bash
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 
 mkdir -p apps/core/{app-services,litellm,flowise,n8n,bpmn,directus,appsmith,metabase}
 ```
@@ -1197,7 +1197,7 @@ EOF
 ### 4.9 Commit e sincronização via Argo CD
 
 ```bash
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 
 git add apps/core/app-services \
         apps/core/litellm \
@@ -1224,7 +1224,7 @@ argocd app sync core-app-services   # se não estiver Synced/Healthy
 ### 4.10 Topologia A – docker-compose (dev / legado)
 
 ```bash
-cd /opt/webapp-ia
+cd /opt/appgear
 
 cat > docker-compose.core-app-services.yml << 'EOF'
 version: "3.9"
@@ -1371,7 +1371,7 @@ EOF
 
 ## 7. Onde salvar
 
-* **Repositório GitOps principal (`webapp-ia-gitops-core`)**:
+* **Repositório GitOps principal (`appgear-gitops-core`)**:
 
   * `apps/core/app-services/kustomization.yaml`
   * `apps/core/litellm/{kustomization.yaml,configmap.yaml,deployment.yaml,service.yaml}`

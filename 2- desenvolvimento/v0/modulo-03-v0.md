@@ -110,10 +110,10 @@ Tudo implantado:
 
 ### 3.2 Repositórios
 
-Repositório GitOps core (ex.: `webapp-ia-gitops-core`):
+Repositório GitOps core (ex.: `appgear-gitops-core`):
 
 ```text
-webapp-ia-gitops-core/
+appgear-gitops-core/
   clusters/
     ag-br-core-dev/
       apps-core.yaml      # inclui Application core-observability
@@ -198,12 +198,12 @@ Resources mínimos por componente (podem ser ajustados, mas não removidos):
 
 ## 4. Como fazer (comandos)
 
-> Convenção: ajustar caminhos conforme o nome real do repositório (ex.: `webapp-ia-gitops-core`).
+> Convenção: ajustar caminhos conforme o nome real do repositório (ex.: `appgear-gitops-core`).
 
 ### 4.1 Estrutura GitOps do Módulo
 
 ```bash
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 
 mkdir -p apps/core/{observability,prometheus,grafana,loki,opencost,lago}
 ```
@@ -899,10 +899,10 @@ Validar:
     Módulo 03 – Observabilidade e FinOps v0.1.md
   ```
 
-* Repositório GitOps da infraestrutura (ex.: `webapp-ia-gitops-core`):
+* Repositório GitOps da infraestrutura (ex.: `appgear-gitops-core`):
 
   ```text
-  webapp-ia-gitops-core/
+  appgear-gitops-core/
     apps/
       core/
         observability/

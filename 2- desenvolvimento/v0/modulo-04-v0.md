@@ -10,13 +10,13 @@ Abaixo está o texto para o arquivo **`Módulo 04 v0.1.md`**.
 
 # Módulo 04 v0.1 – Armazenamento e Bancos Core
 
-**Ceph, Postgres, Redis, Qdrant, RabbitMQ, Redpanda** – AppGear / webapp-ia
+**Ceph, Postgres, Redis, Qdrant, RabbitMQ, Redpanda** – AppGear
 
 ---
 
 ## O que é
 
-Este módulo define, em formato **Markdown canônico** (M00 v0.1), o **stack de persistência Core** da plataforma AppGear / webapp-ia, cobrindo:
+Este módulo define, em formato **Markdown canônico** (M00 v0.1), o **stack de persistência Core** da plataforma AppGear, cobrindo:
 
 * **Storage padrão da Topologia B (Kubernetes):**
 
@@ -127,10 +127,10 @@ Este módulo atende diretamente:
 
 ### Ferramentas e Repositórios
 
-* Repositório GitOps: `webapp-ia-gitops-core` com estrutura:
+* Repositório GitOps: `appgear-gitops-core` com estrutura:
 
   ```text
-  webapp-ia-gitops-core/
+  appgear-gitops-core/
     clusters/
       ag-br-core-dev/
         kustomization.yaml
@@ -145,7 +145,7 @@ Este módulo atende diretamente:
 ### Topologia A (opcional – teste)
 
 * Host Linux com Docker + docker-compose;
-* Diretório `/opt/webapp-ia` com `.env` e subpastas `data/...`.
+* Diretório `/opt/appgear` com `.env` e subpastas `data/...`.
 
 ---
 
@@ -156,7 +156,7 @@ Este módulo atende diretamente:
 ### 1. Estrutura GitOps do Módulo 04
 
 ```bash
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 
 mkdir -p apps/core/{ceph,postgres,postgres/overlays/postgis,redis,qdrant,rabbitmq,redpanda,backup,data-brokers}
 ```
@@ -1082,7 +1082,7 @@ metadata:
 spec:
   project: appgear-core
   source:
-    repoURL: git@github.com:appgear/webapp-ia-gitops-core.git
+    repoURL: git@github.com:appgear/appgear-gitops-core.git
     targetRevision: main
     path: apps/core/data-brokers
   destination:

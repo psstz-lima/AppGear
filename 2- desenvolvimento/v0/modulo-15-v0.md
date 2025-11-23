@@ -250,7 +250,7 @@ Este módulo:
 
 &nbsp; \* Docker + docker-compose.
 
-&nbsp; \* Estrutura `/opt/webapp-ia` com:
+&nbsp; \* Estrutura `/opt/appgear` com:
 
 
 
@@ -270,13 +270,13 @@ Este módulo:
 
 
 
-\### 1. Estrutura GitOps do DR (repositório `webapp-ia-gitops-core`)
+\### 1. Estrutura GitOps do DR (repositório `appgear-gitops-core`)
 
 
 
 ```bash
 
-cd webapp-ia-gitops-core
+cd appgear-gitops-core
 
 
 
@@ -1188,7 +1188,7 @@ spec:
 
 &nbsp; source:
 
-&nbsp;   repoURL: https://git.example.com/webapp-ia-gitops-core.git
+&nbsp;   repoURL: https://git.example.com/appgear-gitops-core.git
 
 &nbsp;   targetRevision: main
 
@@ -1342,7 +1342,7 @@ velero restore create restore-workspaces \\
 
 
 
-Assumindo `.env` em `/opt/webapp-ia/.env`:
+Assumindo `.env` em `/opt/appgear/.env`:
 
 
 
@@ -1356,7 +1356,7 @@ KEYCLOAK\_CONTAINER=appgear-keycloak
 
 N8N\_CONTAINER=appgear-n8n
 
-DOCKER\_DATA\_DIR=/opt/webapp-ia/data
+DOCKER\_DATA\_DIR=/opt/appgear/data
 
 ```
 
@@ -1368,19 +1368,19 @@ Criar diretório de scripts:
 
 ```bash
 
-mkdir -p /opt/webapp-ia/scripts
+mkdir -p /opt/appgear/scripts
 
 ```
 
 
 
-`/opt/webapp-ia/scripts/backup-docker.sh`:
+`/opt/appgear/scripts/backup-docker.sh`:
 
 
 
 ```bash
 
-cat > /opt/webapp-ia/scripts/backup-docker.sh << 'EOF'
+cat > /opt/appgear/scripts/backup-docker.sh << 'EOF'
 
 \#!/usr/bin/env bash
 
@@ -1402,11 +1402,11 @@ set -euo pipefail
 
 \# Carrega .env central, se existir
 
-if \[ -f "/opt/webapp-ia/.env" ]; then
+if \[ -f "/opt/appgear/.env" ]; then
 
 &nbsp; # shellcheck disable=SC2046
 
-&nbsp; export $(grep -v '^#' /opt/webapp-ia/.env | xargs -d '\\n')
+&nbsp; export $(grep -v '^#' /opt/appgear/.env | xargs -d '\\n')
 
 fi
 
@@ -1414,7 +1414,7 @@ fi
 
 TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
 
-BACKUP\_DIR="${BACKUP\_SAFE\_PATH:-/opt/webapp-ia/backup}"
+BACKUP\_DIR="${BACKUP\_SAFE\_PATH:-/opt/appgear/backup}"
 
 ARCHIVE\_NAME="appgear-platform-backup-${TIMESTAMP}.tar.gz"
 
@@ -1482,7 +1482,7 @@ fi
 
 \# 4. Compactar diretórios de dados
 
-DATA\_DIR="${DOCKER\_DATA\_DIR:-/opt/webapp-ia/data}"
+DATA\_DIR="${DOCKER\_DATA\_DIR:-/opt/appgear/data}"
 
 if \[ -d "${DATA\_DIR}" ]; then
 
@@ -1508,7 +1508,7 @@ EOF
 
 
 
-chmod +x /opt/webapp-ia/scripts/backup-docker.sh
+chmod +x /opt/appgear/scripts/backup-docker.sh
 
 ```
 
@@ -1520,7 +1520,7 @@ Agendamento diário (opcional):
 
 ```bash
 
-(crontab -l ; echo "0 2 \* \* \* /opt/webapp-ia/scripts/backup-docker.sh >> /opt/webapp-ia/logs/backup.log 2>\&1") | crontab -
+(crontab -l ; echo "0 2 \* \* \* /opt/appgear/scripts/backup-docker.sh >> /opt/appgear/logs/backup.log 2>\&1") | crontab -
 
 ```
 
@@ -1686,7 +1686,7 @@ Deve incluir `appgear.io/tenant-id=global`.
 
 ```bash
 
-/opt/webapp-ia/scripts/backup-docker.sh
+/opt/appgear/scripts/backup-docker.sh
 
 ```
 
@@ -1698,7 +1698,7 @@ Deve incluir `appgear.io/tenant-id=global`.
 
 ```bash
 
-ls -lh "${BACKUP\_SAFE\_PATH:-/opt/webapp-ia/backup}"
+ls -lh "${BACKUP\_SAFE\_PATH:-/opt/appgear/backup}"
 
 ```
 
@@ -1806,7 +1806,7 @@ Arquivos `appgear-platform-backup-YYYYMMDD-HHMMSS.tar.gz` devem estar presentes.
 
 
 
-&nbsp;  \* Repositório: `webapp-ia-gitops-core`
+&nbsp;  \* Repositório: `appgear-gitops-core`
 
 &nbsp;  \* Pastas/arquivos:
 
@@ -1834,15 +1834,15 @@ Arquivos `appgear-platform-backup-YYYYMMDD-HHMMSS.tar.gz` devem estar presentes.
 
 
 
-&nbsp;  \* Diretório base: `/opt/webapp-ia`
+&nbsp;  \* Diretório base: `/opt/appgear`
 
 
 
 &nbsp;    \* `.env` com variáveis de backup.
 
-&nbsp;    \* `/opt/webapp-ia/scripts/backup-docker.sh`.
+&nbsp;    \* `/opt/appgear/scripts/backup-docker.sh`.
 
-&nbsp;    \* `/opt/webapp-ia/backup/` como destino dos `.tar.gz`.
+&nbsp;    \* `/opt/appgear/backup/` como destino dos `.tar.gz`.
 
 &nbsp;    \* Crontab opcional para agendamento.
 
