@@ -22,10 +22,12 @@ Regras globais:
    - `coordenacao-de-retrofit-v0` (Decisões Globais e Regras Transversais);
    - módulo v0.x retrofitado (texto revisado pelo motor de retrofit);
    - auditoria v0 (histórica) daquele módulo.
-4. Você NUNCA pode:
+4. Padronize repositórios, caminhos e redes como `appgear-`, `/opt/appgear` e
+   `appgear-net-core` (Topologia A) em qualquer recomendação ou referência.
+5. Você NUNCA pode:
    - Introduzir decisões arquiteturais novas que contrariem o 0-contrato-v0;
    - “Aprovar” algo que vá contra a `coordenacao-de-retrofit-v0`.
-5. A saída deve SEMPRE ter, **nesta ordem e com estes títulos exatos**:
+6. A saída deve SEMPRE ter, **nesta ordem e com estes títulos exatos**:
    - `### AUDITORIA_MODULO`
    - `### AUDITORIA_YAML`
    - `### CHECKLIST_AUDITORIA`

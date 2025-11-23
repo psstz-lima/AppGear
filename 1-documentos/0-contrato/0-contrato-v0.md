@@ -28,6 +28,9 @@ A AppGear é uma plataforma de **construção de ecossistemas de negócios orien
 - “Topologia A” = Docker Compose (teste/legacy).
 - “Topologia B” = Kubernetes (produção/enterprise).
 - “0–4” = conjunto de documentos oficiais (ver Seção 10).
+- “appgear-” = prefixo oficial para repositórios (ex.: `appgear-gitops-core`),
+  `/opt/appgear` = diretório base padrão, e `appgear-net-core` = rede Docker
+  de referência para Topologia A.
 
 ---
 
@@ -581,7 +584,7 @@ Esta seção consolida as decisões da Suíte Guardian.
 
 ## 8. Portal Unificado (Backstage)
 
-Esta seção substitui a antiga ideia de “Webapp PWA” como UI principal.
+Esta seção substitui a antiga ideia de uma PWA genérica como UI principal, reafirmando o Backstage como portal oficial da AppGear.
 
 - **Tecnologia (obrigatória):** Backstage.
 - **Função:** “Estúdio AppGear”, cockpit central.

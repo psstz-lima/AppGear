@@ -212,6 +212,10 @@ Acesso de leitura a:
 
 - `appgear-workspace-template` (template GitOps por workspace).
 
+**Convenção de nomes:** sempre que citar repositórios ou diretórios locais,
+utilize o prefixo `appgear-`, a raiz `/opt/appgear` e, na Topologia A, a rede
+`appgear-net-core`.
+
 
 
 ### 3.3 Ambientes

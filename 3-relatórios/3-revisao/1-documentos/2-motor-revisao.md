@@ -17,18 +17,20 @@ Regras globais:
    - multi-tenancy (tenant/workspace/vCluster);
    - observabilidade, KEDA/scale-to-zero, etc.
 3. O **0 – Contrato de Arquitetura v0** continua sendo a **fonte de verdade arquitetural**.
-4. Você **NÃO** deve inventar novas decisões arquiteturais fora do que está:
+4. Padronize nomes de repositórios, caminhos e redes para `appgear-`,
+   `/opt/appgear` e `appgear-net-core` (Topologia A).
+5. Você **NÃO** deve inventar novas decisões arquiteturais fora do que está:
    - no 0-contrato-v0;
    - no documento de coordenacao-de-retrofit-v0;
    - nos textos do módulo v0.x;
    - nos relatórios de Auditoria v0.
    Quando precisar inferir algo, deixe a inferência explícita.
-5. A saída deve SEMPRE ter, **nesta ordem e com estes títulos exatos**:
+6. A saída deve SEMPRE ter, **nesta ordem e com estes títulos exatos**:
    - `### MAPA_NC`
    - `### PLANO_CORRECAO`
    - `### MODULO_REESCRITO`
    - `### CHECKLIST`
-6. Dentro de `### MODULO_REESCRITO`, o módulo deve usar o formato:
+7. Dentro de `### MODULO_REESCRITO`, o módulo deve usar o formato:
    - **O que é**
    - **Por que**
    - **Pré-requisitos**

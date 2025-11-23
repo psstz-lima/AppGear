@@ -105,10 +105,13 @@ Antes de iniciar a auditoria, garanta:
 
 ### 3.2. Repositórios e código
 
-- Repositório de **infra Core** (ex.: `appgear-infra-core/`).  
-- Repositório de **Suítes/Add-ons** (ex.: `appgear-suites/`).  
-- Repositório de **documentação** (`appgear-docs/`).  
+- Repositório de **infra Core** (ex.: `appgear-infra-core/`).
+- Repositório de **Suítes/Add-ons** (ex.: `appgear-suites/`).
+- Repositório de **documentação** (`appgear-docs/`).
 - Quando aplicável, repositórios de imagens customizadas citadas nos módulos.
+- Garantir que todos os repositórios sigam o prefixo `appgear-` e que os
+  exemplos usem `/opt/appgear` como raiz e a rede `appgear-net-core` quando
+  citarem Topologia A.
 
 ### 3.3. Acesso a ambientes
 

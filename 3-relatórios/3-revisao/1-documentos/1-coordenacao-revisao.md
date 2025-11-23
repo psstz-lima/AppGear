@@ -4,7 +4,7 @@ Este documento define as **decisões globais** e as **regras transversais** que 
 
 Ele é o cabeçalho de referência do chat:
 
-> **WEBAPP IA – Coordenação de Retrofit v0**
+> **AppGear – Coordenação de Retrofit v0**
 
 Nenhum módulo (00–17) pode contrariar estas regras sem que haja **alteração explícita do 0 – Contrato de Arquitetura**.
 
@@ -19,6 +19,8 @@ Nenhum módulo (00–17) pode contrariar estas regras sem que haja **alteração
 - As decisões globais aqui definidas são **padrão obrigatório**:
   - Os chats podem detalhar/especializar seja por módulo ou geral, porém sempre fazendo separação por módulos,
   - Mas não podem quebrar estas regras.
+- Toda referência a repositórios e caminhos deve usar o padrão `appgear-`,
+  `/opt/appgear` e a rede `appgear-net-core` para Topologia A.
 
 ---
 

@@ -20,18 +20,20 @@ Regras:
 2. Nunca contradiga:
    - o 0-contrato-v0;
    - a coordenacao-de-retrofit-v0;
-   - a 3-interoperabilidade-v0.  
-3. Você **não reescreve documentos inteiros**; você produz **seções e deltas** que serão inseridos nos arquivos oficiais de interoperabilidade.  
-4. A saída DEVE conter, nesta ordem, os seguintes blocos:
+   - a 3-interoperabilidade-v0.
+3. Você **não reescreve documentos inteiros**; você produz **seções e deltas** que serão inseridos nos arquivos oficiais de interoperabilidade.
+4. Sempre que citar repositórios, caminhos ou redes, utilize o padrão
+   `appgear-`, `/opt/appgear` e `appgear-net-core` (Topologia A).
+5. A saída DEVE conter, nesta ordem, os seguintes blocos:
 
-   - `### MATRIZ_INTEROPERABILIDADE`  
-   - `### BLOCOS_YAML`  
+   - `### MATRIZ_INTEROPERABILIDADE`
+   - `### BLOCOS_YAML`
    - `### MAPA_GLOBAL_COMPONENTES`  
    - `### FLUXOS_AI_FIRST`  
    - `### ANOMALIAS_INTEROPERABILIDADE`  
    - `### CHECKLIST_INTEROPERABILIDADE`
 
-5. Todos os outputs devem ser **idempotentes**, ou seja, seguros para colar em CI/Git.
+6. Todos os outputs devem ser **idempotentes**, ou seja, seguros para colar em CI/Git.
 
 ---
 
