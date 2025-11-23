@@ -24,8 +24,6 @@ Serve como **parecer oficial de integrações** da AppGear, complementando:
 
 - `2 – Auditoria v0` (diretriz de auditoria técnica);
 
-- `4 – Comercial v0` (combinações suportadas para ofertas e planos).
-
 
 
 ---
@@ -76,7 +74,7 @@ A **Interoperabilidade v0** é o documento que:
 
 
 
-- **2 – Auditoria v0**  
+- **2 – Auditoria v0**
 
   Usa este documento como “gabarito” para checar se:
 
@@ -85,16 +83,6 @@ A **Interoperabilidade v0** é o documento que:
   - não existe Shadow IT (serviços paralelos ao Core);
 
   - módulos não furam multi-tenancy ou bypassam LiteLLM, Vault, etc.
-
-
-
-- **4 – Comercial v0**  
-
-  Consulta a Interoperabilidade v0 para definir:
-
-  - quais combinações de Suítes e integrações podem ser ofertadas;
-
-  - quais cenários exigem restrições (ex.: “somente Topologia B”).
 
 
 
@@ -172,13 +160,11 @@ Antes de usar esta diretriz, tenha:
 
 
 
-- `docs/architecture/0-contrato/0-Contrato-v0.md`
+- `1-documentos/0-contrato/0-contrato-v0.md`
 
-- `docs/architecture/1-desenvolvimento/v0.1-raw/Modulo-XX-v0.1.md`
+- `2- desenvolvimento/v0/modulo-XX-v0.md`
 
-- `docs/architecture/2-auditoria/2-Auditoria-v0.md`
-
-- `docs/architecture/4-comercial/4-Comercial-v0.md`
+- `1-documentos/1-auditoria/1-auditoria-v0.md`
 
 
 
@@ -188,7 +174,7 @@ Opcional, mas recomendado:
 
 - módulos v1.0 retrofitados:
 
-  - `docs/architecture/1-desenvolvimento/v1.0-retrofit/Modulo-XX-v1.0.md`
+  - `2- desenvolvimento/v1.0-retrofit/modulo-XX-v1.0.md`
 
 - arquivos auxiliares de interoperabilidade (ver seção 4.1).
 
@@ -252,18 +238,18 @@ Acesso de leitura a:
 
 
 
-No `appgear-docs`:
+No repositório AppGear:
 
 
 
 ```bash
-cd appgear-docs
+cd AppGear
 
-mkdir -p docs/architecture/interoperabilidade
+mkdir -p 1-documentos/2-interoperabilidade/interoperabilidade
 
-touch docs/architecture/interoperabilidade/mapa-global.md
-touch docs/architecture/interoperabilidade/modulos.yaml
-touch docs/architecture/interoperabilidade/fluxos-ai-first.md
+touch 1-documentos/2-interoperabilidade/interoperabilidade/mapa-global.md
+touch 1-documentos/2-interoperabilidade/interoperabilidade/modulos.yaml
+touch 1-documentos/2-interoperabilidade/interoperabilidade/fluxos-ai-first.md
 ```
 
 Este documento fica em:
@@ -271,12 +257,12 @@ Este documento fica em:
 
 
 ```text
-docs/architecture/3-interoperabilidade/3-Interoperabilidade-v0.md
+1-documentos/2-interoperabilidade/2-interoperabilidade-v0.md
 ```
 
 
 
-Arquivos auxiliares em `docs/architecture/interoperabilidade/` detalham:
+Arquivos auxiliares em `1-documentos/2-interoperabilidade/interoperabilidade/` detalham:
 
 
 
@@ -292,7 +278,7 @@ Arquivos auxiliares em `docs/architecture/interoperabilidade/` detalham:
 
 
 
-No `docs/architecture/interoperabilidade/mapa-global.md`:
+No `1-documentos/2-interoperabilidade/interoperabilidade/mapa-global.md`:
 
 
 
@@ -346,7 +332,7 @@ Para cada componente, registrar:
 
 
 
-No `docs/architecture/interoperabilidade/modulos.yaml`, para cada módulo MXX:
+No `1-documentos/2-interoperabilidade/interoperabilidade/modulos.yaml`, para cada módulo MXX:
 
 
 
@@ -422,7 +408,7 @@ Recomendações:
 
 
 
-No `docs/architecture/interoperabilidade/fluxos-ai-first.md`, formalizar fluxos como:
+No `1-documentos/2-interoperabilidade/interoperabilidade/fluxos-ai-first.md`, formalizar fluxos como:
 
 
 
@@ -610,8 +596,6 @@ Quando uma nova integração for proposta:
 
   - avaliar alterações necessárias em módulos `1 – Desenvolvimento`;
 
-  - ajustar checklists em `2 – Auditoria` e limites em `4 – Comercial`.
-
 
 
 ---
@@ -651,7 +635,7 @@ Este arquivo deve ser salvo como:
 
 
 ```text
-appgear-docs/docs/architecture/3-interoperabilidade/3-Interoperabilidade-v0.md
+AppGear/1-documentos/2-interoperabilidade/2-interoperabilidade-v0.md
 ```
 
 
@@ -661,12 +645,11 @@ Ele referencia, quando necessário:
 
 
 ```text
-appgear-docs/docs/architecture/0-contrato/0-Contrato-v0.md
-appgear-docs/docs/architecture/1-desenvolvimento/v0.1-raw/Modulo-XX-v0.1.md
-appgear-docs/docs/architecture/1-desenvolvimento/v1.0-retrofit/Modulo-XX-v1.0.md
-appgear-docs/docs/architecture/2-auditoria/2-Auditoria-v0.md
-appgear-docs/docs/architecture/4-comercial/4-Comercial-v0.md
-appgear-docs/docs/architecture/interoperabilidade/*
+AppGear/1-documentos/0-contrato/0-contrato-v0.md
+AppGear/2- desenvolvimento/v0/modulo-XX-v0.md
+AppGear/2- desenvolvimento/v1.0-retrofit/modulo-XX-v1.0.md
+AppGear/1-documentos/1-auditoria/1-auditoria-v0.md
+AppGear/1-documentos/2-interoperabilidade/interoperabilidade/*
 ```
 
 
@@ -675,6 +658,6 @@ Em repositórios externos (clientes, parceiros), manter:
 
 
 
-- o mesmo nome (`3-Interoperabilidade-v0.md`);
+- o mesmo nome (`2-interoperabilidade-v0.md`);
 
 - referência explícita ao Contrato v0 utilizado.
