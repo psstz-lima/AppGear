@@ -34,7 +34,7 @@ Sugestão de localização:
 
 ```text
 appgear-docs/
-  docs/architecture/0-contrato/0-Contrato-v0.md
+  docs/architecture/0-contrato/0-contrato-v0.md
   docs/architecture/1-desenvolvimento-v0.md
   docs/architecture/2-auditoria-v0.md
   docs/architecture/3-interoperabilidade-v0.md
