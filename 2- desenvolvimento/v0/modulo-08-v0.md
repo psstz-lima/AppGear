@@ -17,7 +17,7 @@ Você pode salvar este conteúdo como:
 
 # Módulo 08 – Serviços de Aplicação Core (LiteLLM, Flowise, N8n, BPMN, Directus, Appsmith, Metabase) – v0.2
 
-> Este módulo define e implanta os **Serviços de Aplicação Core** da plataforma WEBAPP IA/AppGear, em **Topologia B (Kubernetes + GitOps)**:
+> Este módulo define e implanta os **Serviços de Aplicação Core** da plataforma AppGear, em **Topologia B (Kubernetes + GitOps)**:
 >
 > * IA & Agentes: **LiteLLM** (Gateway de IA), **Flowise** (orquestrador de agentes/Translation Layer);
 > * Automação: **N8n** (workflows AI-First), **BPMN/Camunda** (processos humanos);

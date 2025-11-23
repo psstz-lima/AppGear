@@ -223,6 +223,8 @@ A estrutura oficial de diretórios é dividida em:
 1. **Instalação local (Topologia A)** – host de teste/PoC.
 2. **Repositórios GitOps / código (Topologia B)**.
 
+> **Nota:** a atualização abaixo reflete apenas a **organização dos diretórios**. Todo o restante deste contrato permanece inalterado nesta versão v0.
+
 ### 3.1. Estrutura de instalação local (Topologia A)
 
 ```text
@@ -240,37 +242,48 @@ A estrutura oficial de diretórios é dividida em:
 
 ### 3.2. Estrutura de repositórios (Topologia B)
 
-Sugestão mínima:
+Estrutura de referência na raiz do repositório AppGear:
 
 ```text
-appgear-infra-core/
-  cluster/
-  apps-core/
-  keda/
-  istio/
-  tailscale/
-  ceph/
-  velero/
-  backstage/
-  .argo-apps/
+1-documentos/
+  0-contrato/0-contrato-v0.md
+  1-auditoria/1-auditoria-v0.md
+  2-interoperabilidade/2-interoperabilidade-v0.md
 
-appgear-suites/
-  factory/
-  brain/
-  operations/
-  guardian/
+2- desenvolvimento/
+  v0/
+    modulo-00-v0.md
+    modulo-01-v0.md
+    modulo-02-v0.md
+    modulo-03-v0.md
+    modulo-04-v0.md
+    modulo-05-v0.md
+    modulo-06-v0.md
+    modulo-07-v0.md
+    modulo-08-v0.md
+    modulo-09-v0.md
+    modulo-10-v0.md
+    modulo-11-v0.md
+    modulo-12-v0.md
+    modulo-13-v0.md
+    modulo-14-v0.md
+    modulo-15-v0.md
+    modulo-16-v0.md
+    modulo-17-v0.md
 
-appgear-docs/
-  docs/architecture/0-contrato/0-Contrato-v0.md
-  docs/architecture/1-desenvolvimento-v0.md
-  docs/architecture/2-auditoria-v0.md
-  docs/architecture/3-interoperabilidade-v0.md
-  docs/architecture/4-comercial-v0.md
+3-relatórios/
+  3-revisao/
+    revisao-v0.md
+    1-documentos/
+      1-coordenacao-revisao.md
+      2-motor-revisao.md
+      3-motor-auditoria.md
+      4-motor-interoperabilidade.md
 ```
 
-> **Guia para chats – Seção 3 (Diretórios)**  
-> - **1 – Desenvolvimento:** usar esta estrutura como referência. Em Topologia B, o foco é o layout GitOps (infra-core e suites).  
-> - **2 – Auditoria:** verificar existência de repositórios separados (infra vs suites) e se o contrato está versionado em `docs/architecture/`.
+> **Guia para chats – Seção 3 (Diretórios)**
+> - **1 – Desenvolvimento:** usar esta estrutura como referência para localizar rapidamente os módulos versionados (contrato, auditoria, interoperabilidade e desenvolvimento).
+> - **2 – Auditoria:** verificar se os documentos oficiais estão versionados nos diretórios `1-documentos/` e se os módulos técnicos estão em `2- desenvolvimento/`.
 
 ---
 

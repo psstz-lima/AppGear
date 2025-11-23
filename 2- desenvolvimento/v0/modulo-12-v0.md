@@ -42,7 +42,7 @@ Abaixo está o \*\*Módulo 12 – Suíte Guardian (v0.1 Retrofit)\*\* em formato
 
 
 
-A \*\*Suíte Guardian\*\* é a suíte de \*\*Security \& Governance\*\* da plataforma WEBAPP IA / AppGear.
+A \*\*Suíte Guardian\*\* é a suíte de \*\*Security \& Governance\*\* da plataforma AppGear.
 
 Ela é responsável por:
 
