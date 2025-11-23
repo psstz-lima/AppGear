@@ -4,7 +4,7 @@ Este documento define as **decisões globais** e as **regras transversais** que 
 
 Ele é o cabeçalho de referência do chat:
 
-> **WEBAPP IA – Coordenação de Retrofit v0**
+> **AppGear – Coordenação de Retrofit v0**
 
 Nenhum módulo (00–17) pode contrariar estas regras sem que haja **alteração explícita do 0 – Contrato de Arquitetura**.
 

@@ -4,7 +4,7 @@ módulo (00–17) da AppGear, após (ou durante) o retrofit v0.x.
 O objetivo é gerar, de forma consistente:
 
 - Texto de auditoria para o módulo (visão humana);
-- Bloco YAML para `docs/audit/auditoria-modulos.yaml`;
+- Bloco YAML para `3-relatórios/3-revisao/auditoria-modulos.yaml`;
 - Checklist de auditoria para verificação objetiva.
 
 ---
@@ -36,7 +36,7 @@ Regras globais:
 ## BLOCO 1 – Coordenação de Retrofit v0 (REGRAS GLOBAIS)
 
 Cole aqui o texto (ou extrato relevante) do arquivo
-`docs/retrofit/coordenacao-de-retrofit-v0`.
+`3-relatórios/3-revisao/1-documentos/1-coordenacao-revisao.md`.
 
 <<<BLOCO_1_COORDENACAO_RETROFIT_V0_INICIO>>>
 (cole aqui o texto ou extrato do documento de coordenação, incluindo:
@@ -79,7 +79,7 @@ descrição dos problemas, riscos, recomendações antigas, etc.)
 Aqui entra o conteúdo atual do módulo já retrofitado (saída do Motor de Retrofit).
 
 Normalmente, ele estará em:
-`docs/architecture/1-desenvolvimento/v0.1-retrofit/Modulo-XX-v0.x.md`.
+`2- desenvolvimento/v0/modulo-XX-v0.md`.
 
 <<<BLOCO_4_MODULO_V0.X_INICIO>>>
 (cole aqui o conteúdo integral do módulo XX v0.x, já reescrito,
@@ -157,7 +157,7 @@ Sugestão de sub-estrutura:
 ### AUDITORIA_YAML
 
 - Bloco YAML pronto para ser colado/mesclado em
-  `docs/audit/auditoria-modulos.yaml`.
+  `3-relatórios/3-revisao/auditoria-modulos.yaml`.
 
 Formato mínimo esperado (exemplo):
 
