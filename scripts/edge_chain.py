@@ -181,3 +181,11 @@ def test_services_not_exposed_directly():
         "Services expostos diretamente detectados (LoadBalancer/NodePort fora de Traefik/Coraza/Kong/Istio):\n- "
         + "\n- ".join(failures)
     )
+
+if __name__ == "__main__":
+    # Permite rodar este arquivo diretamente com:
+    #   python scripts/test_edge_chain.py
+    # em vez de chamar pytest manualmente.
+    import pytest as _pytest
+    _pytest.main([str(Path(__file__))])
+
