@@ -1,0 +1,439 @@
+- id: traefik
+  nome: Traefik
+  categoria: edge-gateway
+  projeto_upstream: traefik/traefik
+  url_upstream: https://github.com/traefik/traefik
+  licenca_indicativa: "Provavelmente MIT – confirmar licença upstream."
+  modulos_relacionados: [M02]
+  topologias: [A, B]
+  observacoes: >-
+    Ingress / reverse proxy de borda na cadeia Traefik → Coraza → Kong → Istio.
+
+- id: coraza
+  nome: Coraza WAF
+  categoria: waf
+  projeto_upstream: corazawaf/coraza
+  url_upstream: https://github.com/corazawaf/coraza
+  licenca_indicativa: "Verificar licença upstream no projeto Coraza."
+  modulos_relacionados: [M02]
+  topologias: [B]
+  observacoes: >-
+    WAF na borda HTTP, integrado com Traefik/Kong conforme cadeia de borda oficial.
+
+- id: kong
+  nome: Kong Gateway
+  categoria: api-gateway
+  projeto_upstream: Kong/kong
+  url_upstream: https://github.com/Kong/kong
+  licenca_indicativa: "Community/Enterprise – confirmar licença e edição."
+  modulos_relacionados: [M02]
+  topologias: [B]
+  observacoes: >-
+    API Gateway oficial da arquitetura, parte da cadeia Traefik → Coraza → Kong → Istio.
+
+- id: istio
+  nome: Istio
+  categoria: service-mesh
+  projeto_upstream: istio/istio
+  url_upstream: https://github.com/istio/istio
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M02, M17]
+  topologias: [B]
+  observacoes: >-
+    Service Mesh com mTLS STRICT, obrigatório na Topologia B.
+
+- id: tailscale
+  nome: Tailscale
+  categoria: mesh-vpn
+  projeto_upstream: tailscale/tailscale
+  url_upstream: https://github.com/tailscale/tailscale
+  licenca_indicativa: "Verificar termos oficiais de Tailscale."
+  modulos_relacionados: [M02, M16]
+  topologias: [B]
+  observacoes: >-
+    Mesh VPN para conectividade híbrida e acesso seguro a clusters/vClusters.
+
+- id: keycloak
+  nome: Keycloak
+  categoria: idp-sso
+  projeto_upstream: keycloak/keycloak
+  url_upstream: https://github.com/keycloak/keycloak
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M06]
+  topologias: [A, B]
+  observacoes: >-
+    Provedor de identidade/SSO oficial da plataforma.
+
+- id: vault
+  nome: HashiCorp Vault
+  categoria: secrets-manager
+  projeto_upstream: hashicorp/vault
+  url_upstream: https://github.com/hashicorp/vault
+  licenca_indicativa: "Modelo HashiCorp BSL – verificar licença atual."
+  modulos_relacionados: [M05]
+  topologias: [B]
+  observacoes: >-
+    SSoT de segredos, integrado com Kubernetes e demais serviços Core.
+
+- id: openfga
+  nome: OpenFGA
+  categoria: autorizacao
+  projeto_upstream: openfga/openfga
+  url_upstream: https://github.com/openfga/openfga
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M05]
+  topologias: [B]
+  observacoes: >-
+    Serviço de autorização ReBAC (Relationship-based Access Control).
+
+- id: opa
+  nome: Open Policy Agent (OPA)
+  categoria: policy-as-code
+  projeto_upstream: open-policy-agent/opa
+  url_upstream: https://github.com/open-policy-agent/opa
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M17]
+  topologias: [B]
+  observacoes: >-
+    Policy engine usado para validação de políticas em diversos níveis.
+
+- id: kyverno
+  nome: Kyverno
+  categoria: policy-as-code
+  projeto_upstream: kyverno/kyverno
+  url_upstream: https://github.com/kyverno/kyverno
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M17]
+  topologias: [B]
+  observacoes: >-
+    Admission controller para políticas em Kubernetes via CRDs.
+
+- id: conftest
+  nome: Conftest
+  categoria: policy-as-code
+  projeto_upstream: open-policy-agent/conftest
+  url_upstream: https://github.com/open-policy-agent/conftest
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M17]
+  topologias: [A, B]
+  observacoes: >-
+    Validação de manifests e arquivos de configuração no CI usando Rego.
+
+- id: falco
+  nome: Falco
+  categoria: security-runtime
+  projeto_upstream: falcosecurity/falco
+  url_upstream: https://github.com/falcosecurity/falco
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M17, M12]
+  topologias: [B]
+  observacoes: >-
+    Detecção de ameaças em tempo de execução no cluster.
+
+- id: ceph
+  nome: Ceph
+  categoria: storage-distribuido
+  projeto_upstream: ceph/ceph
+  url_upstream: https://github.com/ceph/ceph
+  licenca_indicativa: "Licenças LGPL/GPL – confirmar upstream."
+  modulos_relacionados: [M04, M15]
+  topologias: [B]
+  observacoes: >-
+    Storage distribuído para volumes, backups e objetos.
+
+- id: postgres
+  nome: PostgreSQL
+  categoria: banco-relacional
+  projeto_upstream: postgres/postgres
+  url_upstream: https://www.postgresql.org/
+  licenca_indicativa: "PostgreSQL License – confirmar upstream."
+  modulos_relacionados: [M04, M09, M10]
+  topologias: [A, B]
+  observacoes: >-
+    Banco relacional principal para dados estruturados.
+
+- id: redis
+  nome: Redis
+  categoria: cache-keyvalue
+  projeto_upstream: redis/redis
+  url_upstream: https://github.com/redis/redis
+  licenca_indicativa: "Licenças BSD/RSAL – confirmar upstream e versão."
+  modulos_relacionados: [M04, M08]
+  topologias: [A, B]
+  observacoes: >-
+    Cache e key-value store para sessões, filas leves e outros usos.
+
+- id: qdrant
+  nome: Qdrant
+  categoria: banco-vetores
+  projeto_upstream: qdrant/qdrant
+  url_upstream: https://github.com/qdrant/qdrant
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M04, M10]
+  topologias: [B]
+  observacoes: >-
+    Armazenamento de embeddings para RAG/Corporate Brain.
+
+- id: rabbitmq
+  nome: RabbitMQ
+  categoria: message-broker
+  projeto_upstream: rabbitmq/rabbitmq-server
+  url_upstream: https://github.com/rabbitmq/rabbitmq-server
+  licenca_indicativa: "Geralmente MPL 2.0 – confirmar upstream."
+  modulos_relacionados: [M04, M11]
+  topologias: [B]
+  observacoes: >-
+    Broker de mensagens para integrações e automações.
+
+- id: redpanda
+  nome: Redpanda
+  categoria: event-streaming
+  projeto_upstream: redpanda-data/redpanda
+  url_upstream: https://github.com/redpanda-data/redpanda
+  licenca_indicativa: "Verificar licença (BSL/comercial) no projeto oficial."
+  modulos_relacionados: [M04, M09, M10, M11]
+  topologias: [B]
+  observacoes: >-
+    Event streaming usado como backbone para eventos da plataforma.
+
+- id: meilisearch
+  nome: Meilisearch
+  categoria: search-engine
+  projeto_upstream: meilisearch/meilisearch
+  url_upstream: https://github.com/meilisearch/meilisearch
+  licenca_indicativa: "Geralmente MIT – confirmar upstream."
+  modulos_relacionados: [M04, M09]
+  topologias: [B]
+  observacoes: >-
+    Motor de busca textual para dados indexados.
+
+- id: backstage
+  nome: Backstage
+  categoria: developer-portal
+  projeto_upstream: backstage/backstage
+  url_upstream: https://github.com/backstage/backstage
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M07, M14]
+  topologias: [B]
+  observacoes: >-
+    Portal de desenvolvimento oficial e estúdio central da AppGear.
+
+- id: argo_cd
+  nome: Argo CD
+  categoria: gitops
+  projeto_upstream: argoproj/argo-cd
+  url_upstream: https://github.com/argoproj/argo-cd
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M01, M14]
+  topologias: [B]
+  observacoes: >-
+    GitOps para reconciliar estado de clusters e vClusters a partir de repositórios Git.
+
+- id: argo_workflows
+  nome: Argo Workflows
+  categoria: workflows
+  projeto_upstream: argoproj/argo-workflows
+  url_upstream: https://github.com/argoproj/argo-workflows
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M01, M14]
+  topologias: [B]
+  observacoes: >-
+    Execução de workflows (pipelines de dados, IA, automação) em Kubernetes.
+
+- id: argo_events
+  nome: Argo Events
+  categoria: eventing
+  projeto_upstream: argoproj/argo-events
+  url_upstream: https://github.com/argoproj/argo-events
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M01, M14]
+  topologias: [B]
+  observacoes: >-
+    Orquestrador de eventos para acionar workflows e pipelines AI-first.
+
+- id: keda
+  nome: KEDA
+  categoria: autoscaling
+  projeto_upstream: kedacore/keda
+  url_upstream: https://github.com/kedacore/keda
+  licenca_indicativa: "Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M01, M17]
+  topologias: [B]
+  observacoes: >-
+    Autoscaling baseado em eventos (Scale-to-Zero e afins).
+
+- id: velero
+  nome: Velero
+  categoria: backup-dr
+  projeto_upstream: vmware-tanzu/velero
+  url_upstream: https://github.com/vmware-tanzu/velero
+  licenca_indicativa: "Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M15]
+  topologias: [B]
+  observacoes: >-
+    Backup e restauração de clusters e volumes Kubernetes.
+
+- id: n8n
+  nome: n8n
+  categoria: automation-lowcode
+  projeto_upstream: n8n-io/n8n
+  url_upstream: https://github.com/n8n-io/n8n
+  licenca_indicativa: "Fair-code – verificar licença e termos oficiais."
+  modulos_relacionados: [M08, M11, M14]
+  topologias: [A, B]
+  observacoes: >-
+    Plataforma de automação low-code integrada aos fluxos AI-first.
+
+- id: flowise
+  nome: Flowise
+  categoria: ia-orchestrator
+  projeto_upstream: FlowiseAI/Flowise
+  url_upstream: https://github.com/FlowiseAI/Flowise
+  licenca_indicativa: "Verificar licença upstream."
+  modulos_relacionados: [M08, M10, M14]
+  topologias: [A, B]
+  observacoes: >-
+    Orquestrador de fluxos de IA/LangChain para geração de apps e pipelines.
+
+- id: litellm
+  nome: LiteLLM
+  categoria: llm-gateway
+  projeto_upstream: Berachain/litellm
+  url_upstream: https://github.com/berriai/litellm
+  licenca_indicativa: "Geralmente MIT – confirmar upstream."
+  modulos_relacionados: [M08, M10]
+  topologias: [A, B]
+  observacoes: >-
+    Gateway único de LLMs na AppGear, obrigatório para acesso a provedores de IA.
+
+- id: ollama
+  nome: Ollama
+  categoria: llm-runtime-local
+  projeto_upstream: ollama/ollama
+  url_upstream: https://github.com/ollama/ollama
+  licenca_indicativa: "Verificar termos oficiais de uso e licença."
+  modulos_relacionados: [M08, M10]
+  topologias: [A, B]
+  observacoes: >-
+    Runtime local de modelos LLM, integrado via LiteLLM.
+
+- id: tika
+  nome: Apache Tika
+  categoria: extracao-documentos
+  projeto_upstream: apache/tika
+  url_upstream: https://tika.apache.org/
+  licenca_indicativa: "Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M08, M09, M10]
+  topologias: [B]
+  observacoes: >-
+    Extração de texto e metadata de documentos para pipelines Factory/Brain.
+
+- id: gotenberg
+  nome: Gotenberg
+  categoria: conversao-documentos
+  projeto_upstream: gotenberg/gotenberg
+  url_upstream: https://github.com/gotenberg/gotenberg
+  licenca_indicativa: "Geralmente MIT – confirmar upstream."
+  modulos_relacionados: [M08, M09, M10]
+  topologias: [B]
+  observacoes: >-
+    Conversão de documentos (PDF, etc.) via API HTTP.
+
+- id: metabase
+  nome: Metabase
+  categoria: bi-dashboards
+  projeto_upstream: metabase/metabase
+  url_upstream: https://github.com/metabase/metabase
+  licenca_indicativa: "Geralmente AGPLv3 para edição OSS – confirmar upstream."
+  modulos_relacionados: [M08]
+  topologias: [B]
+  observacoes: >-
+    BI e dashboards analíticos para dados de negócio.
+
+- id: airbyte
+  nome: Airbyte
+  categoria: elt-connectors
+  projeto_upstream: airbytehq/airbyte
+  url_upstream: https://github.com/airbytehq/airbyte
+  licenca_indicativa: "Verificar modelo de licença Community/Enterprise."
+  modulos_relacionados: [M09]
+  topologias: [B]
+  observacoes: >-
+    Conectores para ingestão de dados em CDEs/Factory.
+
+- id: jupyterhub
+  nome: JupyterHub
+  categoria: notebooks
+  projeto_upstream: jupyterhub/jupyterhub
+  url_upstream: https://github.com/jupyterhub/jupyterhub
+  licenca_indicativa: "BSD-3-Clause – confirmar upstream."
+  modulos_relacionados: [M10]
+  topologias: [B]
+  observacoes: >-
+    Ambiente multiusuário de notebooks para exploração de dados/ML.
+
+- id: mlflow
+  nome: MLflow
+  categoria: mlops
+  projeto_upstream: mlflow/mlflow
+  url_upstream: https://github.com/mlflow/mlflow
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M10]
+  topologias: [B]
+  observacoes: >-
+    Tracking de experimentos, modelos e pipelines de ML.
+
+- id: thingsboard
+  nome: ThingsBoard
+  categoria: iot-platform
+  projeto_upstream: thingsboard/thingsboard
+  url_upstream: https://github.com/thingsboard/thingsboard
+  licenca_indicativa: "Verificar licenças Community/PE."
+  modulos_relacionados: [M11]
+  topologias: [B]
+  observacoes: >-
+    Plataforma IoT para integração com dispositivos e Edge.
+
+- id: robocorp
+  nome: Robocorp
+  categoria: rpa
+  projeto_upstream: robocorp/projects
+  url_upstream: https://robocorp.com/
+  licenca_indicativa: "Verificar licenças e termos oficiais."
+  modulos_relacionados: [M11]
+  topologias: [B]
+  observacoes: >-
+    RPA/automação de processos, integrado a Operations.
+
+- id: litmuschaos
+  nome: LitmusChaos
+  categoria: chaos-engineering
+  projeto_upstream: litmuschaos/litmus
+  url_upstream: https://github.com/litmuschaos/litmus
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M12, M17]
+  topologias: [B]
+  observacoes: >-
+    Ferramenta de Chaos Engineering para validar resiliência e DR.
+
+- id: directus
+  nome: Directus
+  categoria: headless-data-platform
+  projeto_upstream: directus/directus
+  url_upstream: https://github.com/directus/directus
+  licenca_indicativa: "Verificar licença Community (GPLv3/AGPL) e termos oficiais."
+  modulos_relacionados: [M08]
+  topologias: [A, B]
+  observacoes: >-
+    Data platform/headless CMS usada como camada de dados para apps.
+
+- id: appsmith
+  nome: Appsmith
+  categoria: lowcode-apps
+  projeto_upstream: appsmithorg/appsmith
+  url_upstream: https://github.com/appsmithorg/appsmith
+  licenca_indicativa: "Geralmente Apache-2.0 – confirmar upstream."
+  modulos_relacionados: [M08]
+  topologias: [A, B]
+  observacoes: >-
+    Plataforma low-code para construção de interfaces e apps internos.

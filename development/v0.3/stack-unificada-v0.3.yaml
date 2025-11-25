@@ -1,0 +1,146 @@
+version: v0.3
+schema: appgear-stack
+compatibility: full
+context:
+  name: "stack-unificada"
+  goal: "Visão holística da arquitetura e das integrações para a baseline v0.3."
+  baseline: "v0.3"
+  notes:
+    - "Aplicável às Topologias A (PoC/Dev) e B (produção), mantendo paridade de premissas."
+    - "Alinha todos os módulos ao Módulo Core v0.3 e ao Contrato de Arquitetura v0."
+
+integration_actions:
+  env:
+    required_action: "Centralizar variáveis em /opt/appgear/.env (Topologia A) e em ExternalSecrets + Vault (Topologia B), mantendo apenas .env.example no Git."
+    expected_result: "Evita conflito de build e credenciais divergentes entre workspaces."
+  tls:
+    required_action: "Aplicar mTLS STRICT em toda a malha Istio e na borda descrita em edge_pipeline."
+    expected_result: "Comunicação interna segura e previsível, sem tráfego em claro ou bypass do gateway."
+  namespaces:
+    required_action: "Validar nomes únicos por tenant/workspace/vcluster usando os padrões de namespaces e labels abaixo."
+    expected_result: "Evita colisões de recursos e garante isolamento em vClusters."
+  argocd:
+    required_action: "Consolidar deployments via ApplicationSets (list-generator) e App-of-Apps apenas como bootstrap."
+    expected_result: "Deploys homogêneos por workspace, sem drift entre ambientes."
+  versioning:
+    required_action: "Fixar a baseline em v0.3 (contrato, módulos e manifestos), documentando exceções explícitas."
+    expected_result: "Controle claro de baseline e rastreabilidade de desvios."
+  documentation:
+    required_action: "Publicar este manifesto como fonte única de namespaces, borda e dependências inter-stack."
+    expected_result: "Referência única para diagramas, checklists de auditoria e módulos de desenvolvimento."
+
+namespaces:
+  core:
+    - argocd
+    - istio-system
+    - kong
+    - coraza
+    - traefik
+    - vault
+    - observability
+    - data
+  suites:
+    - factory
+    - brain
+    - operations
+    - guardian
+  workspaces:
+    template: "workspace-{{workspace_id}}"
+    vcluster: "vcluster-{{workspace_id}}"
+    uniqueness:
+      - "Workspace e vcluster são únicos por tenant e por ambiente."
+      - "Namespaces de app devem herdar labels obrigatórias de tenant/workspace/vcluster/env."
+
+edge_pipeline:
+  order: ["Traefik (TLS passthrough SNI)", "Coraza WAF", "Kong Gateway", "Istio IngressGateway", "Service Mesh"]
+  tls_mode: "STRICT"
+  notes:
+    - "TLS é encerrado somente no Istio IngressGateway para preservar mTLS na malha."
+    - "Nenhum app deve ser publicado direto via Traefik; sempre aplicar WAF + API Gateway."
+
+configuration:
+  env_files:
+    dev_poc: "/opt/appgear/.env"
+    example_file: ".env.example"
+  secrets:
+    provider: "Vault + ExternalSecrets"
+    scope: "tenant/workspace aware"
+    rotation: "Obrigatória para credenciais compartilhadas entre vClusters."
+
+argocd:
+  template_repo: "git@github.com:appgear/appgear-gitops-core.git"
+  base_path: "gitops/appsets"
+  strategy: "App-of-Apps apenas como bootstrap; todos os apps definidos via ApplicationSet list-generator"
+  applicationsets:
+    core:
+      generator: list
+      elements: ["ag-<regiao>-core-dev", "ag-<regiao>-core-prod"]
+      note: "Um ApplicationSet por stack Core (infra, observabilidade, segurança)."
+    suites:
+      generator: list
+      elements: ["ag-<regiao>-core-dev", "ag-<regiao>-core-prod"]
+      note: "Agrupa Factory/Brain/Operations/Guardian a partir do repositório gitops-suites."
+    workspaces:
+      generator: list
+      elements_template: "[{name, tenant, env, vcluster}]"
+      note: "Gera 1 Application por workspace/vCluster para sincronizar apps por tenant; inclusão/remoção via PR."
+  required_labels:
+    - "appgear.io/tenant"
+    - "appgear.io/workspace"
+    - "appgear.io/vcluster"
+    - "appgear.io/env"
+
+components:
+  core:
+    network:
+      - traefik
+      - coraza
+      - kong
+      - istio
+      - tailscale
+    security:
+      - vault
+      - openfga
+      - opa
+      - falco
+    data:
+      - ceph
+      - postgres
+      - redis
+      - qdrant
+      - redpanda
+      - rabbitmq
+    observability:
+      - prometheus
+      - grafana
+      - loki
+      - opencost
+      - lago
+    ai_automation:
+      - ollama
+      - litellm
+      - flowise
+      - n8n
+      - bpmn
+    legal_compliance:
+      - tika
+      - gotenberg
+      - signserver
+  suites:
+    - factory
+    - brain
+    - operations
+    - guardian
+
+version_control:
+  baseline: "v0.3"
+  enforcement:
+    - "Manifestos e módulos devem declarar explicitamente a versão-alvo."
+    - "Qualquer exceção ou recurso experimental precisa de label `appgear.io/version-override`."
+
+references:
+  module_core: "development/v0.3/core-module-v0.3.md"
+  interoperability: "docs/architecture/interoperability/interoperability-v0.md"
+  notes:
+    - "Todos os módulos devem citar este manifesto para dependências cruzadas."
+    - "Diagramas de rede devem seguir o edge_pipeline.order exatamente."

@@ -1,0 +1,883 @@
+# Matriz de interoperabilidade por módulo AppGear
+# Cada item descreve um módulo M00–M17 e suas integrações Core/Suítes.
+
+- modulo: "M00 – Convenções, Repositórios e Nomenclatura"
+  id: "M00"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core: []
+  usa_suites: []
+  integra_com:
+    http: []
+    eventos:
+      produz: []
+      consome: []
+    dados:
+      le_de: []
+      escreve_em: []
+  tenancy:
+    tipo: "infra-core"
+    workspace_isolado_por: "n/a"
+    observa_multi_tenancy_logico: []
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M01 – GitOps e Argo CD (App-of-Apps)"
+  id: "M01"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-argo-cd
+    - core-argo-applicationset
+    - core-argo-workflows
+  usa_suites: []
+  integra_com:
+    http:
+      - nome: "Interface Argo CD"
+        via: "traefik, coraza, kong, istio"
+        prefixo: "/argo"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-argo-cd"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.gitops.sync.completed"
+        - broker: "core-redpanda"
+          topico: "appgear.gitops.sync.failed"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.ai.pipeline.executed"
+    dados:
+      le_de:
+        - "repositorios git (infra-core, suites, workspaces)"
+      escreve_em:
+        - "estado de sincronizacao em CRDs Kubernetes (Argo CD)"
+  tenancy:
+    tipo: "infra-core"
+    workspace_isolado_por: "n/a"
+    observa_multi_tenancy_logico: []
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M02 – Borda e Malha de Serviço (Traefik, Istio, Coraza, Kong)"
+  id: "M02"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-traefik
+    - core-coraza
+    - core-kong
+    - core-istio
+  usa_suites: []
+  integra_com:
+    http:
+      - nome: "Entrada padrão HTTP(S) da plataforma"
+        via: "traefik, coraza, kong, istio"
+        prefixo: "/"
+        cadeia: "traefik -> coraza -> kong -> istio -> serviços-core-e-suites"
+      - nome: "Portal Backstage"
+        via: "traefik, coraza, kong, istio"
+        prefixo: "/"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-backstage"
+      - nome: "Ferramentas no-code"
+        via: "traefik, coraza, kong, istio"
+        prefixo: "/directus, /appsmith, /n8n, /flowise"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-tooling"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.infra.edge.access"
+        - broker: "core-redpanda"
+          topico: "appgear.infra.edge.security"
+      consome: []
+    dados:
+      le_de: []
+      escreve_em: []
+  tenancy:
+    tipo: "infra-core"
+    workspace_isolado_por: "n/a"
+    observa_multi_tenancy_logico: []
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M03 – Observabilidade e FinOps"
+  id: "M03"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-prometheus
+    - core-loki
+    - core-grafana
+    - core-opencost
+    - core-lago
+  usa_suites: []
+  integra_com:
+    http:
+      - nome: "Dashboards Grafana"
+        via: "core-kong"
+        prefixo: "/grafana"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-grafana"
+      - nome: "API de métricas Prometheus"
+        via: "istio"
+        prefixo: "/api/v1/*"
+        cadeia: "istio -> core-prometheus"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.observability.alerts"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.infra.edge.access"
+        - broker: "core-redpanda"
+          topico: "appgear.core.m08.usage"
+    dados:
+      le_de:
+        - "series temporais Prometheus"
+        - "logs Loki"
+        - "metricas de custo OpenCost/Lago"
+      escreve_em:
+        - "dashboards Grafana"
+        - "relatorios FinOps"
+  tenancy:
+    tipo: "infra-core"
+    workspace_isolado_por: "n/a"
+    observa_multi_tenancy_logico: []
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M04 – Armazenamento e Bancos Core"
+  id: "M04"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-ceph
+    - core-postgres
+    - core-redis
+    - core-qdrant
+    - core-redpanda
+    - core-rabbitmq
+    - core-meilisearch
+  usa_suites: []
+  integra_com:
+    http:
+      - nome: "APIs de acesso a dados (serviços que expõem Postgres/Ceph/Qdrant/Meilisearch)"
+        via: "istio"
+        prefixo: "/api/*"
+        cadeia: "kong -> istio -> serviços-de-dados-core"
+    eventos:
+      produz: []
+      consome: []
+    dados:
+      le_de:
+        - "volumes Ceph"
+        - "bancos Postgres"
+        - "cache Redis"
+        - "colecoes Qdrant"
+        - "topicos Redpanda"
+        - "filas RabbitMQ"
+        - "indices Meilisearch"
+      escreve_em:
+        - "mesmas fontes, conforme cada servico consumidor/produtor"
+  tenancy:
+    tipo: "infra-core"
+    workspace_isolado_por: "n/a"
+    observa_multi_tenancy_logico:
+      - "tenant_id (schemas, buckets, indices)"
+      - "workspace_id (quando aplicavel)"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M05 – Segurança e Segredos (Vault, OPA, Falco, OpenFGA)"
+  id: "M05"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-vault
+    - core-opa
+    - core-falco
+    - core-openfga
+    - core-kyverno
+  usa_suites: []
+  integra_com:
+    http:
+      - nome: "API Vault"
+        via: "core-kong"
+        prefixo: "/vault"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-vault"
+      - nome: "API OPA / OpenFGA"
+        via: "istio"
+        prefixo: "/authz/*"
+        cadeia: "kong -> istio -> core-openfga/opa"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.security.alerts"
+        - broker: "core-redpanda"
+          topico: "appgear.security.policy-change"
+      consome: []
+    dados:
+      le_de:
+        - "politicas em repositorios Git"
+        - "configuracoes de roles/permissions (OpenFGA/OPA)"
+      escreve_em:
+        - "estado interno de politicas"
+        - "logs de seguranca (Loki, Prometheus)"
+  tenancy:
+    tipo: "infra-core"
+    workspace_isolado_por: "n/a"
+    observa_multi_tenancy_logico:
+      - "tenant_id/workspace_id em politicas de acesso"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M06 – Identidade e SSO (Keycloak, midPoint, RBAC/ReBAC)"
+  id: "M06"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-keycloak
+    - core-midpoint
+  usa_suites: []
+  integra_com:
+    http:
+      - nome: "Portal de autenticação/SSO"
+        via: "core-kong"
+        prefixo: "/auth"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-keycloak"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.identity.user.created"
+        - broker: "core-redpanda"
+          topico: "appgear.identity.user.updated"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.identity.provisioning.*"
+    dados:
+      le_de:
+        - "banco de identidades do Keycloak"
+        - "midPoint (provisionamento IAM, quando presente)"
+      escreve_em:
+        - "registros de usuarios, grupos, roles"
+  tenancy:
+    tipo: "infra-core"
+    workspace_isolado_por: "n/a"
+    observa_multi_tenancy_logico:
+      - "tenant_id/workspace_id nas claims de token"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M07 – Portal Backstage e Integrações Core"
+  id: "M07"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-backstage
+    - core-argo-cd
+    - core-litellm
+  usa_suites:
+    - Factory
+    - Brain
+    - Operations
+    - Guardian
+  integra_com:
+    http:
+      - nome: "Portal Backstage"
+        via: "core-kong"
+        prefixo: "/"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-backstage"
+      - nome: "Plugins Backstage (GitOps, AI, Docs)"
+        via: "istio"
+        prefixo: "/api/*"
+        cadeia: "backstage -> servicos-core-e-suites"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.backstage.template.run"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.observability.alerts"
+    dados:
+      le_de:
+        - "catalogo Backstage"
+        - "repositorios git"
+      escreve_em:
+        - "catalogo Backstage"
+        - "registros de automacoes (Postgres/Ceph)"
+  tenancy:
+    tipo: "hard-multi-tenant"
+    workspace_isolado_por: "vcluster"
+    observa_multi_tenancy_logico:
+      - "tenant_id/workspace_id no catalogo"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M08 – Serviços Core (LiteLLM, Flowise, N8n, Directus, Appsmith, etc.)"
+  id: "M08"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-litellm
+    - core-flowise
+    - core-n8n
+    - core-directus
+    - core-appsmith
+    - core-ollama
+    - core-tika
+    - core-gotenberg
+  usa_suites:
+    - Factory
+    - Brain
+    - Operations
+    - Guardian
+  integra_com:
+    http:
+      - nome: "Console Directus"
+        via: "core-kong"
+        prefixo: "/directus"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-directus"
+      - nome: "Console Appsmith"
+        via: "core-kong"
+        prefixo: "/appsmith"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-appsmith"
+      - nome: "Orquestrações n8n"
+        via: "core-kong"
+        prefixo: "/n8n"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-n8n"
+      - nome: "Fluxos Flowise"
+        via: "core-kong"
+        prefixo: "/flowise"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-flowise"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.core.m08.audit"
+        - broker: "core-redpanda"
+          topico: "appgear.core.m08.usage"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.factory.cde.*"
+        - broker: "core-redpanda"
+          topico: "appgear.brain.rag.*"
+    dados:
+      le_de:
+        - "core-postgres (schema appgear_core)"
+        - "core-redis (db appgear-session)"
+        - "core-qdrant (collection core_tools)"
+      escreve_em:
+        - "core-postgres (schema appgear_core)"
+        - "core-qdrant (collection core_tools)"
+  tenancy:
+    tipo: "hard-multi-tenant"
+    workspace_isolado_por: "vcluster"
+    observa_multi_tenancy_logico:
+      - "tenant_id"
+      - "workspace_id"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M09 – Suíte Factory"
+  id: "M09"
+  suite: "Factory"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-postgres
+    - core-redpanda
+    - core-ceph
+    - core-meilisearch
+  usa_suites:
+    - Brain
+    - Operations
+  integra_com:
+    http:
+      - nome: "APIs de integrações de negócio (ERP/E-commerce/CRM)"
+        via: "core-kong"
+        prefixo: "/factory/*"
+        cadeia: "traefik -> coraza -> kong -> istio -> factory-services"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.factory.cde.output"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.factory.cde.input"
+    dados:
+      le_de:
+        - "core-postgres (schemas de staging e harmonizacao)"
+        - "origens de dados conectadas (via CDEs/Airbyte)"
+      escreve_em:
+        - "core-postgres (camadas de dados harmonizados)"
+        - "indices Meilisearch"
+        - "Ceph (datasets brutos)"
+  tenancy:
+    tipo: "hard-multi-tenant"
+    workspace_isolado_por: "vcluster"
+    observa_multi_tenancy_logico:
+      - "tenant_id"
+      - "workspace_id"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M10 – Suíte Brain"
+  id: "M10"
+  suite: "Brain"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-litellm
+    - core-qdrant
+    - core-ceph
+  usa_suites:
+    - Factory
+  integra_com:
+    http:
+      - nome: "APIs de RAG/Corporate Brain"
+        via: "core-kong"
+        prefixo: "/brain/*"
+        cadeia: "traefik -> coraza -> kong -> istio -> brain-services"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.brain.rag.output"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.factory.cde.output"
+    dados:
+      le_de:
+        - "core-qdrant (collections por tenant/workspace)"
+        - "Ceph (documentos, arquivos)"
+        - "core-postgres (metadados de fontes)"
+      escreve_em:
+        - "core-qdrant (embeddings)"
+        - "Ceph (artefatos processados)"
+  tenancy:
+    tipo: "hard-multi-tenant"
+    workspace_isolado_por: "vcluster"
+    observa_multi_tenancy_logico:
+      - "tenant_id"
+      - "workspace_id"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M11 – Suíte Operations"
+  id: "M11"
+  suite: "Operations"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-redpanda
+    - core-rabbitmq
+    - core-ceph
+    - core-istio
+  usa_suites:
+    - Factory
+    - Brain
+  integra_com:
+    http:
+      - nome: "APIs de Operations/IoT/RPA"
+        via: "core-kong"
+        prefixo: "/operations/*"
+        cadeia: "traefik -> coraza -> kong -> istio -> operations-services"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.operations.signal.*"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.factory.cde.*"
+        - broker: "core-redpanda"
+          topico: "appgear.brain.rag.output"
+    dados:
+      le_de:
+        - "Ceph (telemetria, estados historicos)"
+        - "core-postgres (configuracoes operacionais)"
+      escreve_em:
+        - "Ceph (eventos e historico de execucao)"
+        - "core-postgres (estado atual de orquestracoes)"
+  tenancy:
+    tipo: "hard-multi-tenant"
+    workspace_isolado_por: "vcluster"
+    observa_multi_tenancy_logico:
+      - "tenant_id"
+      - "workspace_id"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M12 – Suíte Guardian"
+  id: "M12"
+  suite: "Guardian"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-vault
+    - core-opa
+    - core-falco
+    - core-tika
+    - core-gotenberg
+  usa_suites:
+    - Factory
+    - Brain
+    - Operations
+  integra_com:
+    http:
+      - nome: "APIs de Security/Legal/Chaos"
+        via: "core-kong"
+        prefixo: "/guardian/*"
+        cadeia: "traefik -> coraza -> kong -> istio -> guardian-services"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.guardian.security.alert"
+        - broker: "core-redpanda"
+          topico: "appgear.guardian.legal.event"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.observability.alerts"
+        - broker: "core-redpanda"
+          topico: "appgear.security.alerts"
+    dados:
+      le_de:
+        - "logs (Loki)"
+        - "metricas (Prometheus)"
+        - "documentos (Ceph via Tika/Gotenberg)"
+      escreve_em:
+        - "relatorios e pareceres (Ceph/Postgres)"
+  tenancy:
+    tipo: "hard-multi-tenant"
+    workspace_isolado_por: "vcluster"
+    observa_multi_tenancy_logico:
+      - "tenant_id"
+      - "workspace_id"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M13 – Workspaces, vCluster e modelo por cliente"
+  id: "M13"
+  suite: "Core"
+  topologias:
+    - B
+  usa_core:
+    - core-argo-cd
+    - core-istio
+    - core-keda
+  usa_suites:
+    - Factory
+    - Brain
+    - Operations
+    - Guardian
+  integra_com:
+    http:
+      - nome: "APIs de gerenciamento de workspaces/vClusters"
+        via: "backstage + core-kong"
+        prefixo: "/api/workspaces/*"
+        cadeia: "backstage -> kong -> istio -> workspace-operator"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.workspace.created"
+        - broker: "core-redpanda"
+          topico: "appgear.workspace.deleted"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.ai.pipeline.executed"
+    dados:
+      le_de:
+        - "GitOps de workspaces (appgear-workspace-template)"
+      escreve_em:
+        - "CRDs de vCluster/workspace no cluster"
+  tenancy:
+    tipo: "hard-multi-tenant"
+    workspace_isolado_por: "vcluster"
+    observa_multi_tenancy_logico:
+      - "tenant_id"
+      - "workspace_id"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M14 – Pipelines de Geração AI-First"
+  id: "M14"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-litellm
+    - core-argo-workflows
+    - core-n8n
+    - core-flowise
+    - core-qdrant
+    - core-ceph
+    - core-postgres
+  usa_suites:
+    - Factory
+    - Brain
+    - Operations
+    - Guardian
+  integra_com:
+    http:
+      - nome: "Geração AI-First via Backstage"
+        via: "backstage -> core-kong -> istio"
+        prefixo: "/api/ai-first/*"
+        cadeia: "backstage -> n8n -> flowise -> litellm -> argo-workflows -> vcluster"
+      - nome: "Webhooks de pipelines (n8n)"
+        via: "core-kong"
+        prefixo: "/n8n/webhook/*"
+        cadeia: "traefik -> coraza -> kong -> istio -> core-n8n"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.ai.pipeline.executed"
+        - broker: "core-redpanda"
+          topico: "appgear.ai.pipeline.failed"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.factory.cde.output"
+        - broker: "core-redpanda"
+          topico: "appgear.operations.signal.*"
+    dados:
+      le_de:
+        - "core-qdrant (collections de contexto de geração)"
+        - "core-ceph (artifacts de projetos)"
+        - "core-postgres (schema appgear_ci_cd)"
+      escreve_em:
+        - "core-ceph (artifacts gerados)"
+        - "core-postgres (schema appgear_ci_cd)"
+  tenancy:
+    tipo: "hard-multi-tenant"
+    workspace_isolado_por: "vcluster"
+    observa_multi_tenancy_logico:
+      - "tenant_id"
+      - "workspace_id"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M15 – Continuidade de Negócios (DR & Backup Global)"
+  id: "M15"
+  suite: "Core"
+  topologias:
+    - B
+  usa_core:
+    - core-velero
+    - core-ceph
+    - core-postgres
+  usa_suites: []
+  integra_com:
+    http:
+      - nome: "APIs de gerenciamento de backups/restore (quando expostas)"
+        via: "istio"
+        prefixo: "/dr/*"
+        cadeia: "kong -> istio -> dr-services"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.dr.backup.completed"
+        - broker: "core-redpanda"
+          topico: "appgear.dr.backup.failed"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.dr.backup.requested"
+    dados:
+      le_de:
+        - "snapshots Ceph"
+        - "backups Postgres"
+        - "Objetos Velero"
+      escreve_em:
+        - "locais de backup (storage externo/remote)"
+        - "logs de DR (Loki/Prometheus)"
+  tenancy:
+    tipo: "infra-core"
+    workspace_isolado_por: "n/a"
+    observa_multi_tenancy_logico:
+      - "tenant_id/workspace_id nas politicas de DR"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M16 – Conectividade Híbrida (VPN, Túneis, Acesso Remoto)"
+  id: "M16"
+  suite: "Core"
+  topologias:
+    - B
+  usa_core:
+    - core-tailscale
+    - core-istio
+  usa_suites: []
+  integra_com:
+    http:
+      - nome: "Painel de conectividade (quando existir)"
+        via: "istio"
+        prefixo: "/connectivity/*"
+        cadeia: "kong -> istio -> connectivity-services"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.connectivity.session.created"
+        - broker: "core-redpanda"
+          topico: "appgear.connectivity.session.closed"
+      consome: []
+    dados:
+      le_de:
+        - "configuracoes de conexao (Ceph/Postgres)"
+      escreve_em:
+        - "logs de conectividade (Loki)"
+  tenancy:
+    tipo: "infra-core"
+    workspace_isolado_por: "n/a"
+    observa_multi_tenancy_logico:
+      - "tenant_id/workspace_id em politicas de acesso remoto"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
+
+- modulo: "M17 – Políticas Operacionais e Resiliência"
+  id: "M17"
+  suite: "Core"
+  topologias:
+    - A
+    - B
+  usa_core:
+    - core-opa
+    - core-kyverno
+    - core-falco
+    - core-prometheus
+    - core-loki
+  usa_suites: []
+  integra_com:
+    http:
+      - nome: "APIs de Policy-as-Code (quando expostas)"
+        via: "istio"
+        prefixo: "/policy/*"
+        cadeia: "kong -> istio -> policy-services"
+    eventos:
+      produz:
+        - broker: "core-redpanda"
+          topico: "appgear.policy.violation"
+        - broker: "core-redpanda"
+          topico: "appgear.policy.change"
+      consome:
+        - broker: "core-redpanda"
+          topico: "appgear.observability.alerts"
+    dados:
+      le_de:
+        - "logs (Loki)"
+        - "metricas (Prometheus)"
+        - "politicas (repositorios git)"
+      escreve_em:
+        - "registros de violacoes e conformidade"
+  tenancy:
+    tipo: "infra-core"
+    workspace_isolado_por: "n/a"
+    observa_multi_tenancy_logico:
+      - "tenant_id/workspace_id em regras de politica"
+  seguranca:
+    sso: "keycloak"
+    autorizacao: "openfga"
+    segredos: "vault"
+  observabilidade:
+    metrics: "prometheus"
+    logs: "loki"
