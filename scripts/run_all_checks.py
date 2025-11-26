@@ -32,7 +32,21 @@ def main() -> None:
         [sys.executable, "scripts/edge_chain.py"],
     )
 
+    # 3) Checks semanticos de documentacao (fluxos/mapa x modulos + H1 normativos)
+    run_step(
+        "Validar cruzamento de modulos com fluxos/mapa e cabecalhos normativos (docs_semantic_checks.py)",
+        [sys.executable, "scripts/docs_semantic_checks.py"],
+    )
+
+    # 4) Checks de arquivos de modulo e referencias em mapa-global
+    run_step(
+        "Validar existencia de arquivos de modulo e suas referencias em mapa-global (modules_files_checks.py)",
+        [sys.executable, "scripts/modules_files_checks.py"],
+    )
+
     print("\n[ALL OK] Todos os checks passaram sem erros.")
+
+
 
 
 if __name__ == "__main__":

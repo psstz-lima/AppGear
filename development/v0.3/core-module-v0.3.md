@@ -1,6 +1,13 @@
-# Módulo Core v0.3 – Premissas Comuns da Stack AppGear
+# M00 – Fundamentos de repositório e baseline (v0.3)
 
-Versão: v0.3
+> [!IMPORTANT]
+> Este arquivo descreve o módulo M00 da linha v0.3 da AppGear.  
+> Deve ser lido em conjunto com:
+> - `docs/architecture/contract/contract-v0.md`
+> - `docs/architecture/audit/audit-v0.md`
+> - `docs/architecture/interoperability/interoperability-v0.md`
+> - `docs/architecture/interoperability/resources/fluxos-ai-first.md`
+> - `docs/architecture/interoperability/resources/mapa-global.md`
 
 ## Objetivo
 

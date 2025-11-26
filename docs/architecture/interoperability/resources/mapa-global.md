@@ -367,5 +367,58 @@ Foco: **segurança, conformidade, legal e governança**.
   * `contract-v0.md`;
   * `audit-v0.md`;
   * `interoperability-v0.md`.
+  
+---
+
+## 6. Matriz de módulos (M00–M17)
+
+Esta tabela conecta a visão global da plataforma com os módulos normativos definidos em `modulos.yaml` (M00–M17).  
+Os nomes podem ser refinados depois, mas o importante é que **todos os IDs apareçam aqui**.
+
+| Módulo | Nome resumido                              | Suite principal         | Observação rápida                                      |
+|--------|--------------------------------------------|-------------------------|--------------------------------------------------------|
+| M00    | Fundamentos de repositório e baseline      | Factory / Guardian      | Estrutura de pastas, versionamento, baseline v0/v0.3. |
+| M01    | GitOps, CI/CD e orquestração de deploy     | Operations / Guardian   | Pipelines, Argo, GitOps, promoções entre ambientes.   |
+| M02    | Borda de rede e edge chain                 | Operations / Guardian   | Traefik → Coraza → Kong → Istio, exposição segura.    |
+| M03    | Identidade de tenant/workspace/vCluster    | Guardian                | Modelo de multi-tenancy e isolamento lógico/físico.   |
+| M04    | Dados e storage                            | Brain / Operations      | Bancos, storage distribuído, caches, vetores, filas.  |
+| M05    | Segredos e autorização                     | Guardian                | Vault, OpenFGA e controles de acesso finos.           |
+| M06    | SSO e gestão de identidade                 | Guardian                | Keycloak, provedores externos, SSO unificado.         |
+| M07    | Portal de desenvolvimento / Backstage      | Factory / Operations    | Backstage como estúdio central da plataforma.         |
+| M08    | App Factory e low-code                     | Factory                 | Appsmith, Directus, n8n, fluxo de geração de apps.    |
+| M09    | Integração e pipelines de dados            | Brain / Operations      | Airbyte, Meilisearch, ingestão e indexação de dados.  |
+| M10    | IA, RAG e MLOps                            | Brain                   | LiteLLM, Ollama, Qdrant, notebooks, MLflow.           |
+| M11    | Integrações externas, IoT e RPA            | Operations              | ThingsBoard, Robocorp, automações e integrações.      |
+| M12    | Resiliência, caos e testes de falha        | Guardian                | LitmusChaos, drills de DR e resiliência.              |
+| M13    | Observabilidade e FinOps                   | Guardian                | Logs, métricas, traces, OpenCost/Lago, painéis.       |
+| M14    | Orquestração de operações e runbooks       | Operations              | Argo Events/Workflows, coordenação de fluxos.         |
+| M15    | Backup e recuperação de desastre (DR)      | Guardian                | Velero, snapshots, políticas de restore.              |
+| M16    | Conectividade híbrida e acesso remoto      | Operations / Guardian   | Tailscale, acesso seguro a clusters/vClusters.        |
+| M17    | Governança, políticas e conformidade       | Guardian                | OPA, Kyverno, Conftest, políticas multi-camada.       |
+
+---
+
+## 7. Arquivos de módulos v0.3
+
+Referências diretas dos módulos M00–M17 para seus arquivos normativos em `development/v0.3/`:
+
+- M00 → `development/v0.3/core-module-v0.3.md`
+- M01 → `development/v0.3/module-01-v0.3.md`
+- M02 → `development/v0.3/module-02-v0.3.md`
+- M03 → `development/v0.3/module-03-v0.3.md`
+- M04 → `development/v0.3/module-04-v0.3.md`
+- M05 → `development/v0.3/module-05-v0.3.md`
+- M06 → `development/v0.3/module-06-v0.3.md`
+- M07 → `development/v0.3/module-07-v0.3.md`
+- M08 → `development/v0.3/module-08-v0.3.md`
+- M09 → `development/v0.3/module-09-v0.3.md`
+- M10 → `development/v0.3/module-10-v0.3.md`
+- M11 → `development/v0.3/module-11-v0.3.md`
+- M12 → `development/v0.3/module-12-v0.3.md`
+- M13 → `development/v0.3/module-13-v0.3.md`
+- M14 → `development/v0.3/module-14-v0.3.md`
+- M15 → `development/v0.3/module-15-v0.3.md`
+- M16 → `development/v0.3/module-16-v0.3.md`
+- M17 → `development/v0.3/module-17-v0.3.md`
 
 Se o mapa divergir desses documentos, **estes documentos normativos prevalecem**.
