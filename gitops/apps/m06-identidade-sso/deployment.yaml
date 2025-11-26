@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: nginx:stable
+          image: quay.io/keycloak/keycloak:latest
           ports:
             - containerPort: 80
           env:
@@ -30,4 +30,4 @@ spec:
             - name: MODULE_NAME
               value: "identidade-sso"
             - name: INTENDED_COMPONENTS
-              value: "keycloak,midpoint,rbac,rebac,openfga"
+              value: "keycloak,idm,rbac,rebac"

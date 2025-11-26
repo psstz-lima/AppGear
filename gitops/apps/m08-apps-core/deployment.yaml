@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: nginx:stable
+          image: n8nio/n8n:latest
           ports:
             - containerPort: 80
           env:

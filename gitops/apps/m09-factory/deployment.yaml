@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: nginx:stable
+          image: node:20-alpine
           ports:
             - containerPort: 80
           env:

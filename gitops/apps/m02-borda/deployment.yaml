@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: nginx:stable
+          image: traefik:v2.11
           ports:
             - containerPort: 80
           env:

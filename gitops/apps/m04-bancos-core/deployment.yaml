@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: nginx:stable
+          image: postgres:16
           ports:
             - containerPort: 80
           env:

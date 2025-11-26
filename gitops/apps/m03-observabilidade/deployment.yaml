@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: nginx:stable
+          image: grafana/grafana:latest
           ports:
             - containerPort: 80
           env:

@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: nginx:stable
+          image: owasp/zap2docker-stable
           ports:
             - containerPort: 80
           env:

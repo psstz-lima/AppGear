@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: nginx:stable
+          image: eclipse-mosquitto:latest
           ports:
             - containerPort: 80
           env:
@@ -30,4 +30,4 @@ spec:
             - name: MODULE_NAME
               value: "suite-operations"
             - name: INTENDED_COMPONENTS
-              value: "iot,thingsboard,edge,rpa,digital-twins"
+              value: "iot,edge,rpa,digital-twins"

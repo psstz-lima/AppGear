@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: nginx:stable
+          image: velero/velero:latest
           ports:
             - containerPort: 80
           env:
