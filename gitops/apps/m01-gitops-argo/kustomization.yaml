@@ -5,12 +5,14 @@ namespace: appgear-gitops
 
 resources:
   - namespace.yaml
+  - deployment.yaml
+  - service.yaml
 
 configMapGenerator:
   - name: appgear-m01-metadata
     literals:
       - moduleId=M01
-      - moduleName="m01 gitops argo"
+      - moduleName="gitops-argo"
       - contractRef=docs/architecture/contract/contract-v0.md
       - auditRef=docs/architecture/audit/audit-v0.md
       - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
@@ -21,4 +23,4 @@ generatorOptions:
 
 commonLabels:
   appgear.io/module-id: M01
-  appgear.io/module-name: "m01 gitops argo"
+  appgear.io/module-name: "gitops-argo"

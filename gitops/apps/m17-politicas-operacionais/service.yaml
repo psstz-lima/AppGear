@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appgear-m17-politicas-operacionais-svc
+  labels:
+    appgear.io/module-id: M17
+    appgear.io/module-name: "politicas-operacionais"
+spec:
+  type: ClusterIP
+  selector:
+    appgear.io/module-id: M17
+    appgear.io/module-name: "politicas-operacionais"
+    appgear.io/role: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appgear-m14-pipelines-ai-first-svc
+  labels:
+    appgear.io/module-id: M14
+    appgear.io/module-name: "pipelines-ai-first"
+spec:
+  type: ClusterIP
+  selector:
+    appgear.io/module-id: M14
+    appgear.io/module-name: "pipelines-ai-first"
+    appgear.io/role: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

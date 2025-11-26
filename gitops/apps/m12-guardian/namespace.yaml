@@ -4,5 +4,5 @@ metadata:
   name: appgear-guardian
   labels:
     appgear.io/module-id: M12
-    appgear.io/module-name: "m12 guardian"
+    appgear.io/module-name: "suite-guardian"
     appgear.io/env: "core"

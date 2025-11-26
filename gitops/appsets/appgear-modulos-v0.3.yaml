@@ -71,7 +71,7 @@ template:
   spec:
     project: core
     source:
-      repoURL: git@github.com:SEU-USUARIO/AppGear.git  # TODO: ajuste para o repo real
+      repoURL: git@github.com:psstz-lima/AppGear.git  # TODO: ajuste para o repo real
       targetRevision: main
       path: "{{path}}"
     destination:

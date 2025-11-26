@@ -1,6 +1,6 @@
-# GitOps – M01 (m01-gitops-argo)
+# GitOps – M01 (gitops-argo)
 
-Este diretório contém a camada GitOps/Kustomize para o módulo **M01** da AppGear.
+Este diretório contém a camada GitOps/Kustomize para o módulo **M01** da AppGear (v0.3).
 
 - Namespace alvo: `appgear-gitops`
 - Documento normativo do módulo: `development/v0.3/module-01-v0.3.md`
@@ -8,11 +8,16 @@ Este diretório contém a camada GitOps/Kustomize para o módulo **M01** da AppG
 - Diretriz de auditoria: `docs/architecture/audit/audit-v0.md`
 - Diretriz de interoperabilidade: `docs/architecture/interoperability/interoperability-v0.md`
 
+Componentes previstos para este módulo (INTENDED_COMPONENTS):
+`argocd,applicationsets,workflows,events`
+
 Arquivos principais:
 
 - `namespace.yaml` – namespace e labels padrão do módulo.
+- `deployment.yaml` – deployment placeholder do controlador do módulo (`nginx:stable`), com envs descrevendo os componentes previstos.
+- `service.yaml` – service ClusterIP expondo o controlador na porta 80.
 - `kustomization.yaml` – entrada principal do Kustomize para este módulo.
 
 Próximos passos:
 
-- Adicionar aqui os manifests reais (Deployments, Services, CRDs, etc.) que implementam o módulo **M01**, referenciando-os em `kustomization.yaml`.
+- Substituir e/ou complementar o `deployment.yaml` com os manifests reais (Deployments, CRDs, Helm charts, Argo Applications, etc.) que implementam o módulo **M01**, mantendo os labels e o padrão de namespace.

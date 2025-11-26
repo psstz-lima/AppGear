@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m00-fundamentos-controller
+  labels:
+    appgear.io/module-id: M00
+    appgear.io/module-name: "fundamentos"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M00
+      appgear.io/module-name: "fundamentos"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M00
+        appgear.io/module-name: "fundamentos"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M00"
+            - name: MODULE_NAME
+              value: "fundamentos"
+            - name: INTENDED_COMPONENTS
+              value: "contract,audit,interoperability,stack-unificada"

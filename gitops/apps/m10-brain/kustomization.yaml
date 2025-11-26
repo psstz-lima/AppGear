@@ -5,12 +5,14 @@ namespace: appgear-brain
 
 resources:
   - namespace.yaml
+  - deployment.yaml
+  - service.yaml
 
 configMapGenerator:
   - name: appgear-m10-metadata
     literals:
       - moduleId=M10
-      - moduleName="m10 brain"
+      - moduleName="suite-brain"
       - contractRef=docs/architecture/contract/contract-v0.md
       - auditRef=docs/architecture/audit/audit-v0.md
       - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
@@ -21,4 +23,4 @@ generatorOptions:
 
 commonLabels:
   appgear.io/module-id: M10
-  appgear.io/module-name: "m10 brain"
+  appgear.io/module-name: "suite-brain"

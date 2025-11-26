@@ -4,5 +4,5 @@ metadata:
   name: appgear-edge
   labels:
     appgear.io/module-id: M02
-    appgear.io/module-name: "m02 borda"
+    appgear.io/module-name: "borda"
     appgear.io/env: "core"

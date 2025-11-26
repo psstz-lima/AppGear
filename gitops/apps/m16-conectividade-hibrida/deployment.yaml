@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m16-conectividade-hibrida-controller
+  labels:
+    appgear.io/module-id: M16
+    appgear.io/module-name: "conectividade-hibrida"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M16
+      appgear.io/module-name: "conectividade-hibrida"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M16
+        appgear.io/module-name: "conectividade-hibrida"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M16"
+            - name: MODULE_NAME
+              value: "conectividade-hibrida"
+            - name: INTENDED_COMPONENTS
+              value: "tailscale,vpn,tunnels,proxy"

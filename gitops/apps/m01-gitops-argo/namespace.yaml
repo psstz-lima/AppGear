@@ -4,5 +4,5 @@ metadata:
   name: appgear-gitops
   labels:
     appgear.io/module-id: M01
-    appgear.io/module-name: "m01 gitops argo"
+    appgear.io/module-name: "gitops-argo"
     appgear.io/env: "core"

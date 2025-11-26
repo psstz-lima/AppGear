@@ -4,5 +4,5 @@ metadata:
   name: appgear-ops-policies
   labels:
     appgear.io/module-id: M17
-    appgear.io/module-name: "m17 politicas operacionais"
+    appgear.io/module-name: "politicas-operacionais"
     appgear.io/env: "core"

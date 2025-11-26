@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appgear-m13-workspaces-vcluster-svc
+  labels:
+    appgear.io/module-id: M13
+    appgear.io/module-name: "workspaces-vcluster"
+spec:
+  type: ClusterIP
+  selector:
+    appgear.io/module-id: M13
+    appgear.io/module-name: "workspaces-vcluster"
+    appgear.io/role: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

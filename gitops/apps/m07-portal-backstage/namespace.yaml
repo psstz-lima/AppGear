@@ -4,5 +4,5 @@ metadata:
   name: appgear-portal
   labels:
     appgear.io/module-id: M07
-    appgear.io/module-name: "m07 portal backstage"
+    appgear.io/module-name: "portal-backstage"
     appgear.io/env: "core"

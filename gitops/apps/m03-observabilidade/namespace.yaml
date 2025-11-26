@@ -4,5 +4,5 @@ metadata:
   name: appgear-observability
   labels:
     appgear.io/module-id: M03
-    appgear.io/module-name: "m03 observabilidade"
+    appgear.io/module-name: "observabilidade"
     appgear.io/env: "core"

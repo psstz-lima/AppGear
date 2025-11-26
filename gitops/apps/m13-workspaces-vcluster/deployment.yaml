@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m13-workspaces-vcluster-controller
+  labels:
+    appgear.io/module-id: M13
+    appgear.io/module-name: "workspaces-vcluster"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M13
+      appgear.io/module-name: "workspaces-vcluster"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M13
+        appgear.io/module-name: "workspaces-vcluster"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M13"
+            - name: MODULE_NAME
+              value: "workspaces-vcluster"
+            - name: INTENDED_COMPONENTS
+              value: "vcluster,tenants,workspaces,quotas"

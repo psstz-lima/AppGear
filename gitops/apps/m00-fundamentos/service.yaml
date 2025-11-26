@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appgear-m00-fundamentos-svc
+  labels:
+    appgear.io/module-id: M00
+    appgear.io/module-name: "fundamentos"
+spec:
+  type: ClusterIP
+  selector:
+    appgear.io/module-id: M00
+    appgear.io/module-name: "fundamentos"
+    appgear.io/role: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

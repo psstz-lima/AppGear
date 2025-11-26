@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appgear-m06-identidade-sso-svc
+  labels:
+    appgear.io/module-id: M06
+    appgear.io/module-name: "identidade-sso"
+spec:
+  type: ClusterIP
+  selector:
+    appgear.io/module-id: M06
+    appgear.io/module-name: "identidade-sso"
+    appgear.io/role: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

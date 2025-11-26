@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appgear-m01-gitops-argo-svc
+  labels:
+    appgear.io/module-id: M01
+    appgear.io/module-name: "gitops-argo"
+spec:
+  type: ClusterIP
+  selector:
+    appgear.io/module-id: M01
+    appgear.io/module-name: "gitops-argo"
+    appgear.io/role: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

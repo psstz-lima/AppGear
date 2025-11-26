@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m03-observabilidade-controller
+  labels:
+    appgear.io/module-id: M03
+    appgear.io/module-name: "observabilidade"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M03
+      appgear.io/module-name: "observabilidade"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M03
+        appgear.io/module-name: "observabilidade"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M03"
+            - name: MODULE_NAME
+              value: "observabilidade"
+            - name: INTENDED_COMPONENTS
+              value: "prometheus,loki,grafana,opencost"

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appgear-m02-borda-svc
+  labels:
+    appgear.io/module-id: M02
+    appgear.io/module-name: "borda"
+spec:
+  type: ClusterIP
+  selector:
+    appgear.io/module-id: M02
+    appgear.io/module-name: "borda"
+    appgear.io/role: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

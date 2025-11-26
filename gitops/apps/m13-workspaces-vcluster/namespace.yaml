@@ -4,5 +4,5 @@ metadata:
   name: appgear-workspaces
   labels:
     appgear.io/module-id: M13
-    appgear.io/module-name: "m13 workspaces vcluster"
+    appgear.io/module-name: "workspaces-vcluster"
     appgear.io/env: "core"

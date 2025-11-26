@@ -5,12 +5,14 @@ namespace: appgear-observability
 
 resources:
   - namespace.yaml
+  - deployment.yaml
+  - service.yaml
 
 configMapGenerator:
   - name: appgear-m03-metadata
     literals:
       - moduleId=M03
-      - moduleName="m03 observabilidade"
+      - moduleName="observabilidade"
       - contractRef=docs/architecture/contract/contract-v0.md
       - auditRef=docs/architecture/audit/audit-v0.md
       - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
@@ -21,4 +23,4 @@ generatorOptions:
 
 commonLabels:
   appgear.io/module-id: M03
-  appgear.io/module-name: "m03 observabilidade"
+  appgear.io/module-name: "observabilidade"

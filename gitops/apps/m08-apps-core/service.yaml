@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appgear-m08-apps-core-svc
+  labels:
+    appgear.io/module-id: M08
+    appgear.io/module-name: "apps-core"
+spec:
+  type: ClusterIP
+  selector:
+    appgear.io/module-id: M08
+    appgear.io/module-name: "apps-core"
+    appgear.io/role: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

@@ -5,12 +5,14 @@ namespace: appgear-connectivity
 
 resources:
   - namespace.yaml
+  - deployment.yaml
+  - service.yaml
 
 configMapGenerator:
   - name: appgear-m16-metadata
     literals:
       - moduleId=M16
-      - moduleName="m16 conectividade hibrida"
+      - moduleName="conectividade-hibrida"
       - contractRef=docs/architecture/contract/contract-v0.md
       - auditRef=docs/architecture/audit/audit-v0.md
       - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
@@ -21,4 +23,4 @@ generatorOptions:
 
 commonLabels:
   appgear.io/module-id: M16
-  appgear.io/module-name: "m16 conectividade hibrida"
+  appgear.io/module-name: "conectividade-hibrida"

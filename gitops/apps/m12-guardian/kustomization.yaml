@@ -5,12 +5,14 @@ namespace: appgear-guardian
 
 resources:
   - namespace.yaml
+  - deployment.yaml
+  - service.yaml
 
 configMapGenerator:
   - name: appgear-m12-metadata
     literals:
       - moduleId=M12
-      - moduleName="m12 guardian"
+      - moduleName="suite-guardian"
       - contractRef=docs/architecture/contract/contract-v0.md
       - auditRef=docs/architecture/audit/audit-v0.md
       - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
@@ -21,4 +23,4 @@ generatorOptions:
 
 commonLabels:
   appgear.io/module-id: M12
-  appgear.io/module-name: "m12 guardian"
+  appgear.io/module-name: "suite-guardian"

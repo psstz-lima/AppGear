@@ -4,5 +4,5 @@ metadata:
   name: appgear-operations
   labels:
     appgear.io/module-id: M11
-    appgear.io/module-name: "m11 operations"
+    appgear.io/module-name: "suite-operations"
     appgear.io/env: "core"

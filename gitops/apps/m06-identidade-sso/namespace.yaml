@@ -4,5 +4,5 @@ metadata:
   name: appgear-identity
   labels:
     appgear.io/module-id: M06
-    appgear.io/module-name: "m06 identidade sso"
+    appgear.io/module-name: "identidade-sso"
     appgear.io/env: "core"

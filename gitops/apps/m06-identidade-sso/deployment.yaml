@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m06-identidade-sso-controller
+  labels:
+    appgear.io/module-id: M06
+    appgear.io/module-name: "identidade-sso"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M06
+      appgear.io/module-name: "identidade-sso"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M06
+        appgear.io/module-name: "identidade-sso"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M06"
+            - name: MODULE_NAME
+              value: "identidade-sso"
+            - name: INTENDED_COMPONENTS
+              value: "keycloak,midpoint,rbac,rebac,openfga"

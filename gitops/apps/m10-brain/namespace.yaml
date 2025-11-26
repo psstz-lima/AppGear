@@ -4,5 +4,5 @@ metadata:
   name: appgear-brain
   labels:
     appgear.io/module-id: M10
-    appgear.io/module-name: "m10 brain"
+    appgear.io/module-name: "suite-brain"
     appgear.io/env: "core"

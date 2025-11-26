@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appgear-m10-brain-svc
+  labels:
+    appgear.io/module-id: M10
+    appgear.io/module-name: "suite-brain"
+spec:
+  type: ClusterIP
+  selector:
+    appgear.io/module-id: M10
+    appgear.io/module-name: "suite-brain"
+    appgear.io/role: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

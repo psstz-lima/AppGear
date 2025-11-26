@@ -4,5 +4,5 @@ metadata:
   name: appgear-dr
   labels:
     appgear.io/module-id: M15
-    appgear.io/module-name: "m15 dr backup"
+    appgear.io/module-name: "dr-backup"
     appgear.io/env: "core"

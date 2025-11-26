@@ -5,12 +5,14 @@ namespace: appgear-dr
 
 resources:
   - namespace.yaml
+  - deployment.yaml
+  - service.yaml
 
 configMapGenerator:
   - name: appgear-m15-metadata
     literals:
       - moduleId=M15
-      - moduleName="m15 dr backup"
+      - moduleName="dr-backup"
       - contractRef=docs/architecture/contract/contract-v0.md
       - auditRef=docs/architecture/audit/audit-v0.md
       - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
@@ -21,4 +23,4 @@ generatorOptions:
 
 commonLabels:
   appgear.io/module-id: M15
-  appgear.io/module-name: "m15 dr backup"
+  appgear.io/module-name: "dr-backup"

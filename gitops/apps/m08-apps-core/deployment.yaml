@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m08-apps-core-controller
+  labels:
+    appgear.io/module-id: M08
+    appgear.io/module-name: "apps-core"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M08
+      appgear.io/module-name: "apps-core"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M08
+        appgear.io/module-name: "apps-core"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M08"
+            - name: MODULE_NAME
+              value: "apps-core"
+            - name: INTENDED_COMPONENTS
+              value: "litellm,flowise,n8n,directus,appsmith,metabase,tika,gotenberg"

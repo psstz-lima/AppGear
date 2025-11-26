@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m04-bancos-core-controller
+  labels:
+    appgear.io/module-id: M04
+    appgear.io/module-name: "bancos-core"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M04
+      appgear.io/module-name: "bancos-core"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M04
+        appgear.io/module-name: "bancos-core"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M04"
+            - name: MODULE_NAME
+              value: "bancos-core"
+            - name: INTENDED_COMPONENTS
+              value: "postgres,redis,qdrant,redpanda,ceph,meilisearch"

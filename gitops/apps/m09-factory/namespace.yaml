@@ -4,5 +4,5 @@ metadata:
   name: appgear-factory
   labels:
     appgear.io/module-id: M09
-    appgear.io/module-name: "m09 factory"
+    appgear.io/module-name: "suite-factory"
     appgear.io/env: "core"

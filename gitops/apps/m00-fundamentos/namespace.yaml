@@ -4,5 +4,5 @@ metadata:
   name: appgear-core
   labels:
     appgear.io/module-id: M00
-    appgear.io/module-name: "m00 fundamentos"
+    appgear.io/module-name: "fundamentos"
     appgear.io/env: "core"

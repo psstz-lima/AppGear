@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m11-operations-controller
+  labels:
+    appgear.io/module-id: M11
+    appgear.io/module-name: "suite-operations"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M11
+      appgear.io/module-name: "suite-operations"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M11
+        appgear.io/module-name: "suite-operations"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M11"
+            - name: MODULE_NAME
+              value: "suite-operations"
+            - name: INTENDED_COMPONENTS
+              value: "iot,thingsboard,edge,rpa,digital-twins"

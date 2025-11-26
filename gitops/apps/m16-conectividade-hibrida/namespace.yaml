@@ -4,5 +4,5 @@ metadata:
   name: appgear-connectivity
   labels:
     appgear.io/module-id: M16
-    appgear.io/module-name: "m16 conectividade hibrida"
+    appgear.io/module-name: "conectividade-hibrida"
     appgear.io/env: "core"

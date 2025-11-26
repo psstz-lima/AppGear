@@ -5,12 +5,14 @@ namespace: appgear-operations
 
 resources:
   - namespace.yaml
+  - deployment.yaml
+  - service.yaml
 
 configMapGenerator:
   - name: appgear-m11-metadata
     literals:
       - moduleId=M11
-      - moduleName="m11 operations"
+      - moduleName="suite-operations"
       - contractRef=docs/architecture/contract/contract-v0.md
       - auditRef=docs/architecture/audit/audit-v0.md
       - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
@@ -21,4 +23,4 @@ generatorOptions:
 
 commonLabels:
   appgear.io/module-id: M11
-  appgear.io/module-name: "m11 operations"
+  appgear.io/module-name: "suite-operations"

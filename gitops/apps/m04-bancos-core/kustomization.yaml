@@ -5,12 +5,14 @@ namespace: appgear-data
 
 resources:
   - namespace.yaml
+  - deployment.yaml
+  - service.yaml
 
 configMapGenerator:
   - name: appgear-m04-metadata
     literals:
       - moduleId=M04
-      - moduleName="m04 bancos core"
+      - moduleName="bancos-core"
       - contractRef=docs/architecture/contract/contract-v0.md
       - auditRef=docs/architecture/audit/audit-v0.md
       - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
@@ -21,4 +23,4 @@ generatorOptions:
 
 commonLabels:
   appgear.io/module-id: M04
-  appgear.io/module-name: "m04 bancos core"
+  appgear.io/module-name: "bancos-core"

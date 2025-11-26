@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m12-guardian-controller
+  labels:
+    appgear.io/module-id: M12
+    appgear.io/module-name: "suite-guardian"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M12
+      appgear.io/module-name: "suite-guardian"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M12
+        appgear.io/module-name: "suite-guardian"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M12"
+            - name: MODULE_NAME
+              value: "suite-guardian"
+            - name: INTENDED_COMPONENTS
+              value: "pentest-ai,browser-isolation,legal-ai,chaos,app-store-policy"

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appgear-m16-conectividade-hibrida-svc
+  labels:
+    appgear.io/module-id: M16
+    appgear.io/module-name: "conectividade-hibrida"
+spec:
+  type: ClusterIP
+  selector:
+    appgear.io/module-id: M16
+    appgear.io/module-name: "conectividade-hibrida"
+    appgear.io/role: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m17-politicas-operacionais-controller
+  labels:
+    appgear.io/module-id: M17
+    appgear.io/module-name: "politicas-operacionais"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M17
+      appgear.io/module-name: "politicas-operacionais"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M17
+        appgear.io/module-name: "politicas-operacionais"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M17"
+            - name: MODULE_NAME
+              value: "politicas-operacionais"
+            - name: INTENDED_COMPONENTS
+              value: "sync-waves,reloader,alerts,slo"

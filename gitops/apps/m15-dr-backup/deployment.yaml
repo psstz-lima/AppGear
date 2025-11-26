@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m15-dr-backup-controller
+  labels:
+    appgear.io/module-id: M15
+    appgear.io/module-name: "dr-backup"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M15
+      appgear.io/module-name: "dr-backup"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M15
+        appgear.io/module-name: "dr-backup"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M15"
+            - name: MODULE_NAME
+              value: "dr-backup"
+            - name: INTENDED_COMPONENTS
+              value: "velero,snapshots,backup,restore"

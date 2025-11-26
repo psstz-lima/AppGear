@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appgear-m05-seguranca-segredos-controller
+  labels:
+    appgear.io/module-id: M05
+    appgear.io/module-name: "seguranca-segredos"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appgear.io/module-id: M05
+      appgear.io/module-name: "seguranca-segredos"
+      appgear.io/role: controller
+  template:
+    metadata:
+      labels:
+        appgear.io/module-id: M05
+        appgear.io/module-name: "seguranca-segredos"
+        appgear.io/role: controller
+    spec:
+      containers:
+        - name: controller
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODULE_ID
+              value: "M05"
+            - name: MODULE_NAME
+              value: "seguranca-segredos"
+            - name: INTENDED_COMPONENTS
+              value: "vault,opa,kyverno,conftest,falco,openfga"
