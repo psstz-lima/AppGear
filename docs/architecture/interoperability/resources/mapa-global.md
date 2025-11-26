@@ -402,7 +402,8 @@ Os nomes podem ser refinados depois, mas o importante é que **todos os IDs apar
 
 Referências diretas dos módulos M00–M17 para seus arquivos normativos em `development/v0.3/`:
 
-- M00 → `development/v0.3/core-module-v0.3.md`
+- CORE → `development/v0.3/core-module-v0.3.md`
+- M00 → `development/v0.3/module-00-v0.3.md`
 - M01 → `development/v0.3/module-01-v0.3.md`
 - M02 → `development/v0.3/module-02-v0.3.md`
 - M03 → `development/v0.3/module-03-v0.3.md`
