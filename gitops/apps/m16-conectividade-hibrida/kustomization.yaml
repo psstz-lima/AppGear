@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: appgear-connectivity
+
+resources:
+  - namespace.yaml
+
+configMapGenerator:
+  - name: appgear-m16-metadata
+    literals:
+      - moduleId=M16
+      - moduleName="m16 conectividade hibrida"
+      - contractRef=docs/architecture/contract/contract-v0.md
+      - auditRef=docs/architecture/audit/audit-v0.md
+      - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
+      - moduleDoc=development/v0.3/module-16-v0.3.md
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+commonLabels:
+  appgear.io/module-id: M16
+  appgear.io/module-name: "m16 conectividade hibrida"

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: appgear-guardian
+  labels:
+    appgear.io/module-id: M12
+    appgear.io/module-name: "m12 guardian"
+    appgear.io/env: "core"

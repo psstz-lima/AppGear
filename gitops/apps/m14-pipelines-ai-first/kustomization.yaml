@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: appgear-pipelines
+
+resources:
+  - namespace.yaml
+
+configMapGenerator:
+  - name: appgear-m14-metadata
+    literals:
+      - moduleId=M14
+      - moduleName="m14 pipelines ai first"
+      - contractRef=docs/architecture/contract/contract-v0.md
+      - auditRef=docs/architecture/audit/audit-v0.md
+      - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
+      - moduleDoc=development/v0.3/module-14-v0.3.md
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+commonLabels:
+  appgear.io/module-id: M14
+  appgear.io/module-name: "m14 pipelines ai first"

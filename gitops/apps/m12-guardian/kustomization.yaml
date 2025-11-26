@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: appgear-guardian
+
+resources:
+  - namespace.yaml
+
+configMapGenerator:
+  - name: appgear-m12-metadata
+    literals:
+      - moduleId=M12
+      - moduleName="m12 guardian"
+      - contractRef=docs/architecture/contract/contract-v0.md
+      - auditRef=docs/architecture/audit/audit-v0.md
+      - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
+      - moduleDoc=development/v0.3/module-12-v0.3.md
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+commonLabels:
+  appgear.io/module-id: M12
+  appgear.io/module-name: "m12 guardian"

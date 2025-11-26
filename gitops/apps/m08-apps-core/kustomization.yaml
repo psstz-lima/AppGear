@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: appgear-apps
+
+resources:
+  - namespace.yaml
+
+configMapGenerator:
+  - name: appgear-m08-metadata
+    literals:
+      - moduleId=M08
+      - moduleName="m08 apps core"
+      - contractRef=docs/architecture/contract/contract-v0.md
+      - auditRef=docs/architecture/audit/audit-v0.md
+      - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
+      - moduleDoc=development/v0.3/module-08-v0.3.md
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+commonLabels:
+  appgear.io/module-id: M08
+  appgear.io/module-name: "m08 apps core"

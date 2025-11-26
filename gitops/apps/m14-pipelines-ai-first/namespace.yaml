@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: appgear-pipelines
+  labels:
+    appgear.io/module-id: M14
+    appgear.io/module-name: "m14 pipelines ai first"
+    appgear.io/env: "core"

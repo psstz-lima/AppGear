@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: appgear-gitops
+
+resources:
+  - namespace.yaml
+
+configMapGenerator:
+  - name: appgear-m01-metadata
+    literals:
+      - moduleId=M01
+      - moduleName="m01 gitops argo"
+      - contractRef=docs/architecture/contract/contract-v0.md
+      - auditRef=docs/architecture/audit/audit-v0.md
+      - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
+      - moduleDoc=development/v0.3/module-01-v0.3.md
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+commonLabels:
+  appgear.io/module-id: M01
+  appgear.io/module-name: "m01 gitops argo"

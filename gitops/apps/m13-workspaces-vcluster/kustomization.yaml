@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: appgear-workspaces
+
+resources:
+  - namespace.yaml
+
+configMapGenerator:
+  - name: appgear-m13-metadata
+    literals:
+      - moduleId=M13
+      - moduleName="m13 workspaces vcluster"
+      - contractRef=docs/architecture/contract/contract-v0.md
+      - auditRef=docs/architecture/audit/audit-v0.md
+      - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
+      - moduleDoc=development/v0.3/module-13-v0.3.md
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+commonLabels:
+  appgear.io/module-id: M13
+  appgear.io/module-name: "m13 workspaces vcluster"

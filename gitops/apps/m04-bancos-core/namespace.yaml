@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: appgear-data
+  labels:
+    appgear.io/module-id: M04
+    appgear.io/module-name: "m04 bancos core"
+    appgear.io/env: "core"

@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: appgear-data
+
+resources:
+  - namespace.yaml
+
+configMapGenerator:
+  - name: appgear-m04-metadata
+    literals:
+      - moduleId=M04
+      - moduleName="m04 bancos core"
+      - contractRef=docs/architecture/contract/contract-v0.md
+      - auditRef=docs/architecture/audit/audit-v0.md
+      - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
+      - moduleDoc=development/v0.3/module-04-v0.3.md
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+commonLabels:
+  appgear.io/module-id: M04
+  appgear.io/module-name: "m04 bancos core"

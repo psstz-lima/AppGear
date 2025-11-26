@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: appgear-brain
+  labels:
+    appgear.io/module-id: M10
+    appgear.io/module-name: "m10 brain"
+    appgear.io/env: "core"

@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: appgear-portal
+
+resources:
+  - namespace.yaml
+
+configMapGenerator:
+  - name: appgear-m07-metadata
+    literals:
+      - moduleId=M07
+      - moduleName="m07 portal backstage"
+      - contractRef=docs/architecture/contract/contract-v0.md
+      - auditRef=docs/architecture/audit/audit-v0.md
+      - interoperabilityRef=docs/architecture/interoperability/interoperability-v0.md
+      - moduleDoc=development/v0.3/module-07-v0.3.md
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+commonLabels:
+  appgear.io/module-id: M07
+  appgear.io/module-name: "m07 portal backstage"

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: appgear-security
+  labels:
+    appgear.io/module-id: M05
+    appgear.io/module-name: "m05 seguranca segredos"
+    appgear.io/env: "core"
