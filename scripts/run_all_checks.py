@@ -2,51 +2,63 @@ import sys
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
 
+def run_step(repo_root: Path, descricao: str, script_rel: str) -> None:
+    """Executa um script de check e aborta em caso de erro."""
+    python_exe = sys.executable
+    script_path = repo_root / script_rel
 
-def run_step(description: str, args: list[str]) -> None:
-    print(f"\n[STEP] {description}")
-    print(f"[CMD ] {' '.join(args)}\n")
+    print(f"\n[STEP] {descricao} ({script_rel})")
+    print(f"[CMD ] {python_exe} {script_rel}")
 
-    result = subprocess.run(args, cwd=ROOT)
+    result = subprocess.run([python_exe, str(script_path)], cwd=repo_root, check=False)
     if result.returncode != 0:
-        print(f"[FAIL] Etapa falhou: {description}")
+        print(f"[FAIL] Etapa falhou: {descricao}")
         sys.exit(result.returncode)
 
-    print(f"[OK  ] {description} concluida com sucesso.")
+    print(f"[OK  ] {descricao} concluida com sucesso.")
 
 
 def main() -> None:
-    print("[INFO] Raiz do repo:", ROOT)
+    repo_root = Path(__file__).resolve().parents[1]
+    print(f"[INFO] Raiz do repo: {repo_root}")
 
-    # 1) Check de documentacao (modulos.yaml + third_party.yaml)
+    # 1) Matriz de modulos x componentes terceiros
     run_step(
+        repo_root,
         "Validar matriz de modulos e componentes terceiros (check_docs.py)",
-        [sys.executable, "scripts/check_docs.py"],
+        "scripts/check_docs.py",
     )
 
-    # 2) Check da cadeia de borda (Ingress/IngressRoute/Services/stack-unificada)
+    # 2) Cadeia de borda (Traefik -> Coraza -> Kong -> Istio)
     run_step(
+        repo_root,
         "Validar cadeia de borda (Traefik → Coraza → Kong → Istio) (edge_chain.py)",
-        [sys.executable, "scripts/edge_chain.py"],
+        "scripts/edge_chain.py",
     )
 
-    # 3) Checks semanticos de documentacao (fluxos/mapa x modulos + H1 normativos)
+    # 3) Cruzamento de modulos com fluxos/mapa e cabecalhos normativos
     run_step(
+        repo_root,
         "Validar cruzamento de modulos com fluxos/mapa e cabecalhos normativos (docs_semantic_checks.py)",
-        [sys.executable, "scripts/docs_semantic_checks.py"],
+        "scripts/docs_semantic_checks.py",
     )
 
-    # 4) Checks de arquivos de modulo e referencias em mapa-global
+    # 4) Existencia de arquivos de modulo e suas referencias em mapa-global
     run_step(
+        repo_root,
         "Validar existencia de arquivos de modulo e suas referencias em mapa-global (modules_files_checks.py)",
-        [sys.executable, "scripts/modules_files_checks.py"],
+        "scripts/modules_files_checks.py",
+    )
+
+    # 5) GitOps por modulo (NOVO)
+    run_step(
+        repo_root,
+        "Validar estrutura GitOps/Kustomize por modulo (modules_gitops_checks.py)",
+        "scripts/modules_gitops_checks.py",
     )
 
     print("\n[ALL OK] Todos os checks passaram sem erros.")
-
-
 
 
 if __name__ == "__main__":
