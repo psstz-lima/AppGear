@@ -30,6 +30,9 @@ docker ps  # Deve rodar sem erro
 ### 1. Configurar Variáveis de Ambiente
 
 ```bash
+# Navegar para o diretório da Topologia A Minimal
+cd deployments/topology-a/minimal
+
 # Copiar arquivo de exemplo
 cp .env.example .env
 
@@ -44,6 +47,9 @@ nano .env  # ou seu editor preferido
 ### 2. Iniciar Stack
 
 ```bash
+# Certifique-se de estar no diretório correto
+cd deployments/topology-a/minimal
+
 # Iniciar todos os serviços
 docker-compose up -d
 
@@ -54,10 +60,14 @@ docker-compose logs -f
 ### 3. Verificar Funcionamento
 
 ```bash
+# Voltar para raiz do repositório
+cd ../../..
+
 # Executar script de validação
 ./scripts/validate-topology-a.sh
 
 # Ou verificar manualmente:
+cd deployments/topology-a/minimal
 docker-compose ps
 # Todos os 7 serviços devem estar "Up"
 ```

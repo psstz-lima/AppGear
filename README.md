@@ -1,236 +1,268 @@
-# AppGear
+# AppGear - Estrutura do Repositório
 
-Este repositório centraliza a documentação oficial de arquitetura da plataforma **AppGear**, incluindo o **Contrato de Arquitetura v0** e os documentos derivados de desenvolvimento, auditoria e interoperabilidade.
-
-A AppGear é uma plataforma de **construção de ecossistemas de negócios orientada por IA**, focada em geração **AI-First** ponta a ponta (Backend, Frontend, BI e processos), modularidade via 4 Suítes e eficiência de nuvem via **Scale-to-Zero (KEDA)**.
-
----
-
-## Visão geral
-
-O **0 – Contrato de Arquitetura** é a **fonte da verdade arquitetural** da AppGear. Ele estabelece regras obrigatórias para:
-
-- Stack de infraestrutura **Core** e **Add-ons** (Kubernetes, GitOps, Service Mesh, Storage, DR).
-- Serviços de dados, IA, automação, UI e SSO.
-- Governança (Segurança, Identidade, FinOps, API).
-- Industrialização (CI/CD, GitOps Nível 3, Observabilidade).
-- Funcionalidades de produto organizadas em 4 Suítes:
-  - **Factory**, **Brain**, **Operations**, **Guardian**.
-
-Este README serve como porta de entrada para quem precisa **entender, evoluir ou auditar** a arquitetura da AppGear, agora acompanhado de um fluxo CI/CD com **validação automatizada por IA** documentado em `guides/ai-ci-cd-flow.md` e pelo **Procedimento Operacional – Aplicação das Melhorias no Pipeline CI/CD (v1.1)**.
-
-## Estado atual
-
-- Toda a documentação (Contrato, Auditoria, Interoperabilidade e módulos 00–17) está sincronizada com o retrofit v0.3 sem introduzir novas capacidades além do previsto.
-- **Linha v0** permanece estável como fonte de verdade; retrofits **v0.3** dos módulos 00–17 seguem o `development/v0.3/stack-unificada-v0.3.yaml` sem adicionar novas funcionalidades.
-- **Interoperabilidade** reforça a cadeia Traefik → Coraza → Kong → Istio (mTLS STRICT), LiteLLM como gateway de IA e KEDA para cargas não 24/7.
-- **Pipeline**: publicações em `/artifacts/{ai_reports,reports,coverage,tests,docker,sbom}` com hashes SHA-256 e parecer automatizado da IA + RAPID/CCB (ver `guides/ai-ci-cd-flow.md` e `guides/integrated-report-procedure.md`).
+**Versão:** 2.0 - Reorganizado  
+**Data:** 27 de novembro de 2025
 
 ---
 
-## Documentos oficiais
+## 📁 Estrutura Completa
 
-A família de documentos é organizada em 4 blocos principais, todos em `docs/` e `development/`:
-
-- `docs/architecture/contract/contract-v0.md` – Contrato de Arquitetura (documento de referência principal).
-- `development/{v0,v0.1,v0.2}/module-XX-v*.md` – Implantação técnica por módulos (00 a 17) por linha de versão.
-- `docs/architecture/audit/audit-v0.md` – Checklist de aderência ao contrato.
-- `docs/architecture/interoperability/interoperability-v0.md` – Parecer sobre integrações entre serviços.
-
-Complementos de governança e operação:
-
-- `guides/integrated-report-procedure.md` – norma interna v1.1 que impõe validação automatizada por IA no pipeline.
-- `guides/ai-ci-cd-flow.md` – fluxo operacional para aplicar o procedimento em todos os pipelines, com estrutura `/artifacts/{ai_reports,reports,coverage,tests,docker,sbom}` e gate de decisão da IA.
-
-Mapa da árvore atualizada:
-
-```text
-appgear-docs/
-  docs/architecture/contract/contract-v0.md
-  docs/architecture/audit/audit-v0.md
-  docs/architecture/interoperability/interoperability-v0.md
-  development/v0/module-00-v0.md
-  development/v0.1/module-00-v0.1.md
-  development/v0.2/module-00-v0.2.md
-  development/v0.3/core-module-v0.3.md
+```
+AppGear/
+│
+├── 📋 Arquivos Raiz (Informação Geral)
+│   ├── README.md                    # Este arquivo - Visão geral
+│   ├── LICENSE.md                   # Licença
+│   ├── MANIFESTO.md                 # Visão e história do projeto
+│   ├── STATUS-ATUAL.md              # Status atual do projeto
+│   ├── NOTICE.md                    # Avisos legais
+│   ├── THIRD_PARTY_LICENSES.md      # Licenças de terceiros
+│   ├── requirements.txt             # Dependências Python
+│   └── requirements-tests.txt       # Dependências de teste
+│
+├── 🚀 deployments/                  # IMPLANTAÇÕES (Ambientes prontos)
+│   ├── README.md                    # Documentação de deployments
+│   ├── topology-a/                  # Docker Compose
+│   │   ├── README-topology-a.md     # Guia completo Topologia A
+│   │   ├── minimal/                 # ✅ 7 componentes (PRONTO)
+│   │   │   ├── docker-compose.yml
+│   │   │   ├── .env.example
+│   │   │   └── config/
+│   │   ├── standard/                # 15 componentes (FUTURO)
+│   │   └── full/                    # 25+ componentes (FUTURO)
+│   └── topology-b/                  # Kubernetes
+│       ├── README-topology-b.md     # (FUTURO)
+│       ├── minimal/                 # K8s minimal (FUTURO)
+│       ├── standard/                # K8s standard (FUTURO)
+│       └── enterprise/              # K8s enterprise (FUTURO)
+│
+├── 📚 docs/                         # DOCUMENTAÇÃO
+│   ├── README.md                    # Índice de documentação
+│   ├── architecture/                # Arquitetura oficial
+│   │   ├── contract/                # Contrato v0 (fonte da verdade)
+│   │   ├── audit/                   # Auditoria v0
+│   │   ├── interoperability/        # Interoperabilidade v0
+│   │   └── ...
+│   ├── guides/                      # Guias práticos
+│   │   ├── ai-ci-cd-flow.md
+│   │   ├── keda-scale-to-zero.md
+│   │   └── ...
+│   ├── reports/                     # Relatórios técnicos
+│   └── policy/                      # Políticas e governance
+│
+├── 🔧 development/                  # DESENVOLVIMENTO (Módulos técnicos)
+│   ├── README.md                    # Guia de desenvolvimento
+│   ├── v0/                          # Baseline v0 (estável)
+│   ├── v0.1/                        # Versão 0.1
+│   ├── v0.2/                        # Versão 0.2
+│   ├── v0.3/                        # ✅ Retrofit v0.3 (ATIVO)
+│   │   ├── stack-unificada-v0.3.yaml
+│   │   └── modulos/ (M00-M17)
+│   └── ...
+│
+├── 📦 gitops/                       # GITOPS (Argo CD - Topologia B)
+│   ├── README.md
+│   ├── apps/                        # Applications (90+)
+│   ├── appsets/                     # ApplicationSets
+│   └── bootstrap/                   # App-of-Apps bootstrap
+│
+├── 🛠️  scripts/                     # SCRIPTS UTILITÁRIOS
+│   ├── README.md
+│   ├──  validate-topology-a.sh       # ✅ Validação Docker Compose
+│   ├── validate-topology-b.sh       # Validação Kubernetes
+│   ├── run_all_checks.py            # Checks de documentação
+│   ├── check_docs.py
+│   ├── edge_chain.py
+│   └── ...
+│
+├── 🗺️  roadmap/                     # ROADMAPS E PLANEJAMENTO
+│   ├── README.md
+│   └── roadmap_retrofit.md          # Roadmap completo de retrofit
+│
+├── 📦 archive/                      # CÓDIGO LEGADO (deprecated)
+│   └── ...
+│
+└── .archive/                        # Arquivos temporários da reorganização
+    └── oldstructure/
 ```
 
 ---
 
-## Stack padrão (resumo executivo)
+## 🎯 Onde Encontrar Cada Coisa
 
-O contrato define um **Stack Core** obrigatório e um conjunto de **Add-ons por Suíte**.
+### Para USAR a Plataforma
+📍 **deployments/**
+- Docker Compose: `deployments/topology-a/minimal/`
+- Kubernetes: `deployments/topology-b/` (futuro)
+- Guias: `deployments/topology-a/README-topology-a.md`
 
-### Stack Core – Infraestrutura e Governança
+### Para ENTENDER a Arquitetura
+📍 **docs/architecture/**
+- Contrato: `docs/architecture/contract/contract-v0.md`
+- Auditoria: `docs/architecture/audit/audit-v0.md`
+- Interoperabilidade: `docs/architecture/interoperability/interoperability-v0.md`
 
-Principais componentes (Topologia B – Kubernetes):
+### Para DESENVOLVER Módulos
+📍 **development/**
+- Módulos v0.3: `development/v0.3/`
+- Stack unificada: `development/v0.3/stack-unificada-v0.3.yaml`
+- Módulos técnicos: M00-M17
 
-- **Portal & Governança**
-  - Backstage (portal unificado / estúdio).
-- **Rede e Malha**
-  - Traefik (Ingress TLS), Coraza (WAF), Kong (API Gateway), Istio (Service Mesh com mTLS).
-- **Segurança**
-  - Vault (segredos), OpenFGA (autorização fina), OPA (Policy-as-Code), Falco (runtime).
-- **Identidade & IGA**
-  - Keycloak (SSO IdP único), midPoint (IGA).
-- **Conectividade Híbrida**
-  - Tailscale Kubernetes Operator (Mesh VPN).
-- **Escalonamento**
-  - KEDA (Scale-to-Zero obrigatório para Add-ons não 24/7).
-- **Storage & Dados Core**
-  - Ceph (objeto/bloco/arquivo), Postgres/PostGIS, Redis, Qdrant.
-- **Mensageria**
-  - RabbitMQ (fila), Redpanda (streaming).
-- **Observabilidade & FinOps**
-  - Prometheus, Loki, Grafana, OpenCost, Lago.
+### Para VALIDAR Configurações
+📍 **scripts/**
+- Topology A: `./scripts/validate-topology-a.sh`
+- Topology B: `./scripts/validate-topology-b.sh`
+- Docs: `./scripts/run_all_checks.py`
 
-### Stack Core – Serviços de Aplicação Base
-
-- **IA Generativa**
-  - Ollama, Flowise, **LiteLLM como gateway único de IA**.
-- **Automação e Processos**
-  - n8n (automação), engine BPMN (processos humanos).
-- **Dados e UI Base**
-  - Directus (SSoT de dados), Appsmith (frontends internos), Metabase (BI).
-- **Busca Corporativa**
-  - Meilisearch (texto), integrado a Qdrant (vetores) e à Suíte Brain.
-
-### Stack Add-on – Suítes de Negócio
-
-- **Suíte 1 – Factory**
-  - ERP, E-commerce, CRM, Atendimento, CDEs (VS Code Server), geração de apps nativos (React Native/Tauri).
-- **Suíte 2 – Brain**
-  - RAG, Agentes (AI Workforce), AutoML Studio, Corporate Brain.
-- **Suíte 3 – Operations**
-  - Digital Twins & Geo-Ops (ThingsBoard + PostGIS), RPA, Real-Time Action Center, API Economy (Kong + Lago).
-- **Suíte 4 – Guardian**
-  - Security Suite (Pentest AI, Browser Isolation), Resilience (Chaos), Legal AI (Tika + Gotenberg, SBOM), governance avançada de IGA/FinOps.
+### Para ENTENDER o Projeto
+📍 **Raiz do repositório:**
+- README.md (você está aqui)
+- MANIFESTO.md (história e visão)
+- STATUS-ATUAL.md (estado atual)
 
 ---
 
-## Topologias de implantação
+## 🚀 Quick Start
 
-O contrato define duas topologias oficiais:
+### 1. Primeira Vez - Ler Documentação
+```bash
+# Entender o projeto
+cat README.md
+cat MANIFESTO.md
+cat STATUS-ATUAL.md
 
-### Topologia A – Docker Compose (Teste / Legacy)
+# Entender arquitetura
+cat docs/architecture/contract/contract-v0.md
+```
 
-- Objetivo: demos locais, PoC e ambientes de teste.
-- Características:
-  - `docker-compose.yml` único ou segmentado.
-  - `.env` central apenas para **testes**.
-- Limitações:
-  - Não suporta plenamente Istio, vCluster, Ceph, Argo, KEDA, Tailscale.
-  - **Não é suportada para produção em clientes.**
+### 2. Implantar Topologia A (Docker Compose)
+```bash
+# Navegar para deployment
+cd deployments/topology-a/minimal
 
-### Topologia B – Kubernetes “Business Ecosystem” (Padrão / Enterprise)
+# Configurar
+cp .env.example .env
+nano .env  # Adicione sua OPENAI_API_KEY
 
-- Objetivo: entrega enterprise multi-tenant, segura, auditável e FinOps.
-- Pilares:
-  - Kubernetes + GitOps via Argo (Events/Workflows/CD, App-of-Apps).
-  - Istio Service Mesh com mTLS obrigatório.
-  - **vCluster por Workspace** (hard multi-tenancy).
-  - Ceph como backend de storage.
-  - KEDA para Scale-to-Zero dos Add-ons.
-  - Tailscale para conectividade híbrida.
-  - LiteLLM como gateway único de modelos de IA.
+# Iniciar
+docker-compose up -d
 
-#### Modelo de multi-tenancy
+# Validar
+cd ../../..
+./scripts/validate-topology-a.sh
+```
 
-- **Hierarquia oficial:**
-  - `tenant_id` → agrupa Workspaces.
-  - `workspace_id` → unidade de produto/projeto.
-  - `vCluster` → unidade de execução isolada associada a um `workspace_id`.
-- Serviços pesados podem operar em modo **multi-tenant lógico** (por ambiente), desde que haja:
-  - fronteiras rígidas por `tenant_id` em queries/pipelines;
-  - segregação por schema/namespace;
-  - controles de autorização em camada de aplicação (Keycloak/OpenFGA);
-  - testes de não vazamento entre tenants.
+### 3. Explorar Componentes
+- **Flowise:** http://localhost:3000 (admin / appgear_dev)
+- **n8n:** http://localhost:5678 (admin / appgear_dev)
+- **Traefik:** http://localhost:8080
 
 ---
 
-## Estrutura de repositórios (recomendação)
+## 📊 Status por Diretório
 
-O contrato sugere a seguinte organização mínima de repositórios Git para Topologia B:
-
-```text
-appgear-infra-core/
-  cluster/
-  apps-core/
-  keda/
-  istio/
-  tailscale/
-  ceph/
-  velero/
-  backstage/
-  .argo-apps/
-
-appgear-suites/
-  factory/
-  brain/
-  operations/
-  guardian/
-
-  appgear-docs/
-    docs/architecture/0-contrato/0-Contrato-v0.md
-    docs/architecture/1-desenvolvimento-v0.md
-    docs/architecture/2-auditoria-v0.md
-    docs/architecture/3-interoperabilidade-v0.md
-  ```
-
-Este repositório (onde este README reside) normalmente corresponde ao **`appgear-docs`** ou a um monorepo equivalente, contendo a estrutura raiz de pastas.
+| Diretório | Status | Descrição |
+|-----------|--------|-----------|
+| `deployments/topology-a/minimal/` | ✅ Pronto | Docker Compose funcional |
+| `deployments/topology-a/standard/` | ⏳ Planejado | 15 componentes |
+| `deployments/topology-b/` | ⏳ Planejado | Kubernetes (Semana 6-9) |
+| `docs/architecture/` | ✅ Completo | Documentação oficial |
+| `development/v0.3/` | ✅ Ativo | Módulos M00-M17 |
+| `gitops/` | ✅ Estruturado | 90+ apps Argo CD |
+| `scripts/` | ✅ Funcionando | 5/5 checks passando |
+| `roadmap/` | ✅ Documentado | Plano completo |
 
 ---
 
-## Como navegar pela documentação
+## 🎓 Convenções
 
-Sugestão de leitura/uso:
+### Nomenclatura de Arquivos
+- **Configuração:** `*.yml`, `*.yaml`
+- **Documentação:** `*.md` (Markdown)
+- **Scripts:** `*.sh` (Shell), `*.py` (Python)
+- **Exemplos:** `*.example`
 
-1. **Comece em `0-Contrato`**
-   Entenda o produto (Business Ecosystem Generator), as Suítes, o Stack Core/Add-on, Topologias A/B, multi-tenancy e restrições estruturais.
-
-2. **Vá para `1-Desenvolvimento`**
-   Veja como o contrato é implementado em **módulos 00–17** (GitOps, Service Mesh, Storage, Segurança, Suítes etc).
-
-3. **Use `2-Auditoria`**
-   Para validar se um ambiente ou implantação está aderente ao contrato (checklist técnico).
-
-4. **Consulte `3-Interoperabilidade`**
-   Quando precisar entender integrações entre serviços (por exemplo, Backstage ↔ Flowise ↔ N8n ↔ Suítes).
-
----
-
-## Como propor mudanças na arquitetura
-
-Alterações na arquitetura seguem um fluxo formal:
-
-1. Abrir uma **Issue** do tipo “Proposta de alteração do 0 – Contrato”.
-2. Discutir impactos técnicos, de produto e de governança.
-3. Abrir um **Pull Request** alterando `0-Contrato-vX.md`.
-4. Obter aprovação das pessoas responsáveis por Arquitetura/Governança.
-5. Criar nova **tag Git** (`contract-v1`, `contract-v2`, …) e atualizar a versão no cabeçalho do arquivo.
-
-Enquanto isso não ocorre, **a versão `v0` permanece como referência obrigatória**.
+### Estrutura de Diretórios
+- **Raiz:** Informações gerais e arquivos de projeto
+- **deployments/:** Ambientes prontos para uso
+- **docs/:** Documentação oficial e guias
+- **development/:** Código e módulos técnicos
+- **scripts/:** Ferramentas e validações
+- **gitops/:** Manifests Argo CD (Topologia B)
 
 ---
 
-## Versionamento
+## 🔄 Navegação Rápida
 
-- Versões principais: `v0`, `v1`, `v2`, ...  
-- Tags recomendadas no Git: `contract-v0`, `contract-v1`, ...  
-- Este repositório deve deixar claro, no README e no cabeçalho do contrato, **qual versão está vigente**.
+### Arquivos Importantes (Raiz)
+```bash
+README.md                # Você está aqui
+MANIFESTO.md             # História do projeto
+STATUS-ATUAL.md          # Estado atual
+```
+
+### Começar a Usar
+```bash
+cd deployments/topology-a/minimal
+docker-compose up -d
+```
+
+### Entender Arquitetura
+```bash
+cd docs/architecture/contract
+cat contract-v0.md
+```
+
+### Validar Configurações
+```bash
+./scripts/validate-topology-a.sh
+./scripts/run_all_checks.py
+```
 
 ---
 
-## Público-alvo
+## 📝 Changelog da Reorganização
 
-Este repositório é direcionado a:
+### v2.0 - 27/nov/2025
+- ✅ Separados deployments, docs, development
+- ✅ Movidos guides/ → docs/guides/
+- ✅ Movidos reports/ → docs/reports/
+- ✅ Movidos policy/ → docs/policy/
+- ✅ Criada estrutura topology-a/{minimal,standard,full}
+- ✅ Criada estrutura topology-b/{minimal,standard,enterprise}
+- ✅ Todos os caminhos atualizados
+- ✅ READMEs em cada nível
 
-- Arquitetos de software e de plataforma.
-- Engenheiros de infraestrutura / SRE / DevOps.
-- Times de produto responsáveis por AppGear.
-- Auditores técnicos e consultores de segurança.
-- Parceiros e integradores que precisam aderir ao contrato da plataforma.
+### v1.0 - Original
+- Estrutura plana na raiz
 
 ---
 
-> Em caso de dúvida de design ou decisão arquitetural, consulte sempre primeiro o **0 – Contrato** em sua versão vigente antes de alterar código ou manifests.
+## 🆘 Troubleshooting
+
+### "Não encontro o docker-compose.yml"
+```bash
+# Agora está em:
+cd deployments/topology-a/minimal
+```
+
+### "Scripts não funcionam"
+```bash
+# Execute da raiz do repositório:
+./scripts/validate-topology-a.sh
+```
+
+### "Onde está a documentação?"
+```bash
+# Arquitetura oficial:
+docs/architecture/
+
+# Guias práticos:
+docs/guides/
+```
+
+---
+
+**Mantido por:** Paulo Lima + Antigravity AI  
+**Última Atualização:** 27 de novembro de 2025, 02:20  
+**Versão da Estrutura:** 2.0

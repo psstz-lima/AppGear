@@ -40,6 +40,16 @@ check_port() {
     fi
 }
 
+# Mudar para diretório correto
+DEPLOYMENT_DIR="deployments/topology-a/minimal"
+if [ ! -d "$DEPLOYMENT_DIR" ]; then
+    echo -e "${RED}✗${NC} Diretório $DEPLOYMENT_DIR não encontrado"
+    exit 1
+fi
+
+cd "$DEPLOYMENT_DIR" || exit 1
+echo -e "${GREEN}✓${NC} Diretório $DEPLOYMENT_DIR encontrado"
+
 # Verificar se docker-compose.yml existe
 if [ ! -f "docker-compose.yml" ]; then
     echo -e "${RED}✗${NC} docker-compose.yml não encontrado"
