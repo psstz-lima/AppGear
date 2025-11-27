@@ -5,6 +5,16 @@ services:
   - name: litellm-proxy
     url: http://litellm:4000
     protocol: http
+  
+  # Flowise
+  - name: flowise-service
+    url: http://flowise:3000
+    protocol: http
+  
+  # n8n
+  - name: n8n-service
+    url: http://n8n:5678
+    protocol: http
     
 routes:
   # Rota para LiteLLM

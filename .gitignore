@@ -1,0 +1,292 @@
+# ==============================================================================
+# AppGear - .gitignore
+# ==============================================================================
+# Arquivos e diretórios que NÃO devem ser commitados
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# SEGURANÇA - API Keys, Senhas, Secrets (CRÍTICO!)
+# ------------------------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+*.secret
+config.local.yaml
+config.local.yml
+
+# Arquivo de ambiente específico
+deployments/**/.env
+deployments/**/.env.local
+
+# ------------------------------------------------------------------------------
+# Docker & Containers
+# ------------------------------------------------------------------------------
+docker-compose.override.yml
+.dockerignore
+*.log
+
+# Volumes Docker (dados persistentes locais)
+volumes/
+data/
+postgres_data/
+redis_data/
+
+# ------------------------------------------------------------------------------
+# Python
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+.ENV
+.env.venv
+
+# PyInstaller
+*.manifest
+*.spec
+
+# pytest
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# ------------------------------------------------------------------------------
+# IDEs e Editores
+# ------------------------------------------------------------------------------
+# VSCode
+.vscode/
+*.code-workspace
+.history/
+
+# JetBrains (PyCharm, IntelliJ, etc)
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+
+# Emacs
+*~
+\#*\#
+.\#*
+.projectile
+
+# ------------------------------------------------------------------------------
+# Sistema Operacional
+# ------------------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ------------------------------------------------------------------------------
+# Logs e Debugging
+# ------------------------------------------------------------------------------
+*.log
+logs/
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.npm
+.eslintcache
+
+# ------------------------------------------------------------------------------
+# Temporários e Cache
+# ------------------------------------------------------------------------------
+*.tmp
+*.temp
+*.cache
+.cache/
+tmp/
+temp/
+
+# ------------------------------------------------------------------------------
+# Certificados e Chaves SSH
+# ------------------------------------------------------------------------------
+*.crt
+*.cer
+*.der
+*.key
+*.pem
+*.p12
+*.pfx
+*.pub
+id_rsa
+id_rsa.pub
+known_hosts
+
+# TLS/SSL
+certs/
+certificates/
+ssl/
+tls/
+
+# ------------------------------------------------------------------------------
+# Kubernetes Secrets (se houver localmente)
+# ------------------------------------------------------------------------------
+kubeconfig
+kubeconfig.*
+*.kubeconfig
+kube-config
+
+# ------------------------------------------------------------------------------
+# Backups
+# ------------------------------------------------------------------------------
+*.bak
+*.backup
+*.old
+*.orig
+*~
+backup/
+backups/
+
+# SQL Dumps
+*.sql
+*.dump
+*.backup.sql
+
+# ------------------------------------------------------------------------------
+# Node.js (se houver frontend)
+# ------------------------------------------------------------------------------
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+.pnp
+.pnp.js
+
+# ------------------------------------------------------------------------------
+# Archives
+# ------------------------------------------------------------------------------
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# ------------------------------------------------------------------------------
+# AppGear Específico
+# ------------------------------------------------------------------------------
+# Arquivos de desenvolvimento local
+.local/
+local/
+
+# Reports sensíveis (se contiverem dados reais)
+reports/production-*
+reports/prod-*
+
+# Testes locais que geram dados
+test-data/
+test-results/
+
+# Arquivos de configuração local sobrescritos
+*-local.*
+*.local
+
+# Terraform (se usado)
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+
+# Ansible (se usado)
+*.retry
+
+# ------------------------------------------------------------------------------
+# Git Específico
+# ------------------------------------------------------------------------------
+*.orig
+*.rej
+*.patch
+
+# ------------------------------------------------------------------------------
+# Arquivos Grandes (não devem ir pro Git)
+# ------------------------------------------------------------------------------
+*.iso
+*.dmg
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+
+# ==============================================================================
+# IMPORTANTE: Sempre revise antes de commit
+# Execute: git status
+# Verifique se nenhum arquivo sensível está sendo adicionado!
+# ==============================================================================
