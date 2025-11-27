@@ -1,0 +1,237 @@
+version: '3.8'
+
+# AppGear - Topologia A Minimal
+# 7 componentes core para validação de conceito
+# Setup: ~15 minutos | Recursos: 4GB RAM, 2 CPU
+
+networks:
+  appgear-net-core:
+    driver: bridge
+    name: appgear-net-core
+
+volumes:
+  postgres_data:
+  redis_data:
+  flowise_data:
+  n8n_data:
+  traefik_certs:
+
+services:
+  # ============================================================================
+  # BORDA - Traefik (Ingress Controller)
+  # ============================================================================
+  traefik:
+    image: traefik:v2.10
+    container_name: appgear-traefik
+    restart: unless-stopped
+    command:
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--log.level=INFO"
+    ports:
+      - "80:80"       # HTTP
+      - "443:443"     # HTTPS
+      - "8080:8080"   # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik_certs:/certs
+    networks:
+      - appgear-net-core
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.localhost`)"
+      - "traefik.http.routers.dashboard.service=api@internal"
+
+  # ============================================================================
+  # BORDA - Kong (API Gateway)
+  # ============================================================================
+  kong:
+    image: kong:3.4
+    container_name: appgear-kong
+    restart: unless-stopped
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /opt/kong/kong.yml
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001
+      KONG_PROXY_LISTEN: 0.0.0.0:8000
+    ports:
+      - "8000:8000"   # Proxy
+      - "8001:8001"   # Admin API
+    volumes:
+      - ./config/kong.yml:/opt/kong/kong.yml:ro
+    networks:
+      - appgear-net-core
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kong.rule=PathPrefix(`/api`)"
+      - "traefik.http.services.kong.loadbalancer.server.port=8000"
+    healthcheck:
+      test: ["CMD", "kong", "health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================================================
+  # DADOS - PostgreSQL
+  # ============================================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: appgear-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-appgear}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-appgear_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-appgear}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./config/init-postgres.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - appgear-net-core
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-appgear}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================================================
+  # DADOS - Redis
+  # ============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: appgear-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-appgear_redis_dev}
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - appgear-net-core
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # ============================================================================
+  # IA - LiteLLM (Gateway Único de IA)
+  # ============================================================================
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: appgear-litellm
+    restart: unless-stopped
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:-sk-appgear-dev-key}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-appgear}:${POSTGRES_PASSWORD:-appgear_dev_password}@postgres:5432/${POSTGRES_DB:-appgear}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-appgear_redis_dev}
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./config/litellm-config.yaml:/app/config.yaml:ro
+    networks:
+      - appgear-net-core
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.litellm.rule=PathPrefix(`/litellm`)"
+      - "traefik.http.services.litellm.loadbalancer.server.port=4000"
+      - "traefik.http.middlewares.litellm-strip.stripprefix.prefixes=/litellm"
+      - "traefik.http.routers.litellm.middlewares=litellm-strip"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================================================
+  # IA - Flowise (Orquestração de Workflows IA)
+  # ============================================================================
+  flowise:
+    image: flowiseai/flowise:latest
+    container_name: appgear-flowise
+    restart: unless-stopped
+    environment:
+      DATABASE_TYPE: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: ${POSTGRES_USER:-appgear}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-appgear_dev_password}
+      DATABASE_NAME: ${POSTGRES_DB:-appgear}
+      FLOWISE_USERNAME: ${FLOWISE_USERNAME:-admin}
+      FLOWISE_PASSWORD: ${FLOWISE_PASSWORD:-appgear_dev}
+      APIKEY_PATH: /root/.flowise
+      SECRETKEY_PATH: /root/.flowise
+      LOG_LEVEL: info
+    ports:
+      - "3000:3000"
+    volumes:
+      - flowise_data:/root/.flowise
+    networks:
+      - appgear-net-core
+    depends_on:
+      postgres:
+        condition: service_healthy
+      litellm:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flowise.rule=PathPrefix(`/flowise`)"
+      - "traefik.http.services.flowise.loadbalancer.server.port=3000"
+      - "traefik.http.middlewares.flowise-strip.stripprefix.prefixes=/flowise"
+      - "traefik.http.routers.flowise.middlewares=flowise-strip"
+
+  # ============================================================================
+  # AUTOMAÇÃO - n8n (Workflows e Automação)
+  # ============================================================================
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: appgear-n8n
+    restart: unless-stopped
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: ${POSTGRES_DB:-appgear}
+      DB_POSTGRESDB_USER: ${POSTGRES_USER:-appgear}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD:-appgear_dev_password}
+      N8N_BASIC_AUTH_ACTIVE: true
+      N8N_BASIC_AUTH_USER: ${N8N_USER:-admin}
+      N8N_BASIC_AUTH_PASSWORD: ${N8N_PASSWORD:-appgear_dev}
+      N8N_HOST: n8n.localhost
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      WEBHOOK_URL: http://n8n.localhost:5678/
+      GENERIC_TIMEZONE: America/Sao_Paulo
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - appgear-net-core
+    depends_on:
+      postgres:
+        condition: service_healthy
+      litellm:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.n8n.rule=PathPrefix(`/n8n`)"
+      - "traefik.http.services.n8n.loadbalancer.server.port=5678"
+      - "traefik.http.middlewares.n8n-strip.stripprefix.prefixes=/n8n"
+      - "traefik.http.routers.n8n.middlewares=n8n-strip"
