@@ -63,30 +63,30 @@ fi
 case $ACTION in
     "start"|"up")
         echo -e "${GREEN}Iniciando Topologia A Minimal...${NC}"
-        exec sudo "$TOPOLOGY_DIR/startup-stack.sh"
+        exec sudo "$TOPOLOGY_DIR/startup-stack-a-minimal.sh"
         ;;
     "stop"|"down")
         echo -e "${YELLOW}Parando Topologia A Minimal...${NC}"
-        exec sudo "$TOPOLOGY_DIR/shutdown-stack.sh"
+        exec sudo "$TOPOLOGY_DIR/shutdown-stack-a-minimal.sh"
         ;;
     "status"|"ps")
-        exec sudo "$TOPOLOGY_DIR/status-stack.sh"
+        exec sudo "$TOPOLOGY_DIR/status-stack-a-minimal.sh"
         ;;
     "restart")
         echo -e "${YELLOW}Reiniciando Topologia A Minimal...${NC}"
-        sudo "$TOPOLOGY_DIR/shutdown-stack.sh"
+        sudo "$TOPOLOGY_DIR/shutdown-stack-a-minimal.sh"
         sleep 3
-        exec sudo "$TOPOLOGY_DIR/startup-stack.sh"
+        exec sudo "$TOPOLOGY_DIR/startup-stack-a-minimal.sh"
         ;;
     "test"|"e2e")
-        exec "$TOPOLOGY_DIR/test-e2e.sh"
+        exec "$TOPOLOGY_DIR/test-e2e-a-minimal.sh"
         ;;
     "backup")
-        exec sudo "$TOPOLOGY_DIR/backup-manager.sh"
+        exec sudo "$TOPOLOGY_DIR/backup-manager-a-minimal.sh"
         ;;
     "logs")
         # Passa argumentos restantes (grupo, -f, etc)
-        exec sudo "$TOPOLOGY_DIR/logs-viewer.sh" "$@"
+        exec sudo "$TOPOLOGY_DIR/logs-viewer-a-minimal.sh" "$@"
         ;;
     *)
         echo -e "${RED}Erro: Ação '$ACTION' não reconhecida${NC}"

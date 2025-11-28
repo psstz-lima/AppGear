@@ -85,7 +85,7 @@ if docker ps --format '{{.Names}}' | grep -q "appgear-"; then
     echo ""
     if [[ $REPLY =~ ^[Ss]$ ]]; then
         log_info "Executando shutdown primeiro..."
-        "$SCRIPT_DIR/shutdown-stack.sh"
+        "$SCRIPT_DIR/shutdown-stack-a-minimal.sh"
         sleep 3
     else
         log_info "Continuando com containers existentes..."
@@ -282,5 +282,5 @@ echo "  • Traefik:  http://localhost:8080"
 echo "  • Kong:     http://localhost:8001"
 echo ""
 log_info "Para ver logs: docker logs -f <container-name>"
-log_info "Para parar:    ./scripts/shutdown-stack.sh"
+log_info "Para parar:    ./scripts/shutdown-stack-a-minimal.sh"
 echo ""

@@ -10,12 +10,12 @@ scripts/
 │   └── stack-a-minimal.sh       # Gerenciador Topologia A Minimal
 │
 ├── topology-a-minimal/          # Scripts Operacionais (Backend)
-│   ├── startup-stack.sh
-│   ├── shutdown-stack.sh
-│   ├── status-stack.sh
-│   ├── test-e2e.sh
-│   ├── backup-manager.sh
-│   └── logs-viewer.sh
+│   ├── startup-stack-a-minimal.sh
+│   ├── shutdown-stack-a-minimal.sh
+│   ├── status-stack-a-minimal.sh
+│   ├── test-e2e-a-minimal.sh
+│   ├── backup-manager-a-minimal.sh
+│   └── logs-viewer-a-minimal.sh
 │
 ├── checks/                      # Validação e QA
 │   ├── topology_a_checks.sh

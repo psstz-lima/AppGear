@@ -4,77 +4,63 @@ Scripts específicos para gerenciamento da **Topologia A Minimal** (Docker Compo
 
 ## 📜 Scripts Disponíveis
 
-### 🚀 startup-stack.sh
+### 🚀 startup-stack-a-minimal.sh
 Inicia toda a stack na ordem correta.
 ```bash
-sudo ./scripts/topology-a-minimal/startup-stack.sh
+sudo ./scripts/topology-a-minimal/startup-stack-a-minimal.sh
 ```
 
-### 🛑 shutdown-stack.sh
+### 🛑 shutdown-stack-a-minimal.sh
 Para toda a stack de forma segura.
 ```bash
-sudo ./scripts/topology-a-minimal/shutdown-stack.sh
+sudo ./scripts/topology-a-minimal/shutdown-stack-a-minimal.sh
 ```
 
-### 📊 status-stack.sh
+### 📊 status-stack-a-minimal.sh
 Mostra status detalhado de todos os serviços.
 ```bash
-sudo ./scripts/topology-a-minimal/status-stack.sh
+sudo ./scripts/topology-a-minimal/status-stack-a-minimal.sh
 ```
 
-### 🧪 test-e2e.sh
+### 🧪 test-e2e-a-minimal.sh
 Executa teste de fumaça (Smoke Test) validando inferência de IA e APIs.
 ```bash
-./scripts/topology-a-minimal/test-e2e.sh
+./scripts/topology-a-minimal/test-e2e-a-minimal.sh
 ```
 
-### 💾 backup-manager.sh
+### 💾 backup-manager-a-minimal.sh
 Realiza backup dos dados persistentes (PostgreSQL, Flowise, n8n).
 ```bash
-sudo ./scripts/topology-a-minimal/backup-manager.sh
+sudo ./scripts/topology-a-minimal/backup-manager-a-minimal.sh
 ```
 *Salva em: `../../backups/YYYYMMDD_HHMMSS/`*
 
-### 📜 logs-viewer.sh
+### 📜 logs-viewer-a-minimal.sh
 Visualizador de logs unificado com filtros.
 ```bash
-sudo ./scripts/topology-a-minimal/logs-viewer.sh [ai|infra|gateway|app|all] [-f]
+sudo ./scripts/topology-a-minimal/logs-viewer-a-minimal.sh [ai|infra|gateway|app|all] [-f]
 ```
 
 ---
 
 ## 🎯 Uso via Wrapper (Recomendado)
 
-Use o script `stack.sh` na raiz `scripts/`:
+Use o atalho em `scripts/shortcuts/`:
 
 ```bash
 # Operação Básica
-./scripts/stack.sh a-minimal start
-./scripts/stack.sh a-minimal stop
-./scripts/stack.sh a-minimal status
+./scripts/shortcuts/stack-a-minimal.sh start
+./scripts/shortcuts/stack-a-minimal.sh stop
+./scripts/shortcuts/stack-a-minimal.sh status
 
 # Operação Avançada
-./scripts/stack.sh a-minimal test       # Rodar testes
-./scripts/stack.sh a-minimal backup     # Fazer backup
-./scripts/stack.sh a-minimal logs ai -f # Ver logs de IA em tempo real
+./scripts/shortcuts/stack-a-minimal.sh test       # Rodar testes
+./scripts/shortcuts/stack-a-minimal.sh backup     # Fazer backup
+./scripts/shortcuts/stack-a-minimal.sh logs ai -f # Ver logs de IA em tempo real
 ```
 
 ---
 
-## 📦 Serviços Gerenciados
-
-| Serviço | Porta | Função |
-|---------|-------|--------|
-| PostgreSQL | 5432 | Banco de dados |
-| Redis | 6379 | Cache |
-| Traefik | 80, 443, 8080 | Proxy reverso |
-| Kong | 8000, 8001 | API Gateway |
-| LiteLLM | 4000 | AI Gateway (Groq) |
-| Flowise | 3000 | AI Workflows |
-| n8n | 5678 | Automação |
-
----
-
 **Topologia:** A Minimal (Docker Compose)  
-**Versão:** 1.1  
+**Versão:** 1.2  
 **Atualizado:** 28 de novembro de 2025
