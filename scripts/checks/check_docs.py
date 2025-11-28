@@ -4,7 +4,7 @@ from pathlib import Path
 import yaml
 
 # Raiz do repositório (scripts/check_docs.py -> raiz é o pai da pasta scripts)
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 MODULOS = ROOT / "docs/architecture/interoperability/resources/modulos.yaml"
 THIRD_PARTY = ROOT / "docs/architecture/interoperability/resources/third_party.yaml"

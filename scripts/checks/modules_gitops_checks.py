@@ -5,7 +5,7 @@ import yaml
 
 
 def main() -> None:
-    repo_root = Path(__file__).resolve().parents[1]
+    repo_root = Path(__file__).resolve().parents[2]
     print(f"[INFO] Raiz do repo: {repo_root}")
 
     mod_yaml = repo_root / "docs" / "architecture" / "interoperability" / "resources" / "modulos.yaml"

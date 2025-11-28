@@ -3,7 +3,7 @@ from pathlib import Path
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 MODULOS_YAML = ROOT / "docs/architecture/interoperability/resources/modulos.yaml"
 MAPA_MD = ROOT / "docs/architecture/interoperability/resources/mapa-global.md"

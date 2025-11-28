@@ -6,7 +6,7 @@ from typing import Iterable, List
 
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parents[2]
 EDGE_CHAIN_SEQUENCE = ["traefik", "coraza", "kong"]
 ALLOWED_EDGE_SERVICE_KEYWORDS = ("traefik", "coraza", "kong", "istio")
 WAF_KEYWORDS = ("coraza", "waf")
