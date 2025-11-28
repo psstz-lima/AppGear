@@ -1,125 +1,89 @@
 # Scripts de Gerenciamento AppGear
 
-Scripts organizados por topologia para facilitar o gerenciamento da stack.
+Scripts organizados por função e topologia para facilitar a operação e manutenção.
 
-## 📁 Estrutura
+## 📁 Estrutura de Diretórios
 
 ```
 scripts/
-├── topology-a-minimal/      # Topologia A Minimal (Docker Compose)
-│   ├── startup-stack.sh     # Inicia stack
-│   ├── shutdown-stack.sh    # Para stack
-│   ├── status-stack.sh      # Status detalhado
-│   └── README.md            # Documentação específica
+├── stack.sh ⭐                  # Script Principal (Wrapper)
+├── QUICKSTART.md                # Guia Rápido
+├── README.md                    # Documentação Geral
 │
-├── topology-a-standard/     # [FUTURO] Topologia A Standard (Kubernetes)
-├── topology-b/              # [FUTURO] Topologia B
+├── topology-a-minimal/          # Operação: Topologia A Minimal
+│   ├── startup-stack.sh
+│   ├── shutdown-stack.sh
+│   └── status-stack.sh
 │
-├── validate-topology-a.sh   # Validação Topologia A
-├── validate-topology-b.sh   # Validação Topologia B
-└── README.md               # Este arquivo
+├── checks/                      # Validação e QA
+│   ├── validate-topology-a.sh   # Validação de Deployment
+│   ├── validate-topology-b.sh
+│   ├── check_docs.py            # Verificação de Documentação
+│   ├── run_all_checks.py        # Suite de Testes
+│   └── ... (outros scripts python)
+│
+└── requirements/                # Dependências
+    └── requirements-tests.txt   # Libs para scripts Python
 ```
 
 ---
 
-## 🎯 Quick Start
+## 🚀 Uso Principal
 
-### Topologia A Minimal (Atual)
+Use o script `stack.sh` na raiz para a maioria das operações:
 
 ```bash
-# Iniciar stack
-sudo ./scripts/topology-a-minimal/startup-stack.sh
+# Iniciar
+./scripts/stack.sh a-minimal start
 
-# Ver status
-sudo ./scripts/topology-a-minimal/status-stack.sh
+# Parar
+./scripts/stack.sh a-minimal stop
 
-# Parar stack
-sudo ./scripts/topology-a-minimal/shutdown-stack.sh
+# Status
+./scripts/stack.sh a-minimal status
 ```
 
-**Documentação completa:** [topology-a-minimal/README.md](topology-a-minimal/README.md)
-
 ---
 
-## 📚 Por Topologia
+## 🔍 Scripts de Validação (Checks)
 
-### Topologia A Minimal
-**Status:** ✅ Implementada (Docker Compose)  
-**Ambiente:** Desenvolvimento local  
-**Scripts:** 3 (startup, shutdown, status)
+Localizados em `scripts/checks/`, estes scripts garantem a integridade do ambiente e da documentação.
 
-**Serviços:**
-- PostgreSQL, Redis
-- Traefik, Kong
-- LiteLLM (Groq)
-- Flowise, n8n
-
-**Ver:** [topology-a-minimal/](topology-a-minimal/)
-
----
-
-### Topologia A Standard
-**Status:** ⏳ Planejada (FASE 2)  
-**Ambiente:** Produção (Kubernetes)  
-**Adiciona:**
-- Coraza WAF
-- Istio Service Mesh
-- Prometheus, Grafana
-- Jaeger (tracing)
-
----
-
-### Topologia B
-**Status:** ⏳ Planejada (FASE 3)  
-**Ambiente:** Multi-tenant  
-**Adiciona:**
-- Separação por tenant
-- Multi-região
-- HA (High Availability)
-
----
-
-## 🔧 Scripts de Validação
-
-### validate-topology-a.sh
-Valida implementação da Topologia A.
-
+### Validar Deployment
 ```bash
-./scripts/validate-topology-a.sh
+./scripts/checks/validate-topology-a.sh
 ```
 
-### validate-topology-b.sh
-Valida implementação da Topologia B.
-
+### Validar Documentação e Estrutura
 ```bash
-./scripts/validate-topology-b.sh
+python3 scripts/checks/run_all_checks.py
 ```
 
 ---
 
-## 📖 Convenções
+## � Topologias
 
-### Nomenclatura
-- **Topologia:** `topology-{letra}-{variante}/`
-- **Scripts:** `{ação}-stack.sh`
-
-### Exemplos
-- `topology-a-minimal/startup-stack.sh`
-- `topology-a-standard/startup-stack.sh`
-- `topology-b/startup-stack.sh`
-
-### Permissões
-Todos os scripts de gerenciamento requerem **sudo**.
+### topology-a-minimal/
+Scripts operacionais para a versão Minimal da Topologia A (Docker Compose).
+- **Foco:** Desenvolvimento local, testes rápidos.
+- **Serviços:** LiteLLM, Flowise, n8n, Kong, Traefik, Postgres, Redis.
 
 ---
 
-## 🚀 Roadmap
+## 🛠️ Manutenção
 
-- [x] **FASE 1:** Topologia A Minimal (Docker Compose) - ✅ Concluída
-- [ ] **FASE 2:** Topologia A Standard (Kubernetes + Observabilidade)
-- [ ] **FASE 3:** Topologia B (Multi-tenant)
+### Adicionar Nova Topologia
+1. Crie o diretório `scripts/topology-nome/`
+2. Adicione `startup-stack.sh`, `shutdown-stack.sh`, `status-stack.sh`
+3. Atualize `stack.sh` para reconhecer a nova topologia
+
+### Dependências Python
+Se for rodar os scripts de check Python:
+```bash
+pip install -r scripts/requirements/requirements-tests.txt
+```
 
 ---
 
-**Última atualização:** 28 de novembro de 2025  
-**Versão:** 1.0
+**Versão:** 1.1  
+**Atualizado:** 28 de novembro de 2025
