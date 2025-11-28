@@ -1,23 +1,23 @@
 model_list:
-  # Groq - Modelos Gratuitos e Rápidos (ATUALIZADOS 2025)
-  - model_name: llama-3.3-70b
+  # Groq - Modelos Gratuitos e Rápidos
+  - model_name: llama-3-70b
     litellm_params:
-      model: groq/llama-3.3-70b-versatile
+      model: groq/llama3-70b-8192
       api_key: os.environ/GROQ_API_KEY
   
-  - model_name: llama-3.1-8b
+  - model_name: llama-3-8b
     litellm_params:
-      model: groq/llama-3.1-8b-instant
+      model: groq/llama3-8b-8192
       api_key: os.environ/GROQ_API_KEY
   
-  - model_name: llama-4-scout-17b
+  - model_name: mixtral-8x7b
     litellm_params:
-      model: groq/meta-llama/llama-4-scout-17b-16e-instruct
+      model: groq/mixtral-8x7b-32768
       api_key: os.environ/GROQ_API_KEY
   
-  - model_name: qwen3-32b
+  - model_name: gemma-7b
     litellm_params:
-      model: groq/qwen/qwen3-32b
+      model: groq/gemma-7b-it
       api_key: os.environ/GROQ_API_KEY
 
   # OpenAI - Mantido para referência (requer créditos)

@@ -132,11 +132,12 @@ services:
     container_name: appgear-litellm
     restart: unless-stopped
     environment:
-      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:-sk-appgear-dev-key}
-      DATABASE_URL: postgresql://${POSTGRES_USER:-appgear}:${POSTGRES_PASSWORD:-appgear_dev_password}@postgres:5432/${POSTGRES_DB:-appgear}
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      REDIS_PASSWORD: ${REDIS_PASSWORD:-appgear_redis_dev}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
     ports:
       - "4000:4000"
     volumes:
