@@ -7,21 +7,30 @@
 # ------------------------------------------------------------------------------
 # SEGURANÇA - API Keys, Senhas, Secrets (CRÍTICO!)
 # ------------------------------------------------------------------------------
+# Diretório de secrets (RECOMENDADO)
+.secrets/
+secrets/
+
+# Variáveis de ambiente
 .env
 .env.local
 .env.*.local
+deployments/**/.env
+deployments/**/.env.local
+
+# Chaves e certificados
 *.key
 *.pem
 *.p12
 *.pfx
-secrets/
+
+# Arquivos de credenciais
 *.secret
 config.local.yaml
 config.local.yml
-
-# Arquivo de ambiente específico
-deployments/**/.env
-deployments/**/.env.local
+CREDENTIALS.md
+CREDENTIALS.txt
+.credentials
 
 # ------------------------------------------------------------------------------
 # Docker & Containers

@@ -1,0 +1,43 @@
+# ==============================================================================
+# AppGear - Test Dependencies
+# ==============================================================================
+# Python packages required for running automated tests
+# Install: pip install -r requirements-tests.txt
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Testing Framework
+# ------------------------------------------------------------------------------
+pytest>=7.4.0,<8.0.0          # Core testing framework
+pytest-cov>=4.1.0             # Code coverage plugin
+pytest-mock>=3.12.0           # Mocking support
+pytest-asyncio>=0.21.0        # Async test support
+pyyaml>=6.0.0                 # YAML parsing for config tests
+
+# ------------------------------------------------------------------------------
+# Code Quality
+# ------------------------------------------------------------------------------
+pylint>=3.0.0                 # Linting
+black>=23.0.0                 # Code formatting
+isort>=5.12.0                 # Import sorting
+mypy>=1.7.0                   # Type checking
+
+# ------------------------------------------------------------------------------
+# HTTP Testing
+# ------------------------------------------------------------------------------
+requests>=2.31.0              # HTTP library
+httpx>=0.25.0                 # Async HTTP client
+responses>=0.24.0             # Mock HTTP responses
+
+# ------------------------------------------------------------------------------
+# Docker Testing (Optional)
+# ------------------------------------------------------------------------------
+# docker>=6.1.0               # Docker SDK for Python
+# testcontainers>=3.7.0       # Docker containers for tests
+
+# ==============================================================================
+# Notes:
+# - Keep versions pinned for reproducibility
+# - Update regularly for security patches
+# - Test compatibility before upgrading major versions
+# ==============================================================================

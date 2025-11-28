@@ -16,6 +16,7 @@ volumes:
   n8n_data:
   traefik_certs:
 
+
 services:
   # ============================================================================
   # BORDA - Traefik (Ingress Controller)
@@ -33,9 +34,9 @@ services:
       - "--entrypoints.websecure.address=:443"
       - "--log.level=INFO"
     ports:
-      - "80:80"       # HTTP
-      - "443:443"     # HTTPS
-      - "8080:8080"   # Dashboard
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
+      - "8080:8080" # Dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - traefik_certs:/certs
@@ -63,8 +64,8 @@ services:
       KONG_ADMIN_LISTEN: 0.0.0.0:8001
       KONG_PROXY_LISTEN: 0.0.0.0:8000
     ports:
-      - "8000:8000"   # Proxy
-      - "8001:8001"   # Admin API
+      - "8000:8000" # Proxy
+      - "8001:8001" # Admin API
     volumes:
       - ./config/kong.yml:/opt/kong/kong.yml:ro
     networks:
@@ -74,7 +75,7 @@ services:
       - "traefik.http.routers.kong.rule=PathPrefix(`/api`)"
       - "traefik.http.services.kong.loadbalancer.server.port=8000"
     healthcheck:
-      test: ["CMD", "kong", "health"]
+      test: [ "CMD", "kong", "health" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -98,7 +99,7 @@ services:
     networks:
       - appgear-net-core
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-appgear}"]
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-appgear}" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -118,7 +119,7 @@ services:
     networks:
       - appgear-net-core
     healthcheck:
-      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -154,7 +155,7 @@ services:
       - "traefik.http.middlewares.litellm-strip.stripprefix.prefixes=/litellm"
       - "traefik.http.routers.litellm.middlewares=litellm-strip"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:4000/health" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -167,12 +168,6 @@ services:
     container_name: appgear-flowise
     restart: unless-stopped
     environment:
-      DATABASE_TYPE: postgres
-      DATABASE_HOST: postgres
-      DATABASE_PORT: 5432
-      DATABASE_USER: ${POSTGRES_USER:-appgear}
-      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-appgear_dev_password}
-      DATABASE_NAME: ${POSTGRES_DB:-appgear}
       FLOWISE_USERNAME: ${FLOWISE_USERNAME:-admin}
       FLOWISE_PASSWORD: ${FLOWISE_PASSWORD:-appgear_dev}
       APIKEY_PATH: /root/.flowise
@@ -210,7 +205,7 @@ services:
       DB_POSTGRESDB_DATABASE: ${POSTGRES_DB:-appgear}
       DB_POSTGRESDB_USER: ${POSTGRES_USER:-appgear}
       DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD:-appgear_dev_password}
-      N8N_BASIC_AUTH_ACTIVE: true
+      N8N_BASIC_AUTH_ACTIVE: "true"
       N8N_BASIC_AUTH_USER: ${N8N_USER:-admin}
       N8N_BASIC_AUTH_PASSWORD: ${N8N_PASSWORD:-appgear_dev}
       N8N_HOST: n8n.localhost
