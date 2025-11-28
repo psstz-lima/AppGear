@@ -22,6 +22,36 @@ echo -e "${BLUE}  AppGear Stack - Startup${NC}"
 echo -e "${BLUE}═══════════════════════════════════════════════════════${NC}"
 echo ""
 
+# ⚠️  VERIFICAÇÃO DE CONFLITO: Topologia Standard (K8s)
+export KUBECONFIG=~/.kube/config
+if kubectl get pods -n appgear &>/dev/null 2>&1; then
+    K8S_PODS=$(kubectl get pods -n appgear --no-headers 2>/dev/null | wc -l)
+    if [ "$K8S_PODS" -gt 0 ]; then
+        echo -e "${RED}╔════════════════════════════════════════════════════════════╗${NC}"
+        echo -e "${RED}║           ⚠️  CONFLITO DE TOPOLOGIAS DETECTADO            ║${NC}"
+        echo -e "${RED}╚════════════════════════════════════════════════════════════╝${NC}"
+        echo ""
+        echo -e "${YELLOW}A Topologia A Standard (Kubernetes) está rodando com $K8S_PODS pods.${NC}"
+        echo ""
+        echo -e "${RED}ERRO:${NC} Não é possível iniciar a Topologia A Minimal (Docker Compose)"
+        echo -e "enquanto a Standard está ativa devido a conflitos de:"
+        echo ""
+        echo "  • Portas (3000, 4000, 5678, 5432, 6379)"
+        echo "  • Recursos (CPU, Memória)"
+        echo "  • Dados (PostgreSQL, Redis)"
+        echo ""
+        echo -e "${BLUE}Soluções:${NC}"
+        echo ""
+        echo "  1. Parar a Topologia Standard primeiro:"
+        echo -e "     ${GREEN}./scripts/shortcuts/stack-a-standard.sh cleanup${NC}"
+        echo ""
+        echo "  2. Ou use apenas a Standard (já está rodando):"
+        echo -e "     ${GREEN}./scripts/shortcuts/stack-a-standard.sh ports${NC}"
+        echo ""
+        exit 1
+    fi
+fi
+
 # Funções de logging
 log_info() {
     echo -e "${BLUE}[INFO]${NC} $1"

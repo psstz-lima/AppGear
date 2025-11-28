@@ -21,6 +21,35 @@ echo -e "${BLUE}  AppGear - Deploy Stack (Kubernetes)${NC}"
 echo -e "${BLUE}═══════════════════════════════════════════════════════${NC}"
 echo ""
 
+# ⚠️  VERIFICAÇÃO DE CONFLITO: Topologia Minimal (Docker Compose)
+DOCKER_CONTAINERS=$(docker ps --filter "name=appgear-" --format "{{.Names}}" 2>/dev/null | wc -l)
+if [ "$DOCKER_CONTAINERS" -gt 0 ]; then
+    echo -e "${RED}╔════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${RED}║           ⚠️  CONFLITO DE TOPOLOGIAS DETECTADO            ║${NC}"
+    echo -e "${RED}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    echo -e "${YELLOW}A Topologia A Minimal (Docker Compose) está rodando com $DOCKER_CONTAINERS containers.${NC}"
+    echo ""
+    docker ps --filter "name=appgear-" --format "  • {{.Names}} ({{.Status}})"
+    echo ""
+    echo -e "${RED}ERRO:${NC} Não é possível iniciar a Topologia A Standard (Kubernetes)"
+    echo -e "enquanto a Minimal está ativa devido a conflitos de:"
+    echo ""
+    echo "  • Portas (3000, 4000, 5678, 5432, 6379)"
+    echo "  • Recursos (CPU, Memória)"
+    echo "  • Dados (PostgreSQL, Redis)"
+    echo ""
+    echo -e "${BLUE}Soluções:${NC}"
+    echo ""
+    echo "  1. Parar a Topologia Minimal primeiro:"
+    echo -e "     ${GREEN}./scripts/shortcuts/stack-a-minimal.sh stop${NC}"
+    echo ""
+    echo "  2. Ou use apenas a Minimal (já está rodando):"
+    echo -e "     ${GREEN}# Acesse: http://localhost:3000 (Flowise)${NC}"
+    echo ""
+    exit 1
+fi
+
 # Verificar se kubectl está disponível
 if ! command -v kubectl &> /dev/null; then
     echo -e "${RED}[ERRO]${NC} kubectl não encontrado. Instale o K3s primeiro:"
