@@ -1,268 +1,167 @@
-# AppGear - Estrutura do Repositório
+# AppGear - Plataforma de Automação e IA
 
-**Versão:** 2.0 - Reorganizado  
-**Data:** 27 de novembro de 2025
+**Status:** ✅ FASE 2 Completa | Topologias: Minimal (Compose) + Standard (K8s)
 
 ---
 
-## 📁 Estrutura Completa
+## 🚀 Início Rápido
+
+### Topologia A Minimal (Docker Compose)
+Ideal para desenvolvimento local rápido.
+
+```bash
+# Iniciar
+./scripts/shortcuts/stack-a-minimal.sh start
+
+# Acessar
+# Flowise:  http://localhost:3000
+# LiteLLM:  http://localhost:4000
+# n8n:      http://localhost:5678
+```
+
+### Topologia A Standard (Kubernetes)
+Ideal para staging/produção com observabilidade.
+
+```bash
+# Instalar K3s (primeira vez)
+./scripts/shortcuts/stack-a-standard.sh install
+
+# Deploy
+./scripts/shortcuts/stack-a-standard.sh deploy
+
+# Criar port-forwards
+./scripts/shortcuts/stack-a-standard.sh ports
+
+# Acessar
+# Flowise:    http://localhost:3000
+# LiteLLM:    http://localhost:4000
+# n8n:        http://localhost:5678
+# Prometheus: http://localhost:9090
+# Grafana:    http://localhost:3001 (admin/appgear_grafana_2025)
+```
+
+---
+
+## 📦 O que é AppGear?
+
+Plataforma modular para automação e workflows de IA, integrando:
+
+- **LiteLLM** - Gateway unificado para LLMs (Groq, OpenAI)
+- **Flowise** - Constructor visual de workflows de IA
+- **n8n** - Automação de processos
+- **PostgreSQL** - Banco de dados persistente
+- **Redis** - Cache de alto desempenho
+- **Prometheus + Grafana** - Observabilidade completa _(K8s)_
+
+---
+
+## 🗂️ Estrutura do Projeto
 
 ```
 AppGear/
+├── deployments/
+│   └── topology-a/
+│       ├── minimal/          # Docker Compose
+│       └── standard/         # Kubernetes (K3s)
 │
-├── 📋 Arquivos Raiz (Informação Geral)
-│   ├── README.md                    # Este arquivo - Visão geral
-│   ├── LICENSE.md                   # Licença
-│   ├── MANIFESTO.md                 # Visão e história do projeto
-│   ├── STATUS-ATUAL.md              # Status atual do projeto
-│   ├── NOTICE.md                    # Avisos legais
-│   ├── THIRD_PARTY_LICENSES.md      # Licenças de terceiros
-│   ├── requirements.txt             # Dependências Python
-│   └── requirements-tests.txt       # Dependências de teste
+├── scripts/
+│   ├── shortcuts/            # Atalhos de gerenciamento
+│   │   ├── stack-a-minimal.sh
+│   │   └── stack-a-standard.sh
+│   ├── topology-a-minimal/   # Scripts Minimal
+│   └── topology-a-standard/  # Scripts Standard
 │
-├── 🚀 deployments/                  # IMPLANTAÇÕES (Ambientes prontos)
-│   ├── README.md                    # Documentação de deployments
-│   ├── topology-a/                  # Docker Compose
-│   │   ├── README-topology-a.md     # Guia completo Topologia A
-│   │   ├── minimal/                 # ✅ 7 componentes (PRONTO)
-│   │   │   ├── docker-compose.yml
-│   │   │   ├── .env.example
-│   │   │   └── config/
-│   │   ├── standard/                # 15 componentes (FUTURO)
-│   │   └── full/                    # 25+ componentes (FUTURO)
-│   └── topology-b/                  # Kubernetes
-│       ├── README-topology-b.md     # (FUTURO)
-│       ├── minimal/                 # K8s minimal (FUTURO)
-│       ├── standard/                # K8s standard (FUTURO)
-│       └── enterprise/              # K8s enterprise (FUTURO)
-│
-├── 📚 docs/                         # DOCUMENTAÇÃO
-│   ├── README.md                    # Índice de documentação
-│   ├── architecture/                # Arquitetura oficial
-│   │   ├── contract/                # Contrato v0 (fonte da verdade)
-│   │   ├── audit/                   # Auditoria v0
-│   │   ├── interoperability/        # Interoperabilidade v0
-│   │   └── ...
-│   ├── guides/                      # Guias práticos
-│   │   ├── ai-ci-cd-flow.md
-│   │   ├── keda-scale-to-zero.md
-│   │   └── ...
-│   ├── reports/                     # Relatórios técnicos
-│   └── policy/                      # Políticas e governance
-│
-├── 🔧 development/                  # DESENVOLVIMENTO (Módulos técnicos)
-│   ├── README.md                    # Guia de desenvolvimento
-│   ├── v0/                          # Baseline v0 (estável)
-│   ├── v0.1/                        # Versão 0.1
-│   ├── v0.2/                        # Versão 0.2
-│   ├── v0.3/                        # ✅ Retrofit v0.3 (ATIVO)
-│   │   ├── stack-unificada-v0.3.yaml
-│   │   └── modulos/ (M00-M17)
-│   └── ...
-│
-├── 📦 gitops/                       # GITOPS (Argo CD - Topologia B)
-│   ├── README.md
-│   ├── apps/                        # Applications (90+)
-│   ├── appsets/                     # ApplicationSets
-│   └── bootstrap/                   # App-of-Apps bootstrap
-│
-├── 🛠️  scripts/                     # SCRIPTS UTILITÁRIOS
-│   ├── README.md
-│   ├──  validate-topology-a.sh       # ✅ Validação Docker Compose
-│   ├── validate-topology-b.sh       # Validação Kubernetes
-│   ├── run_all_checks.py            # Checks de documentação
-│   ├── check_docs.py
-│   ├── edge_chain.py
-│   └── ...
-│
-├── 🗺️  roadmap/                     # ROADMAPS E PLANEJAMENTO
-│   ├── README.md
-│   └── roadmap_retrofit.md          # Roadmap completo de retrofit
-│
-├── 📦 archive/                      # CÓDIGO LEGADO (deprecated)
-│   └── ...
-│
-└── .archive/                        # Arquivos temporários da reorganização
-    └── oldstructure/
+├── docs/                     # Documentação completa
+└── .secrets/                # Credenciais (não versionado)
 ```
 
 ---
 
-## 🎯 Onde Encontrar Cada Coisa
+## 🎯 Funcionalidades por Topologia
 
-### Para USAR a Plataforma
-📍 **deployments/**
-- Docker Compose: `deployments/topology-a/minimal/`
-- Kubernetes: `deployments/topology-b/` (futuro)
-- Guias: `deployments/topology-a/README-topology-a.md`
-
-### Para ENTENDER a Arquitetura
-📍 **docs/architecture/**
-- Contrato: `docs/architecture/contract/contract-v0.md`
-- Auditoria: `docs/architecture/audit/audit-v0.md`
-- Interoperabilidade: `docs/architecture/interoperability/interoperability-v0.md`
-
-### Para DESENVOLVER Módulos
-📍 **development/**
-- Módulos v0.3: `development/v0.3/`
-- Stack unificada: `development/v0.3/stack-unificada-v0.3.yaml`
-- Módulos técnicos: M00-M17
-
-### Para VALIDAR Configurações
-📍 **scripts/**
-- Topology A: `./scripts/validate-topology-a.sh`
-- Topology B: `./scripts/validate-topology-b.sh`
-- Docs: `./scripts/run_all_checks.py`
-
-### Para ENTENDER o Projeto
-📍 **Raiz do repositório:**
-- README.md (você está aqui)
-- MANIFESTO.md (história e visão)
-- STATUS-ATUAL.md (estado atual)
+| Funcionalidade | Minimal | Standard |
+|----------------|---------|----------|
+| **Orquestração** | Docker Compose | Kubernetes (K3s) |
+| **Escalabilidade** | Manual | Automática (HPA) |
+| **Alta Disponibilidade** | ❌ | ✅ (2x LiteLLM) |
+| **Observabilidade** | Logs | Prometheus + Grafana |
+| **Storage** | Volumes | PVCs (35Gi) |
+| **RBAC** | ❌ | ✅ |
+| **Secrets** | .env | K8s Secrets |
 
 ---
 
-## 🚀 Quick Start
+## 📚 Documentação
 
-### 1. Primeira Vez - Ler Documentação
-```bash
-# Entender o projeto
-cat README.md
-cat MANIFESTO.md
-cat STATUS-ATUAL.md
+### Guias de Instalação
+- [Topologia A Minimal](docs/guides/installation-guide-topology-a-minimal.md)
+- [Topologia A Standard](deployments/topology-a/standard/README.md)
 
-# Entender arquitetura
-cat docs/architecture/contract/contract-v0.md
-```
+### Scripts
+- [Guia Rápido](scripts/QUICKSTART.md)
+- [README Scripts](scripts/README.md)
 
-### 2. Implantar Topologia A (Docker Compose)
-```bash
-# Navegar para deployment
-cd deployments/topology-a/minimal
-
-# Configurar
-cp .env.example .env
-nano .env  # Adicione sua OPENAI_API_KEY
-
-# Iniciar
-docker-compose up -d
-
-# Validar
-cd ../../..
-./scripts/validate-topology-a.sh
-```
-
-### 3. Explorar Componentes
-- **Flowise:** http://localhost:3000 (admin / appgear_dev)
-- **n8n:** http://localhost:5678 (admin / appgear_dev)
-- **Traefik:** http://localhost:8080
+### Status e Planejamento
+- [Status Atual](STATUS-ATUAL.md) - Estado do projeto
+- [Roadmap](development/README.md) - Planejamento futuro
 
 ---
 
-## 📊 Status por Diretório
+## 🧪 Testes
 
-| Diretório | Status | Descrição |
-|-----------|--------|-----------|
-| `deployments/topology-a/minimal/` | ✅ Pronto | Docker Compose funcional |
-| `deployments/topology-a/standard/` | ⏳ Planejado | 15 componentes |
-| `deployments/topology-b/` | ⏳ Planejado | Kubernetes (Semana 6-9) |
-| `docs/architecture/` | ✅ Completo | Documentação oficial |
-| `development/v0.3/` | ✅ Ativo | Módulos M00-M17 |
-| `gitops/` | ✅ Estruturado | 90+ apps Argo CD |
-| `scripts/` | ✅ Funcionando | 5/5 checks passando |
-| `roadmap/` | ✅ Documentado | Plano completo |
-
----
-
-## 🎓 Convenções
-
-### Nomenclatura de Arquivos
-- **Configuração:** `*.yml`, `*.yaml`
-- **Documentação:** `*.md` (Markdown)
-- **Scripts:** `*.sh` (Shell), `*.py` (Python)
-- **Exemplos:** `*.example`
-
-### Estrutura de Diretórios
-- **Raiz:** Informações gerais e arquivos de projeto
-- **deployments/:** Ambientes prontos para uso
-- **docs/:** Documentação oficial e guias
-- **development/:** Código e módulos técnicos
-- **scripts/:** Ferramentas e validações
-- **gitops/:** Manifests Argo CD (Topologia B)
-
----
-
-## 🔄 Navegação Rápida
-
-### Arquivos Importantes (Raiz)
+### Minimal (Docker Compose)
 ```bash
-README.md                # Você está aqui
-MANIFESTO.md             # História do projeto
-STATUS-ATUAL.md          # Estado atual
+./scripts/shortcuts/stack-a-minimal.sh test
 ```
 
-### Começar a Usar
+### Standard (Kubernetes)
 ```bash
-cd deployments/topology-a/minimal
-docker-compose up -d
-```
-
-### Entender Arquitetura
-```bash
-cd docs/architecture/contract
-cat contract-v0.md
-```
-
-### Validar Configurações
-```bash
-./scripts/validate-topology-a.sh
-./scripts/run_all_checks.py
+./scripts/topology-a-standard/test-e2e-a-standard.sh
 ```
 
 ---
 
-## 📝 Changelog da Reorganização
+## 🔧 Troubleshooting
 
-### v2.0 - 27/nov/2025
-- ✅ Separados deployments, docs, development
-- ✅ Movidos guides/ → docs/guides/
-- ✅ Movidos reports/ → docs/reports/
-- ✅ Movidos policy/ → docs/policy/
-- ✅ Criada estrutura topology-a/{minimal,standard,full}
-- ✅ Criada estrutura topology-b/{minimal,standard,enterprise}
-- ✅ Todos os caminhos atualizados
-- ✅ READMEs em cada nível
+### Minimal
+Veja [installation-guide-topology-a-minimal.md](docs/guides/installation-guide-topology-a-minimal.md#troubleshooting)
 
-### v1.0 - Original
-- Estrutura plana na raiz
-
----
-
-## 🆘 Troubleshooting
-
-### "Não encontro o docker-compose.yml"
+### Standard
 ```bash
-# Agora está em:
-cd deployments/topology-a/minimal
-```
+# Ver logs
+./scripts/shortcuts/stack-a-standard.sh logs <pod-name>
 
-### "Scripts não funcionam"
-```bash
-# Execute da raiz do repositório:
-./scripts/validate-topology-a.sh
-```
+# Status detalhado
+./scripts/shortcuts/stack-a-standard.sh status
 
-### "Onde está a documentação?"
-```bash
-# Arquitetura oficial:
-docs/architecture/
-
-# Guias práticos:
-docs/guides/
+# Recrear deployment
+kubectl rollout restart deployment/<name> -n appgear
 ```
 
 ---
 
-**Mantido por:** Paulo Lima + Antigravity AI  
-**Última Atualização:** 27 de novembro de 2025, 02:20  
-**Versão da Estrutura:** 2.0
+## 🤝 Contribuindo
+
+1. Clone o repositório
+2. Siga os guias de instalação
+3. Execute os testes E2E antes de commits
+
+---
+
+## 📄 Licença
+
+[Definir licença]
+
+---
+
+## 🏆 Status do Projeto
+
+- ✅ **FASE 1** - Topologia A Minimal (100%)
+- ✅ **FASE 2** - Topologia A Standard (100%)
+- 🔮 **FASE 3** - Enterprise Features (Planejada)
+
+**Última Atualização:** 28 de novembro de 2025
+
+---
+
+**Desenvolvido com ❤️ usando Kubernetes, Docker, e as melhores práticas DevOps**
