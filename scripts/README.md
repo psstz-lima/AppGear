@@ -6,41 +6,48 @@ Scripts organizados por função e topologia para facilitar a operação e manut
 
 ```
 scripts/
-├── stack.sh ⭐                  # Script Principal (Wrapper)
-├── QUICKSTART.md                # Guia Rápido
-├── README.md                    # Documentação Geral
+├── shortcuts/                   # Atalhos de Gerenciamento (Use estes!)
+│   └── stack-a-minimal.sh       # Gerenciador Topologia A Minimal
 │
-├── topology-a-minimal/          # Operação: Topologia A Minimal
+├── topology-a-minimal/          # Scripts Operacionais (Backend)
 │   ├── startup-stack.sh
 │   ├── shutdown-stack.sh
-│   └── status-stack.sh
+│   ├── status-stack.sh
+│   ├── test-e2e.sh
+│   ├── backup-manager.sh
+│   └── logs-viewer.sh
 │
 ├── checks/                      # Validação e QA
-│   ├── validate-topology-a.sh   # Validação de Deployment
-│   ├── validate-topology-b.sh
-│   ├── check_docs.py            # Verificação de Documentação
-│   ├── run_all_checks.py        # Suite de Testes
-│   └── ... (outros scripts python)
+│   ├── topology_a_checks.sh
+│   ├── docs_consistency_checks.py
+│   └── ...
 │
-└── requirements/                # Dependências
-    └── requirements-tests.txt   # Libs para scripts Python
+├── requirements/                # Dependências Python
+└── QUICKSTART.md                # Guia Rápido
 ```
 
 ---
 
-## 🚀 Uso Principal
+## 🚀 Uso Principal (Atalhos)
 
-Use o script `stack.sh` na raiz para a maioria das operações:
+Use os scripts em `scripts/shortcuts/` para gerenciar sua stack. Eles são pré-configurados para cada topologia.
 
+### Topologia A Minimal
 ```bash
 # Iniciar
-./scripts/stack.sh a-minimal start
+./scripts/shortcuts/stack-a-minimal.sh start
 
 # Parar
-./scripts/stack.sh a-minimal stop
+./scripts/shortcuts/stack-a-minimal.sh stop
 
 # Status
-./scripts/stack.sh a-minimal status
+./scripts/shortcuts/stack-a-minimal.sh status
+
+# Logs
+./scripts/shortcuts/stack-a-minimal.sh logs ai -f
+
+# Teste E2E
+./scripts/shortcuts/stack-a-minimal.sh test
 ```
 
 ---
@@ -51,7 +58,7 @@ Localizados em `scripts/checks/`, estes scripts garantem a integridade do ambien
 
 ### Validar Deployment
 ```bash
-./scripts/checks/validate-topology-a.sh
+./scripts/checks/topology_a_checks.sh
 ```
 
 ### Validar Documentação e Estrutura
@@ -61,29 +68,5 @@ python3 scripts/checks/run_all_checks.py
 
 ---
 
-## � Topologias
-
-### topology-a-minimal/
-Scripts operacionais para a versão Minimal da Topologia A (Docker Compose).
-- **Foco:** Desenvolvimento local, testes rápidos.
-- **Serviços:** LiteLLM, Flowise, n8n, Kong, Traefik, Postgres, Redis.
-
----
-
-## 🛠️ Manutenção
-
-### Adicionar Nova Topologia
-1. Crie o diretório `scripts/topology-nome/`
-2. Adicione `startup-stack.sh`, `shutdown-stack.sh`, `status-stack.sh`
-3. Atualize `stack.sh` para reconhecer a nova topologia
-
-### Dependências Python
-Se for rodar os scripts de check Python:
-```bash
-pip install -r scripts/requirements/requirements-tests.txt
-```
-
----
-
-**Versão:** 1.1  
+**Versão:** 1.2  
 **Atualizado:** 28 de novembro de 2025

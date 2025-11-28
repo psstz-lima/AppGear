@@ -26,15 +26,15 @@ def main() -> None:
     # 1) Matriz de modulos x componentes terceiros
     run_step(
         repo_root,
-        "Validar matriz de modulos e componentes terceiros (check_docs.py)",
-        "scripts/checks/check_docs.py",
+        "Validar matriz de modulos e componentes terceiros (docs_consistency_checks.py)",
+        "scripts/checks/docs_consistency_checks.py",
     )
 
     # 2) Cadeia de borda (Traefik -> Coraza -> Kong -> Istio)
     run_step(
         repo_root,
-        "Validar cadeia de borda (Traefik → Coraza → Kong → Istio) (edge_chain.py)",
-        "scripts/checks/edge_chain.py",
+        "Validar cadeia de borda (Traefik → Coraza → Kong → Istio) (edge_chain_checks.py)",
+        "scripts/checks/edge_chain_checks.py",
     )
 
     # 3) Cruzamento de modulos com fluxos/mapa e cabecalhos normativos
