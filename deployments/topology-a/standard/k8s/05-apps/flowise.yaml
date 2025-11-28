@@ -1,0 +1,126 @@
+---
+# Flowise Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flowise
+  namespace: appgear
+  labels:
+    app: flowise
+    component: ai-workflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flowise
+  template:
+    metadata:
+      labels:
+        app: flowise
+        component: ai-workflow
+    spec:
+      containers:
+      - name: flowise
+        image: flowiseai/flowise:1.4.7
+        args:
+        - flowise
+        - start
+        ports:
+        - containerPort: 3000
+          name: http
+        env:
+        - name: DATABASE_TYPE
+          value: postgres
+        - name: DATABASE_HOST
+          value: postgres
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: POSTGRES_USER
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: POSTGRES_PASSWORD
+        - name: DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: POSTGRES_DB
+        - name: DATABASE_SCHEMA
+          value: flowise
+        - name: FLOWISE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: flowise-credentials
+              key: FLOWISE_USERNAME
+        - name: FLOWISE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: flowise-credentials
+              key: FLOWISE_PASSWORD
+        - name: APIKEY_PATH
+          value: /root/.flowise
+        - name: SECRETKEY_PATH
+          value: /root/.flowise
+        - name: LOG_LEVEL
+          value: info
+        volumeMounts:
+        - name: flowise-data
+          mountPath: /root/.flowise
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 5
+      volumes:
+      - name: flowise-data
+        persistentVolumeClaim:
+          claimName: flowise-data
+---
+# Flowise PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: flowise-data
+  namespace: appgear
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+# Flowise Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: flowise
+  namespace: appgear
+  labels:
+    app: flowise
+spec:
+  type: ClusterIP
+  ports:
+  - port: 3000
+    targetPort: 3000
+    name: http
+  selector:
+    app: flowise

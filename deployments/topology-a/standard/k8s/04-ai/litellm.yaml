@@ -1,0 +1,94 @@
+---
+# LiteLLM Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: litellm
+  namespace: appgear
+  labels:
+    app: litellm
+    component: ai-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: litellm
+  template:
+    metadata:
+      labels:
+        app: litellm
+        component: ai-gateway
+    spec:
+      containers:
+      - name: litellm
+        image: ghcr.io/berriai/litellm:main-latest
+        args:
+        - --config
+        - /app/config.yaml
+        ports:
+        - containerPort: 4000
+          name: http
+        env:
+        - name: LITELLM_MASTER_KEY
+          valueFrom:
+            secretKeyRef:
+              name: litellm-credentials
+              key: LITELLM_MASTER_KEY
+        - name: GROQ_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: litellm-credentials
+              key: GROQ_API_KEY
+        - name: DATABASE_URL
+          value: "postgresql://appgear:appgear_secure_2025@postgres:5432/appgear"
+        - name: REDIS_HOST
+          value: redis
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-credentials
+              key: REDIS_PASSWORD
+        volumeMounts:
+        - name: config
+          mountPath: /app/config.yaml
+          subPath: config.yaml
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        livenessProbe:
+          tcpSocket:
+            port: 4000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 4000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+      volumes:
+      - name: config
+        configMap:
+          name: litellm-config
+---
+# LiteLLM Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: litellm
+  namespace: appgear
+  labels:
+    app: litellm
+spec:
+  type: ClusterIP
+  ports:
+  - port: 4000
+    targetPort: 4000
+    name: http
+  selector:
+    app: litellm
