@@ -1,101 +1,125 @@
-# Scripts - AppGear
+# Scripts de Gerenciamento AppGear
 
-Scripts utilitários para validação, testes e automação.
+Scripts organizados por topologia para facilitar o gerenciamento da stack.
+
+## 📁 Estrutura
+
+```
+scripts/
+├── topology-a-minimal/      # Topologia A Minimal (Docker Compose)
+│   ├── startup-stack.sh     # Inicia stack
+│   ├── shutdown-stack.sh    # Para stack
+│   ├── status-stack.sh      # Status detalhado
+│   └── README.md            # Documentação específica
+│
+├── topology-a-standard/     # [FUTURO] Topologia A Standard (Kubernetes)
+├── topology-b/              # [FUTURO] Topologia B
+│
+├── validate-topology-a.sh   # Validação Topologia A
+├── validate-topology-b.sh   # Validação Topologia B
+└── README.md               # Este arquivo
+```
 
 ---
 
-## 📁 Scripts Disponíveis
+## 🎯 Quick Start
 
-### Validação de Topologias
+### Topologia A Minimal (Atual)
 
-**`validate-topology-a.sh`** ✅
-- Valida Topologia A (Docker Compose)
-- Verifica 7 serviços rodando
-- Testa cadeia de borda
-- Valida acessibilidade
+```bash
+# Iniciar stack
+sudo ./scripts/topology-a-minimal/startup-stack.sh
+
+# Ver status
+sudo ./scripts/topology-a-minimal/status-stack.sh
+
+# Parar stack
+sudo ./scripts/topology-a-minimal/shutdown-stack.sh
+```
+
+**Documentação completa:** [topology-a-minimal/README.md](topology-a-minimal/README.md)
+
+---
+
+## 📚 Por Topologia
+
+### Topologia A Minimal
+**Status:** ✅ Implementada (Docker Compose)  
+**Ambiente:** Desenvolvimento local  
+**Scripts:** 3 (startup, shutdown, status)
+
+**Serviços:**
+- PostgreSQL, Redis
+- Traefik, Kong
+- LiteLLM (Groq)
+- Flowise, n8n
+
+**Ver:** [topology-a-minimal/](topology-a-minimal/)
+
+---
+
+### Topologia A Standard
+**Status:** ⏳ Planejada (FASE 2)  
+**Ambiente:** Produção (Kubernetes)  
+**Adiciona:**
+- Coraza WAF
+- Istio Service Mesh
+- Prometheus, Grafana
+- Jaeger (tracing)
+
+---
+
+### Topologia B
+**Status:** ⏳ Planejada (FASE 3)  
+**Ambiente:** Multi-tenant  
+**Adiciona:**
+- Separação por tenant
+- Multi-região
+- HA (High Availability)
+
+---
+
+## 🔧 Scripts de Validação
+
+### validate-topology-a.sh
+Valida implementação da Topologia A.
 
 ```bash
 ./scripts/validate-topology-a.sh
 ```
 
-**`validate-topology-b.sh`**
-- Valida Topologia B (Kubernetes)
-- Verifica namespaces, pods
-- Testa GitOps, Istio, KEDA
+### validate-topology-b.sh
+Valida implementação da Topologia B.
 
 ```bash
 ./scripts/validate-topology-b.sh
 ```
 
-### Validação de Documentação
+---
 
-**`run_all_checks.py`** ✅
-- Executa todos os checks de documentação
-- 5 validações automatizadas
+## 📖 Convenções
 
-```bash
-python3 scripts/run_all_checks.py
-```
+### Nomenclatura
+- **Topologia:** `topology-{letra}-{variante}/`
+- **Scripts:** `{ação}-stack.sh`
 
-**`check_docs.py`** ✅
-- Valida matriz de módulos e componentes
-- Verifica consistency
+### Exemplos
+- `topology-a-minimal/startup-stack.sh`
+- `topology-a-standard/startup-stack.sh`
+- `topology-b/startup-stack.sh`
 
-**`edge_chain.py`** ✅
-- Valida cadeia de borda (Traefik→Coraza→Kong→Istio)
-- 4 testes pytest
-
-**`docs_semantic_checks.py`** ✅
-- Valida cruzamento módulos/fluxos/mapa
-
-**`modules_files_checks.py`** ✅
-- Valida existência de arquivos de módulos
-
-**`modules_gitops_checks.py`** ✅
-- Valida estrutura GitOps/Kustomize
+### Permissões
+Todos os scripts de gerenciamento requerem **sudo**.
 
 ---
 
-## 🚀 Uso
+## 🚀 Roadmap
 
-### Quick Validation
-
-```bash
-# Validar tudo
-cd /home/paulo-lima/AppGear
-./scripts/run_all_checks.py
-
-# Validar Topology A
-./scripts/validate-topology-a.sh
-```
-
-### Executar da Raiz
-
-**IMPORTANTE:** Todos os scripts devem ser executados da raiz do repositório:
-
-```bash
-# ✅ CORRETO
-cd /home/paulo-lima/AppGear
-./scripts/validate-topology-a.sh
-
-# ❌ ERRADO
-cd scripts
-./validate-topology-a.sh
-```
+- [x] **FASE 1:** Topologia A Minimal (Docker Compose) - ✅ Concluída
+- [ ] **FASE 2:** Topologia A Standard (Kubernetes + Observabilidade)
+- [ ] **FASE 3:** Topologia B (Multi-tenant)
 
 ---
 
-## 📊 Status dos Scripts
-
-| Script | Status | Checks | Última Validação |
-|--------|--------|--------|------------------|
-| `validate-topology-a.sh` | ✅ OK | 10 checks | 27/nov/2025 |
-| `validate-topology-b.sh` | ✅ OK | 12 checks | - |
-| `run_all_checks.py` | ✅ OK | 5 validações | 27/nov/2025 |
-| `check_docs.py` | ✅ OK | Matriz OK | 27/nov/2025 |
-| `edge_chain.py` | ✅ OK | 4/4 testes | 27/nov/2025 |
-
----
-
-**Mantido por:** Equipe AppGear  
-**Última Atualização:** 27 de novembro de 2025
+**Última atualização:** 28 de novembro de 2025  
+**Versão:** 1.0
