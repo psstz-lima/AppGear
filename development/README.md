@@ -26,6 +26,8 @@ development/
 | **v0** | ✅ Estável | Baseline original | Congelado |
 | **v0.3** | ✅ Ativo | Retrofit em andamento | Em desenvolvimento |
 
+**📊 Status de Implementação:** [implementation-status.md](implementation-status.md)
+
 ---
 
 ## 📦 Módulos Técnicos (v0.3)
