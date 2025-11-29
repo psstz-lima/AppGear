@@ -7,12 +7,10 @@
 
 ## 📊 Resumo Executivo
 
-- **FASE 1 (Topologia A Minimal - Docker Compose)**: ✅ CONCLUÍDA (100%)
-- **FASE 2 (Topologia A Standard - Kubernetes)**: ✅ CONCLUÍDA (100%)
-  - 5 Workloads convertidos ✅
-  - K3s instalado e configurado ✅
-  - Observabilidade (Prometheus + Grafana) ✅
-  - **Auditoria e Compliance** ✅
+- **FASE 1 (Topologia A Minimal - Docker Compose)**: ✅ CONCLUÍDA (100%) - *Dev/PoC*
+- **FASE 2 (Topologia A Standard - Kubernetes)**: ✅ CONCLUÍDA (100%) - *Core/Observabilidade*
+- **FASE 3 (Topologia A Full - Ingress/WAF)**: 🔮 PLANEJADA
+- **FASE 4 (Topologia B - Enterprise)**: 🔮 PLANEJADA
 
 ---
 
@@ -92,11 +90,6 @@ logs <pod>   # Ver logs
 cleanup      # Remove tudo
 ```
 
-### Pendente (Opcional - Fase 3)
-- [ ] Gateways (Traefik/Kong via Ingress)
-- [ ] Coraza WAF
-- [ ] Testes E2E adaptados para K8s
-
 ---
 
 ## 🎯 Comparativo: Minimal vs Standard
@@ -152,19 +145,6 @@ Grafana:    http://localhost:3001  (admin/appgear_grafana_2025)
 - Alertas básicos no Prometheus
 
 ### FASE 4: Topologia B (Enterprise)
-*Foco: Produção em escala, multi-tenancy e governança avançada.*
-
-**Service Mesh**
-- Implementação do Istio
-- Configuração de mTLS (Segurança Zero Trust)
-
-**Secrets Management**
-- Integração com HashiCorp Vault
-- Rotação automática de segredos
-
-**Multi-tenancy**
-- Implementação de vClusters
-- Isolamento rigoroso por tenant
 
 **Auto-scaling**
 - KEDA (Event-driven autoscaling)

@@ -40,6 +40,18 @@ Ideal para staging/produção com observabilidade.
 # Grafana:    http://localhost:3001 (admin/appgear_grafana_2025)
 ```
 
+### Topologia A Full (Fase 3)
+*Em breve: Acesso via Ingress (sem port-forward) e WAF.*
+```bash
+# 🚧 Planejado para Fase 3
+```
+
+### Topologia B (Fase 4)
+*Em breve: Ambiente Enterprise com Istio, Vault e GitOps.*
+```bash
+# 🚧 Planejado para Fase 4
+```
+
 > **⚠️ Importante:** As topologias são mutuamente exclusivas. O sistema impedirá que você inicie uma se a outra estiver rodando para evitar conflitos de porta e dados. Use `cleanup` antes de trocar.
 
 ---
