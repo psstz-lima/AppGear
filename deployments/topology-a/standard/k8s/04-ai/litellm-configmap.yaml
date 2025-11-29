@@ -40,6 +40,7 @@ data:
           api_key: os.environ/OPENAI_API_KEY
 
     litellm_settings:
+      callbacks: ["prometheus"]
       drop_params: true
       set_verbose: false
       request_timeout: 600
@@ -48,3 +49,4 @@ data:
     general_settings:
       master_key: os.environ/LITELLM_MASTER_KEY
       database_url: os.environ/DATABASE_URL
+

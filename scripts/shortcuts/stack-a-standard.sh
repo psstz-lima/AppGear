@@ -96,19 +96,19 @@ case $ACTION in
         kubectl port-forward -n appgear svc/flowise 3000:3000 > /dev/null 2>&1 &
         kubectl port-forward -n appgear svc/litellm 4000:4000 > /dev/null 2>&1 &
         kubectl port-forward -n appgear svc/n8n 5678:5678 > /dev/null 2>&1 &
-        kubectl port-forward -n observability svc/prometheus 9090:9090 > /dev/null 2>&1 &
+        kubectl port-forward -n observability svc/prometheus 9099:9090 > /dev/null 2>&1 &
         kubectl port-forward -n observability svc/grafana 3001:3000 > /dev/null 2>&1 &
         sleep 2
         echo -e "${GREEN}Port-forwards ativos:${NC}"
         echo "  • Flowise:    http://localhost:3000"
         echo "  • LiteLLM:    http://localhost:4000"
         echo "  • n8n:        http://localhost:5678"
-        echo "  • Prometheus: http://localhost:9090"
+        echo "  • Prometheus: http://localhost:9099"
         echo "  • Grafana:    http://localhost:3001 (admin/appgear_grafana_2025)"
         ;;
     
     "prometheus")
-        kubectl port-forward -n observability svc/prometheus 9090:9090
+        kubectl port-forward -n observability svc/prometheus 9099:9090
         ;;
     
     "grafana")

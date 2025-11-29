@@ -32,7 +32,7 @@
 
 ---
 
-## 🚀 FASE 2: Topologia A Standard (85% Core Completa)
+## 🚀 FASE 2: Topologia A Standard (100% Completa)
 
 ### Infraestrutura Kubernetes ✅
 - **K3s v1.33.6** instalado e funcional
@@ -67,6 +67,8 @@
 - ✅ Prometheus scraping ativo
 - ✅ Grafana + datasource configurado
 - ✅ Port-forwards funcionais
+- ✅ **Exclusão Mútua** entre topologias implementada
+- ✅ **Dashboard "AppGear Monitor"** criado
 
 ### Gerenciamento ✅
 ```bash
@@ -77,17 +79,16 @@ install      # Instala K3s
 deploy       # Deploy completo
 status       # Status dos pods
 ports        # Port-forwards para todos
-prometheus   # Acesso Prometheus (9090)
+prometheus   # Acesso Prometheus (9099)
 grafana      # Acesso Grafana (3001)
 logs <pod>   # Ver logs
 cleanup      # Remove tudo
 ```
 
-### Pendente (15% - Opcional)
+### Pendente (Opcional - Fase 3)
 - [ ] Gateways (Traefik/Kong via Ingress)
 - [ ] Coraza WAF
 - [ ] Testes E2E adaptados para K8s
-- [ ] Dashboards Grafana customizados
 
 ---
 

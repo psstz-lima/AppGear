@@ -1,67 +1,66 @@
 # Topologia A Standard - Kubernetes
 
-Implementação da stack AppGear em Kubernetes usando K3s.
+Implementação da stack AppGear em Kubernetes usando K3s, focada em observabilidade e escalabilidade.
 
 ## 🎯 Estrutura de Diretórios
 
 ```
 standard/
 ├── k8s/
-│   ├── 00-namespaces/       # Namespaces e RBAC
-│   ├── 01-storage/          # StorageClass, PV, PVC
+│   ├── 00-namespaces/       # Namespaces e Secrets
 │   ├── 02-databases/        # PostgreSQL, Redis
-│   ├── 03-gateways/         # Traefik, Kong, Coraza
-│   ├── 04-ai/               # LiteLLM
-│   └── 05-apps/             # Flowise, n8n
+│   ├── 04-ai/               # LiteLLM (2 réplicas)
+│   ├── 05-apps/             # Flowise, n8n
+│   └── 06-observability/    # Prometheus, Grafana
 │
 └── scripts/
     ├── setup-k3s-a-standard.sh       # Instala K3s
-    ├── deploy-stack-a-standard.sh    # Deploy completo
+    ├── deploy-stack-a-standard.sh    # Deploy completo com verificação de conflito
     └── cleanup-stack-a-standard.sh   # Remove recursos
 ```
 
-## 🚀 Instalação
+## 🚀 Instalação e Uso
 
-### 1. Instalar K3s
+Use o script de atalho para facilitar:
+
 ```bash
-sudo ./scripts/setup-k3s-a-standard.sh
+# 1. Instalar K3s
+./scripts/shortcuts/stack-a-standard.sh install
+
+# 2. Deploy da Stack
+./scripts/shortcuts/stack-a-standard.sh deploy
+
+# 3. Acessar Serviços (Port-forward)
+./scripts/shortcuts/stack-a-standard.sh ports
 ```
 
-### 2. Deploy da Stack
-```bash
-./scripts/deploy-stack-a-standard.sh
-```
-
-### 3. Verificar Status
-```bash
-kubectl get pods -n appgear
-```
+> **⚠️ Exclusão Mútua:** Este deploy falhará se a Topologia Minimal (Docker Compose) estiver rodando. Pare-a antes de iniciar.
 
 ## 📦 Componentes
 
-| Componente | Tipo | Namespace | Porta |
-|------------|------|-----------|-------|
-| PostgreSQL | StatefulSet | appgear | 5432 |
-| Redis | StatefulSet | appgear | 6379 |
-| Traefik | DaemonSet | kube-system | 80, 443 |
-| Kong | Deployment | appgear | 8000, 8001 |
-| LiteLLM | Deployment | appgear | 4000 |
-| Flowise | Deployment | appgear | 3000 |
-| n8n | Deployment | appgear | 5678 |
+| Componente | Tipo | Namespace | Porta (Local) | Obs |
+|------------|------|-----------|---------------|-----|
+| PostgreSQL | StatefulSet | appgear | - | Acesso interno apenas |
+| Redis | StatefulSet | appgear | - | Acesso interno apenas |
+| LiteLLM | Deployment | appgear | 4000 | 2 Réplicas, Load Balanced |
+| Flowise | Deployment | appgear | 3000 | Schema `public` |
+| n8n | Deployment | appgear | 5678 | Schema `n8n` (isolado) |
+| Prometheus | Deployment | observability | 9099 | Monitoramento de métricas |
+| Grafana | Deployment | observability | 3001 | Dashboards visuais |
 
 ## 🔍 Diferenças vs Minimal
 
 | Aspecto | Minimal (Compose) | Standard (K8s) |
 |---------|-------------------|----------------|
-| Orquestração | Docker Compose | Kubernetes |
-| Escalabilidade | Manual | Automática (HPA) |
-| Alta Disponibilidade | Não | Sim (multi-réplica) |
+| Orquestração | Docker Compose | Kubernetes (K3s) |
+| Escalabilidade | Manual | Automática (HPA ready) |
+| Alta Disponibilidade | Não | Sim (LiteLLM multi-réplica) |
 | Observabilidade | Logs básicos | Prometheus + Grafana |
-| Segurança | Básica | WAF + Network Policies |
-| Backup | Script manual | Velero (futuro) |
+| Segurança | Básica | Secrets Management + RBAC |
+| Dados | Volumes Docker | PVCs Persistentes |
 
 ---
 
-**Versão:** 1.0  
-**Status:** Em Desenvolvimento  
+**Versão:** 2.0
+**Status:** ✅ Completa
 **Data:** 28 de novembro de 2025

@@ -36,9 +36,11 @@ Ideal para staging/produção com observabilidade.
 # Flowise:    http://localhost:3000
 # LiteLLM:    http://localhost:4000
 # n8n:        http://localhost:5678
-# Prometheus: http://localhost:9090
+# Prometheus: http://localhost:9099
 # Grafana:    http://localhost:3001 (admin/appgear_grafana_2025)
 ```
+
+> **⚠️ Importante:** As topologias são mutuamente exclusivas. O sistema impedirá que você inicie uma se a outra estiver rodando para evitar conflitos de porta e dados. Use `cleanup` antes de trocar.
 
 ---
 

@@ -50,6 +50,30 @@ Use os scripts em `scripts/shortcuts/` para gerenciar sua stack. Eles são pré-
 ./scripts/shortcuts/stack-a-minimal.sh test
 ```
 
+### Topologia A Standard (Kubernetes)
+```bash
+# Instalar K3s
+./scripts/shortcuts/stack-a-standard.sh install
+
+# Deploy Completo
+./scripts/shortcuts/stack-a-standard.sh deploy
+
+# Criar Port-forwards (Acesso)
+./scripts/shortcuts/stack-a-standard.sh ports
+
+# Status dos Pods
+./scripts/shortcuts/stack-a-standard.sh status
+
+# Acesso ao Shell
+./scripts/shortcuts/stack-a-standard.sh shell litellm
+
+# Logs
+./scripts/shortcuts/stack-a-standard.sh logs flowise
+
+# Limpeza Total
+./scripts/shortcuts/stack-a-standard.sh cleanup
+```
+
 ---
 
 ## 🔍 Scripts de Validação (Checks)

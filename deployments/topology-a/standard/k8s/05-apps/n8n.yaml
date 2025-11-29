@@ -47,6 +47,8 @@ spec:
             secretKeyRef:
               name: postgres-credentials
               key: POSTGRES_PASSWORD
+        - name: DB_POSTGRESDB_SCHEMA
+          value: n8n
         - name: N8N_BASIC_AUTH_ACTIVE
           value: "true"
         - name: N8N_BASIC_AUTH_USER

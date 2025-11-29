@@ -1,27 +1,22 @@
-# GitOps – M04 (bancos-core)
+# GitOps – M04 (Bancos Core)
 
-Este diretório contém a camada GitOps/Kustomize para o módulo **M04** da AppGear (v0.3).
+Este diretório contém a estrutura GitOps para o módulo **M04** (Bancos de Dados Core).
 
-- Namespace alvo: `appgear-data`
-- Imagem base utilizada neste módulo: `postgres:16` (ajuste conforme a versão/repositorio real desejado)
-- Documento normativo do módulo: `development/v0.3/module-04-v0.3.md`
-- Contrato de arquitetura: `docs/architecture/contract/contract-v0.md`
-- Diretriz de auditoria: `docs/architecture/audit/audit-v0.md`
-- Diretriz de interoperabilidade: `docs/architecture/interoperability/interoperability-v0.md`
+## 🚧 Status: Fase 3 (Planejamento)
 
-Componentes previstos para este módulo (INTENDED_COMPONENTS):
-`postgres,redis,qdrant,redpanda,ceph,meilisearch`
+A implementação ativa deste módulo na **Fase 2 (Standard Topology)** está localizada em:
+👉 `deployments/topology-a/standard/k8s/02-databases/`
 
-Arquivos principais:
+### Implementação Atual (Fase 2)
+- **Namespace:** `appgear`
+- **Componentes:**
+  - PostgreSQL (StatefulSet)
+  - Redis (StatefulSet)
+- **Deploy:** Via `kubectl apply` (Manifestos diretos)
 
-- `namespace.yaml` – namespace e labels padrão do módulo.
-- `deployment.yaml` – deployment do controlador do módulo, com uma imagem base aderente ao domínio do módulo.
-- `service.yaml` – service ClusterIP expondo o controlador na porta 80.
-- `kustomization.yaml` – entrada principal do Kustomize para este módulo.
-
-Observação:
-
-- A imagem configurada em `deployment.yaml` é uma sugestão e pode exigir ajuste de tag ou de repositório
-  para o ambiente real (por exemplo, pinagem de versão, repositório privado ou imagem hardenizada).
-- Os componentes listados em `INTENDED_COMPONENTS` devem ser detalhados em manifests adicionais,
-  que podem ser adicionados a este diretório e referenciados em `kustomization.yaml`.
+### Futuro (Fase 3 - GitOps)
+Este diretório será utilizado para a migração para ArgoCD/Kustomize, gerenciando:
+- PostgreSQL HA (Patroni/CloudNativePG)
+- Redis Cluster
+- Qdrant (Vector DB)
+- Backups via Velero

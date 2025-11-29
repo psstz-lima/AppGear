@@ -1,0 +1,89 @@
+{
+    "dashboard": {
+        "id": null,
+        "uid": "appgear-monitor",
+        "title": "AppGear Monitor (Availability)",
+        "tags": [
+            "kubernetes",
+            "appgear"
+        ],
+        "timezone": "browser",
+        "schemaVersion": 16,
+        "version": 1,
+        "refresh": "5s",
+        "panels": [
+            {
+                "title": "LiteLLM Instances Up",
+                "type": "stat",
+                "gridPos": {
+                    "h": 8,
+                    "w": 8,
+                    "x": 0,
+                    "y": 0
+                },
+                "targets": [
+                    {
+                        "expr": "sum(up{app=\"litellm\"})",
+                        "legendFormat": "Replicas",
+                        "refId": "A"
+                    }
+                ],
+                "fieldConfig": {
+                    "defaults": {
+                        "color": {
+                            "mode": "thresholds"
+                        },
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "red",
+                                    "value": null
+                                },
+                                {
+                                    "color": "green",
+                                    "value": 1
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "title": "Kubernetes Nodes Up",
+                "type": "stat",
+                "gridPos": {
+                    "h": 8,
+                    "w": 8,
+                    "x": 8,
+                    "y": 0
+                },
+                "targets": [
+                    {
+                        "expr": "sum(up{job=\"kubernetes-nodes\"})",
+                        "legendFormat": "Nodes",
+                        "refId": "A"
+                    }
+                ]
+            },
+            {
+                "title": "All AppGear Pods Status",
+                "type": "timeseries",
+                "gridPos": {
+                    "h": 8,
+                    "w": 16,
+                    "x": 0,
+                    "y": 8
+                },
+                "targets": [
+                    {
+                        "expr": "up{kubernetes_namespace=\"appgear\"}",
+                        "legendFormat": "{{kubernetes_pod_name}}",
+                        "refId": "A"
+                    }
+                ]
+            }
+        ]
+    },
+    "overwrite": true
+}

@@ -51,7 +51,7 @@ spec:
               name: postgres-credentials
               key: POSTGRES_DB
         - name: DATABASE_SCHEMA
-          value: flowise
+          value: public
         - name: FLOWISE_USERNAME
           valueFrom:
             secretKeyRef:
