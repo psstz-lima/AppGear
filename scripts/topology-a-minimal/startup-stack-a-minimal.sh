@@ -169,8 +169,8 @@ wait_healthy appgear-kong 60
 
 echo ""
 
-# FASE 3: AI Gateway (LiteLLM)
-log_info "═══ FASE 3/4: AI Gateway ═══"
+# ETAPA 3: AI Gateway (LiteLLM)
+log_info "═══ ETAPA 3: AI Gateway ═══"
 echo ""
 
 # Verificar se LiteLLM existe como container parado

@@ -13,7 +13,7 @@ Este relatório avalia a conformidade da implementação atual (**Fase 2**) com 
 
 **Resultado Geral:** ✅ **ADERENTE (Fase 2)**
 
-A implementação atual respeita os princípios fundamentais do contrato para o estágio de desenvolvimento atual. As lacunas identificadas são planejadas para a Fase 3 (GitOps/Enterprise) e não representam violações arquiteturais.
+A implementação atual respeita os princípios fundamentais do contrato para o estágio de desenvolvimento atual. As lacunas identificadas são planejadas para as Fases 3 e 4 (Full/Enterprise) e não representam violações arquiteturais.
 
 ---
 
@@ -30,9 +30,9 @@ A implementação atual respeita os princípios fundamentais do contrato para o 
 | **Automação** | n8n (Deployment) | ✅ OK | Motor de workflows. |
 | **UI/Builder** | Flowise (Deployment) | ✅ OK | Construtor visual de IA. |
 | **Observabilidade** | Prometheus + Grafana | ✅ OK | Monitoramento básico ativo. |
-| **Service Mesh** (Istio) | *Não Implantado* | ⚠️ Fase 3 | Comunicação direta via Service IP. |
+| **Service Mesh** (Istio) | *Não Implantado* | ⚠️ Fase 4 | Comunicação direta via Service IP. |
 | **API Gateway** (Kong) | *Não Implantado* | ⚠️ Fase 3 | Acesso via Port-forward. |
-| **Secrets** (Vault) | K8s Secrets | ⚠️ Fase 3 | Segredos geridos nativamente no K8s. |
+| **Secrets** (Vault) | K8s Secrets | ⚠️ Fase 4 | Segredos geridos nativamente no K8s. |
 
 ### 2.2. Topologias (Seção 3)
 
@@ -53,7 +53,7 @@ A implementação atual respeita os princípios fundamentais do contrato para o 
 > **Cláusula:** "Gerenciados via GitOps."
 
 - **Verificação:** A estrutura de diretórios `gitops/apps/` existe e segue o padrão Kustomize. No entanto, o deploy atual é feito via scripts imperativos (`kubectl apply`) para agilidade na Fase 2.
-- **Status:** ⚠️ **PARCIAL** (Preparado para Fase 3).
+- **Status:** ⚠️ **PARCIAL** (Preparado para Fase 4).
 
 ---
 
@@ -71,7 +71,7 @@ Para a **Fase 2**, os seguintes desvios do contrato são aceitos e documentados:
 
 A plataforma AppGear, em sua configuração **Standard Topology (Fase 2)**, está construída sobre bases sólidas que respeitam o Contrato de Arquitetura v0.
 
-A fundação para a **Fase 3** está pronta:
+A fundação para a **Fase 3 (Full)** está pronta:
 - Workloads já containerizados e orquestrados.
 - Separação de responsabilidades clara (Data, AI, Apps, Obs).
 - Estrutura de diretórios GitOps preparada.

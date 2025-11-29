@@ -57,7 +57,7 @@ Guias completos de instalação da plataforma AppGear, organizados por topologia
 
 ---
 
-#### 🔴 Enterprise (FASE 3) - Planejado
+#### 🔴 Enterprise (FASE 4) - Planejado
 - **Complexidade:** Avançada
 - **Componentes:** 20+ serviços
 - **Tempo:** 2-4 horas

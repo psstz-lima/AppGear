@@ -140,8 +140,8 @@ Grafana:    http://localhost:3001  (admin/appgear_grafana_2025)
 
 ## 🔮 Roadmap Futuro (Planejado)
 
-### Topologia A Standard (Evolução)
-*Foco: Melhoria da experiência de desenvolvimento e segurança básica no K3s.*
+### FASE 3: Topologia A Full (Planejada)
+*Objetivo: Completar a Topologia A com Ingress e WAF, eliminando port-forwards.*
 
 **Borda & Rede**
 - Implementação de Ingress (Traefik/Kong) para eliminar port-forwards
@@ -151,7 +151,7 @@ Grafana:    http://localhost:3001  (admin/appgear_grafana_2025)
 - Dashboards customizados de negócio (FinOps/Tokens)
 - Alertas básicos no Prometheus
 
-### Topologia B (Enterprise)
+### FASE 4: Topologia B (Enterprise)
 *Foco: Produção em escala, multi-tenancy e governança avançada.*
 
 **Service Mesh**

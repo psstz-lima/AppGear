@@ -184,7 +184,7 @@ helm install loki grafana/loki-stack
 
 ---
 
-## 🛠️ Fase 2.5: Scripts e Automação
+## 🛠️ Etapa Final: Scripts e Automação
 
 ### Scripts Necessários
 

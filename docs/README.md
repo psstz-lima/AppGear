@@ -99,6 +99,26 @@ docs/
 | Interoperabilidade v0 | `architecture/interoperability/interoperability-v0.md` | ✅ Completo | Alta |
 | AI-CI/CD Flow | `guides/ai-ci-cd-flow.md` | ✅ Completo | Média |
 | KEDA Guide | `guides/keda-scale-to-zero.md` | ✅ Completo | Média |
+| Licença | `../LICENSE.md` | ✅ Ativo | Legal |
+
+---
+
+## 📊 Status do Projeto
+
+### Topologia A Minimal (Docker Compose)
+- **Status:** ✅ CONCLUÍDA (100%)
+- **Foco:** Desenvolvimento local, testes rápidos.
+- **Stack:** Docker Compose, .env, Logs locais.
+
+### Topologia A Standard (Kubernetes)
+- **Status:** ✅ CONCLUÍDA (100%)
+- **Foco:** Staging, validação de arquitetura K8s.
+- **Stack:** K3s, Helm, Prometheus/Grafana, PVCs.
+
+### Topologia B (Enterprise)
+- **Status:** 🔮 PLANEJADA (Fase 3)
+- **Foco:** Produção em escala, multi-tenancy.
+- **Stack:** Istio, Vault, vClusters, ArgoCD.
 
 ---
 

@@ -2,10 +2,11 @@
 
 Este diretório contém a estrutura GitOps para o módulo **M03** (Observabilidade).
 
-## 🚧 Status: Fase 3 (Planejamento)
+## 🚧 Status: Fase 4 (Planejamento)
 
-A implementação ativa deste módulo na **Fase 2 (Standard Topology)** está localizada em:
-👉 `deployments/topology-a/standard/k8s/06-observability/`
+Este módulo contém a definição **GitOps** da stack de observabilidade.
+
+> **Nota:** Na **Fase 2 (Standard)**, o Prometheus e Grafana são deployados via manifestos diretos em `deployments/topology-a/standard/k8s/06-observability/`.
 
 ### Implementação Atual (Fase 2)
 - **Namespace:** `observability`
@@ -14,7 +15,7 @@ A implementação ativa deste módulo na **Fase 2 (Standard Topology)** está lo
   - Grafana (Porta 3001)
 - **Deploy:** Via `kubectl apply` (Manifestos diretos)
 
-### Futuro (Fase 3 - GitOps)
+### Futuro (Fase 4 - GitOps)
 Este diretório será utilizado para a migração para ArgoCD/Kustomize, gerenciando:
 - Prometheus Operator
 - Loki (Logs)

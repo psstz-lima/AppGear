@@ -26,7 +26,7 @@ Este relatório consolida os achados das auditorias específicas realizadas nest
 | **Auditoria Técnica** | 🟢 90% | **Conforme** | Workloads, Observabilidade e Dados operacionais. |
 | **Interoperabilidade** | 🟢 100% | **Conforme** | Gateway de IA e isolamento de schemas validados. |
 
-**Conclusão:** A FASE 2 atingiu seus objetivos de **estabilidade, observabilidade e fundação Kubernetes**. A plataforma está pronta para iniciar a FASE 3 (Enterprise/GitOps).
+**Conclusão:** A FASE 2 atingiu seus objetivos de **estabilidade, observabilidade e fundação Kubernetes**. A plataforma está pronta para iniciar a FASE 3 (Topologia A Full).
 
 ---
 
@@ -38,11 +38,11 @@ Este relatório consolida os achados das auditorias específicas realizadas nest
 *   **Observabilidade:** O stack Prometheus + Grafana está funcional, fornecendo métricas vitais de disponibilidade e performance de IA.
 *   **Segurança Básica:** Segredos geridos via Kubernetes Secrets e exclusão mútua entre topologias (Minimal vs Standard) garantida via scripts.
 
-### 2. Desvios Aceitos (Roadmap Fase 3)
-Os seguintes itens não estão implementados, mas **não constituem violação** pois são escopo da próxima fase:
-*   **Service Mesh (Istio):** Comunicação atual é HTTP direto (ClusterIP).
-*   **Ingress Controller (Traefik/Kong):** Acesso atual via Port-forward seguro.
-*   **GitOps Puro (ArgoCD):** Deploy atual via manifestos (`kubectl apply`), com estrutura GitOps já preparada.
+### 2. Desvios Aceitos (Roadmap Fase 3/4)
+Os seguintes itens não estão implementados, mas **não constituem violação** pois são escopo das próximas fases:
+*   **Service Mesh (Istio):** Comunicação atual é HTTP direto (ClusterIP) - **Fase 4**.
+*   **Ingress Controller (Traefik/Kong):** Acesso atual via Port-forward seguro - **Fase 3**.
+*   **GitOps Puro (ArgoCD):** Deploy atual via manifestos (`kubectl apply`) - **Fase 4**.
 
 ---
 
@@ -52,9 +52,11 @@ Os seguintes itens não estão implementados, mas **não constituem violação**
 
 A Topologia A Standard cumpre seu papel de ambiente robusto para desenvolvimento e validação de arquitetura em Kubernetes.
 
-**Próximos Passos Prioritários (Fase 3):**
+**Próximos Passos Prioritários (Fase 3 - Topologia A Full):**
 1.  Implementar Ingress Controller para eliminar dependência de `kubectl port-forward`.
-2.  Ativar pipeline GitOps com ArgoCD.
+
+**Próximos Passos (Fase 4 - Enterprise):**
+1.  Ativar pipeline GitOps com ArgoCD.
 
 ---
 

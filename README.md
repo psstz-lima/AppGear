@@ -152,17 +152,30 @@ kubectl rollout restart deployment/<name> -n appgear
 
 ## 📄 Licença
 
-[Definir licença]
+Este projeto está licenciado sob a [Proprietary License](LICENSE.md).
 
 ---
 
 ## 🏆 Status do Projeto
 
-- ✅ **FASE 1** - Topologia A Minimal (100%)
-- ✅ **FASE 2** - Topologia A Standard (100%)
-- 🔮 **FASE 3** - Enterprise Features (Planejada)
+### FASE 1: Topologia A Minimal (Docker Compose)
+- **Status:** ✅ CONCLUÍDA (100%)
+- **Foco:** Desenvolvimento local, testes rápidos.
 
-**Última Atualização:** 28 de novembro de 2025
+### FASE 2: Topologia A Standard (Kubernetes)
+- **Status:** ✅ CONCLUÍDA (100%)
+- **Foco:** Staging, validação de arquitetura K8s.
+
+### FASE 3 Topologia A Full (Planejada)
+- **Status:** 🔮 PLANEJADA
+- **Foco:** Ingress, WAF, Dashboards de Negócio.
+
+### FASE 4: Topologia B (Enterprise)
+- **Status:** 🔮 PLANEJADA
+- **Foco:** Produção em escala, multi-tenancy.
+- **Features:** Istio, Vault, vClusters, ArgoCD.
+
+**Última Atualização:** 29 de novembro de 2025
 
 ---
 

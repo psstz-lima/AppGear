@@ -66,7 +66,7 @@ A plataforma demonstra interoperabilidade correta entre os módulos Core, Factor
 ### 3.3. Cadeia de Borda (Edge Chain)
 > **Regra:** Traefik → Coraza → Kong → Istio.
 - **Verificação:** Ambiente atual usa `kubectl port-forward` para acesso direto aos Services.
-- **Resultado:** ⚠️ **N.A. (Escopo Fase 3)** - A cadeia de borda completa ainda não foi implantada.
+- **Resultado:** ⚠️ **N.A. (Escopo Fase 3/4)** - A cadeia de borda completa ainda não foi implantada.
 
 ---
 
@@ -96,7 +96,7 @@ A plataforma demonstra interoperabilidade correta entre os módulos Core, Factor
 
 A interoperabilidade interna da **Topologia A Standard** está madura e segue os princípios arquiteturais da AppGear.
 
-**Pontos de Atenção para Fase 3:**
+**Pontos de Atenção para Fase 3/4:**
 1.  **Service Mesh:** Implementar Istio para mTLS entre serviços (atualmente HTTP plano dentro do cluster).
 2.  **Ingress:** Substituir Port-forward pela cadeia Traefik/Kong.
 3.  **Network Policies:** Restringir tráfego entre namespaces (atualmente aberto).

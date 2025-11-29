@@ -288,12 +288,12 @@ grafana-xxx     1/1 Running
 
 ## 🔮 Próximos Passos (Opcional)
 
-### FASE 2.5: Gateways
+### FASE 3: Topologia A Full (Gateways)
 - [ ] Traefik IngressController
 - [ ] Kong Gateway
 - [ ] Ingress resources
 
-### FASE 3: Enterprise
+### FASE 4: Enterprise
 - [ ] Istio Service Mesh
 - [ ] Vault para secrets
 - [ ] vClusters (multi-tenancy)

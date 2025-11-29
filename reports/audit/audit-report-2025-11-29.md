@@ -11,9 +11,9 @@
 
 A auditoria foi realizada no ambiente **Topologia A Standard**, focando na implementação da **Fase 2** (Core + Observabilidade).
 
-**Resultado Geral:** ✅ **APROVADO (Com Ressalvas de Fase 3)**
-
-O ambiente encontra-se funcional, com todos os workloads essenciais (LiteLLM, Flowise, n8n, Bancos) operando corretamente no Kubernetes. A observabilidade básica (Prometheus/Grafana) está ativa. As ressalvas referem-se a componentes de Borda e Service Mesh que são escopo da Fase 3.
+**Resultado Geral:** ✅ **APROVADO (Com Ressalvas de Fase 3/4)**
+*   Highlighted the successful implementation of core components and observability.
+*   Noted expected "Not Applicable" (`N.A.`) status for Phase 3/4 components like Traefik, Kong, and Service Mesh. A observabilidade básica (Prometheus/Grafana) está ativa. As ressalvas referem-se a componentes de Borda e Service Mesh que são escopo da Fase 3/4.
 
 ---
 
@@ -24,7 +24,7 @@ O ambiente encontra-se funcional, com todos os workloads essenciais (LiteLLM, Fl
 | **Namespaces** | ✅ OK | `appgear` e `observability` presentes. |
 | **Traefik (Ingress)** | ⚠️ N.A. | Não implantado (Escopo Fase 3). Acesso via Port-forward. |
 | **Kong (Gateway)** | ⚠️ N.A. | Não implantado (Escopo Fase 3). |
-| **Service Mesh (Istio)** | ⚠️ N.A. | Não implantado (Escopo Fase 3). |
+| **Service Mesh (Istio)** | ⚠️ N.A. | Não implantado (Escopo Fase 4). |
 | **Observabilidade** | ✅ OK | Prometheus e Grafana rodando no namespace `observability`. |
 | **Secrets Management** | ✅ OK | Kubernetes Secrets utilizados (`postgres-credentials`, etc). |
 
@@ -62,7 +62,7 @@ O ambiente encontra-se funcional, com todos os workloads essenciais (LiteLLM, Fl
 |-------|--------|-----------|
 | **LiteLLM Gateway Único** | ✅ OK | Flowise configurado para usar `http://litellm:4000`. Sem chaves diretas no Flowise. |
 | **Cadeia de Borda** | ⚠️ N.A. | Acesso direto via Port-forward (Ambiente de Dev/Staging). |
-| **Multi-tenancy** | ⚠️ Parcial | Namespaces segregados, mas sem vClusters (Escopo Fase 3). |
+| **Multi-tenancy** | ⚠️ Parcial | Namespaces segregados, mas sem vClusters (Escopo Fase 4). |
 
 ---
 
@@ -83,7 +83,11 @@ O ambiente encontra-se funcional, com todos os workloads essenciais (LiteLLM, Fl
 
 O ambiente está **sólido e conforme** para os objetivos da Fase 2.
 
-**Próximos Passos (Fase 3):**
+**Próximos Passos (Fase 3 - Full):**
+- Implementar Ingress e WAF.
+
+**Próximos Passos (Fase 4 - Enterprise):**
+- Implementar Service Mesh e GitOps.
 1.  Implementar **Traefik Ingress Controller** para eliminar necessidade de port-forwards.
 2.  Implementar **Kong Gateway** para gestão de APIs.
 3.  Migrar para **GitOps (ArgoCD)** usando a estrutura preparada em `gitops/apps/`.

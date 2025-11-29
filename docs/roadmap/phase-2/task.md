@@ -65,7 +65,13 @@
 
 ---
 
-## 🔮 FASE 3: Enterprise & Multi-tenancy
+## 🔮 FASE 3: Topologia A Full (Planejada)
+**Status:** PLANEJADA
+- [ ] Ingress (Traefik/Kong)
+- [ ] Coraza WAF
+- [ ] Dashboards de Negócio
+
+## 🔮 FASE 4: Topologia B (Enterprise)
 **Status:** PLANEJADA
 
 ### Service Mesh
