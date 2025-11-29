@@ -32,6 +32,12 @@ ESTADO ATUAL: aplica-se à linha estável v0 (contrato, auditoria, interoperabil
 
 Tais documentos não limitam nem ampliam os direitos desta LICENÇA, mas ajudam a identificar o SOFTWARE e sua arquitetura.
 
+1.5. Definições aplicáveis a esta LICENÇA:
+   (a) “VISITANTE NÃO LICENCIADO” é qualquer pessoa física ou jurídica que tenha acesso ao repositório público ou à documentação da APPGEAR, por meio de plataformas como GitHub ou similares, sem possuir CONTRATO COMERCIAL vigente com o TITULAR que o identifique como LICENCIADO.
+   (b) “LICENCIADO” é a pessoa física ou jurídica expressamente identificada como tal em CONTRATO COMERCIAL celebrado com o TITULAR, na qualidade de cliente, parceiro, distribuidor autorizado ou similar.
+
+1.6. A disponibilização do repositório em modo público em plataformas como GitHub tem finalidade exclusiva de apresentação, demonstração técnica e transparência arquitetural, constituindo mera **visualização pública controlada** e **NÃO** implicando concessão de qualquer licença de uso, cópia, instalação, execução, distribuição ou criação de obras derivadas do SOFTWARE a VISITANTES NÃO LICENCIADOS.
+
 ---
 
 2. PROPRIEDADE INTELECTUAL
@@ -53,7 +59,7 @@ Tais documentos não limitam nem ampliam os direitos desta LICENÇA, mas ajudam 
 
 3. CONCESSÃO DE LICENÇA (USO AUTORIZADO)
 
-3.1. Sujeito ao cumprimento integral desta LICENÇA e dos CONTRATOS COMERCIAIS aplicáveis, o TITULAR concede ao usuário (“LICENCIADO”) uma licença:
+3.1. Sujeito ao cumprimento integral desta LICENÇA e dos CONTRATOS COMERCIAIS aplicáveis, o TITULAR concede ao LICENCIADO (conforme definido na Seção 1.5(b)) uma licença:
    (a) limitada;
    (b) não exclusiva;
    (c) intransferível;
@@ -68,7 +74,12 @@ para instalar, configurar e executar o SOFTWARE, exclusivamente para:
    (b) prestação de serviços concorrentes baseados em cópia substancial do SOFTWARE;
    (c) revenda, sublicenciamento ou cessão do SOFTWARE sem autorização expressa e escrita do TITULAR.
 
-3.3. A licença **não** autoriza a:
+3.3. **VISITANTES NÃO LICENCIADOS** (usuários que acessam o repositório público sem contrato comercial vigente) estão limitados à simples visualização do conteúdo disponibilizado na interface da plataforma de hospedagem (ex: GitHub), estritamente para fins de conhecimento e avaliação da APPGEAR, **sem** direito de:
+   (a) realizar clone, download ou cópia dos arquivos para ambiente local;
+   (b) utilizar o SOFTWARE para qualquer finalidade, seja pessoal, educacional ou comercial;
+   (c) submeter Pull Requests ou Issues, salvo se expressamente convidados para colaboração pontual.
+
+3.4. A licença **não** autoriza a:
    (a) criação de “forks” públicos da plataforma APPGEAR;
    (b) disponibilização de versões modificadas ou reempacotadas que possam ser percebidas como produto competitivo, derivação direta ou “clonagem” da APPGEAR;
    (c) publicação em repositórios públicos de código ou infraestrutura (por exemplo, GitHub, GitLab, Bitbucket ou similares) de qualquer parte substancial do SOFTWARE, salvo se:
@@ -79,7 +90,13 @@ para instalar, configurar e executar o SOFTWARE, exclusivamente para:
 
 4. RESTRIÇÕES EXPRESSAS
 
-4.1. Sem prejuízo de outras restrições previstas em lei, o LICENCIADO **NÃO PODE**, salvo autorização expressa e escrita do TITULAR:
+4.1. Sem prejuízo de outras restrições previstas em lei, o VISITANTE NÃO LICENCIADO **NÃO PODE**, em qualquer hipótese e sob qualquer forma, salvo autorização expressa e escrita do TITULAR:
+   (a) copiar, baixar, clonar, realizar fork ou de qualquer modo reproduzir o repositório ou partes relevantes do SOFTWARE, seja em contas próprias, seja em contas de terceiros, em plataformas como GitHub, GitLab, Bitbucket ou similares;
+   (b) instalar, executar, testar, compilar, empacotar ou de qualquer forma utilizar o SOFTWARE em ambientes locais, de nuvem, de desenvolvimento, de teste, de homologação ou de produção;
+   (c) redistribuir, revender, sublicenciar, alugar, ceder, disponibilizar como serviço (SaaS, PaaS, marketplace, etc.) ou incorporar o SOFTWARE em outros produtos ou plataformas;
+   (d) reutilizar, adaptar ou reempacotar a arquitetura, documentação, fluxos, prompts, manifests, templates ou qualquer outro artefato do SOFTWARE, com ou sem modificações, para fins comerciais ou não comerciais.
+
+4.2. Sem prejuízo de outras restrições previstas em lei, o LICENCIADO **NÃO PODE**, salvo autorização expressa e escrita do TITULAR:
 
    (a) copiar, reproduzir ou distribuir o SOFTWARE, total ou parcialmente, para qualquer fim que não seja estritamente necessário ao seu uso autorizado;
    (b) publicar, disponibilizar ou expor o SOFTWARE em repositórios públicos, fóruns, marketplaces ou quaisquer meios que permitam o acesso não autorizado a código, manifests, diagramas ou documentação proprietária;
@@ -89,7 +106,7 @@ para instalar, configurar e executar o SOFTWARE, exclusivamente para:
    (f) utilizar o SOFTWARE em violação à legislação aplicável, incluindo, mas não se limitando a, normas de proteção de dados, privacidade, segurança da informação e propriedade intelectual;
    (g) exportar, replicar ou reempacotar a arquitetura descrita em `docs/architecture/**` como se fosse padrão genérico ou base de produto independente, sem atribuição e sem autorização do TITULAR.
 
-4.2. Qualquer uso não autorizado do SOFTWARE constituirá infração contratual e violação de direitos de propriedade intelectual, sujeitando o infrator às sanções civis, administrativas e criminais cabíveis.
+4.3. Qualquer uso não autorizado do SOFTWARE constituirá infração contratual e violação de direitos de propriedade intelectual, sujeitando o infrator às sanções civis, administrativas e criminais cabíveis.
 
 ---
 
@@ -187,6 +204,10 @@ sem prejuízo dos direitos mínimos já concedidos ao LICENCIADO nos CONTRATOS C
    (b) alimentar datasets de treinamento para IA, incluindo, mas não se limitando a, LLMs, modelos de recomendação ou agentes autônomos;
    (c) construir sistemas que reproduzam substancialmente a arquitetura, os fluxos ou o comportamento da plataforma APPGEAR a partir de engenharia reversa “guiada por IA”.
 
+11.1-A. Em especial, VISITANTES NÃO LICENCIADOS não estão autorizados a:
+   (a) copiar, espelhar ou indexar o repositório da APPGEAR, no todo ou em parte, para fins de treinamento, ajuste, avaliação ou alimentação de modelos de IA, próprios ou de terceiros;
+   (b) utilizar ferramentas de raspagem (scraping), mirroring, arquivamento automático ou mecanismos semelhantes para extrair, de forma massiva ou sistemática, o conteúdo do SOFTWARE disponibilizado em repositórios públicos.
+
 11.2. O disposto em 11.1 não impede o uso de modelos de IA:
    (a) como parte da própria plataforma APPGEAR, conforme previsto no Contrato de Arquitetura; ou
    (b) para fins de suporte interno operacional, desde que não envolvam ingestão de partes substanciais do SOFTWARE em datasets de treinamento.
@@ -204,6 +225,8 @@ sem prejuízo dos direitos mínimos já concedidos ao LICENCIADO nos CONTRATOS C
 12.3. Esta LICENÇA poderá ser atualizada pelo TITULAR para refletir mudanças no Contrato de Arquitetura, em legislação aplicável ou em políticas de produto. Versões atualizadas devem ser identificadas por número de versão e data.
 
 12.4. A lei aplicável e o foro competente para dirimir conflitos oriundos desta LICENÇA poderão ser definidos em CONTRATO COMERCIAL específico. Na ausência de definição diversa, aplicar-se-á a legislação brasileira e o foro da comarca do domicílio do TITULAR.
+
+12.5. O acesso ao repositório público da APPGEAR, bem como qualquer forma de uso, tentativa de uso, clonagem, download, instalação, execução ou integração do SOFTWARE, implica ciência e aceitação integral desta LICENÇA, ainda que o usuário não seja LICENCIADO. VISITANTES NÃO LICENCIADOS, ao descumprirem estas condições, assumem integral responsabilidade pelos atos praticados.
 
 ---
 

@@ -257,7 +257,7 @@ yarn.lock
 local/
 
 # Modelos de IA e dados pesados
-models/
+.models/
 
 # Reports sensíveis (se contiverem dados reais)
 reports/production-*
