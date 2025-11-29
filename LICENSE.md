@@ -8,7 +8,7 @@ CONTATO: contato@appgear.io
 
 ESTADO ATUAL: aplica-se à linha estável v0 (contrato, auditoria, interoperabilidade) e aos retrofits v0.3 dos módulos 00–17 documentados em `development/v0.3/stack-unificada-v0.3.yaml`, bem como a quaisquer arquivos de código, documentação, arquitetura, prompts, automações e artefatos correlatos identificados como parte da “Arquitetura AppGear” ou da “Plataforma AppGear”.
 
-> [!CUIDADO]
+> [!CAUTION]
 > **IMPORTANTE: ESTA NÃO É UMA LICENÇA OPEN SOURCE.**
 >
 > A MERA DISPONIBILIDADE DESTE CÓDIGO EM REPOSITÓRIO PÚBLICO (EX: GITHUB) **NÃO CONCEDE DIREITOS** DE USO, CÓPIA OU REDISTRIBUIÇÃO.
