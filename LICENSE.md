@@ -8,7 +8,12 @@ CONTATO: contato@appgear.io
 
 ESTADO ATUAL: aplica-se à linha estável v0 (contrato, auditoria, interoperabilidade) e aos retrofits v0.3 dos módulos 00–17 documentados em `development/v0.3/stack-unificada-v0.3.yaml`, bem como a quaisquer arquivos de código, documentação, arquitetura, prompts, automações e artefatos correlatos identificados como parte da “Arquitetura AppGear” ou da “Plataforma AppGear”.
 
-IMPORTANTE: ESTA NÃO É UMA LICENÇA OPEN SOURCE. QUALQUER USO QUE NÃO SEJA EXPRESSAMENTE AUTORIZADO NESTE DOCUMENTO OU EM CONTRATO COMERCIAL ESPECÍFICO É PROIBIDO.
+> [!CAUTION]
+> **IMPORTANTE: ESTA NÃO É UMA LICENÇA OPEN SOURCE.**
+>
+> A MERA DISPONIBILIDADE DESTE CÓDIGO EM REPOSITÓRIO PÚBLICO (EX: GITHUB) **NÃO CONCEDE DIREITOS** DE USO, CÓPIA OU REDISTRIBUIÇÃO.
+>
+> QUALQUER USO QUE NÃO SEJA EXPRESSAMENTE AUTORIZADO NESTE DOCUMENTO OU EM CONTRATO COMERCIAL ESPECÍFICO É **ESTRITAMENTE PROIBIDO**.
 
 ---
 
@@ -41,6 +46,8 @@ Tais documentos não limitam nem ampliam os direitos desta LICENÇA, mas ajudam 
 2.2. Nenhuma disposição desta LICENÇA deve ser interpretada como transferência de propriedade intelectual ao usuário. É concedido apenas um direito de uso limitado, não exclusivo e intransferível, conforme descrito na Seção 3.
 
 2.3. É expressamente proibida a alegação de coautoria, joint ownership ou qualquer forma de apropriação de arquitetura, documentação, fluxos, prompts ou modelos conceituais do SOFTWARE por parte do LICENCIADO ou de terceiros, salvo estipulação escrita em CONTRATO COMERCIAL.
+
+2.4. **Não-Renúncia por Hospedagem Pública:** O fato de o TITULAR hospedar o código-fonte em plataformas públicas (como GitHub) para fins de portfólio, auditoria ou colaboração controlada **NÃO** constitui renúncia aos seus direitos de propriedade intelectual, nem coloca o SOFTWARE em domínio público ou sob licença permissiva.
 
 ---
 
