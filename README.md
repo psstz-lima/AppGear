@@ -154,11 +154,20 @@ kubectl rollout restart deployment/<name> -n appgear
 
 ---
 
-## 🤝 Contribuindo
+## ⛔ Propriedade Intelectual e Uso
 
-1. Clone o repositório
-2. Siga os guias de instalação
-3. Execute os testes E2E antes de commits
+**Este software é PROPRIETÁRIO e CONFIDENCIAL.**
+
+Embora o código fonte possa estar hospedado em um repositório público para fins de portfólio ou colaboração controlada, ele **NÃO É OPEN SOURCE**.
+
+1.  **Uso Restrito:** Este projeto está em desenvolvimento ativo para comercialização futura.
+2.  **Proibição de Cópia:** É estritamente proibida a cópia, redistribuição, engenharia reversa ou uso não autorizado de qualquer parte deste código.
+3.  **Consequências Legais:** A apropriação indevida desta tecnologia intelectual constituirá violação de direitos autorais e segredo industrial, sujeita às penalidades da lei.
+
+**Nota sobre Terceiros:**
+Este projeto orquestra tecnologias de código aberto (como PostgreSQL, Redis, LiteLLM, etc.) que permanecem sujeitas às suas respectivas licenças originais (MIT, Apache 2.0, etc.). A restrição de propriedade intelectual aplica-se à **plataforma AppGear** (scripts de orquestração, arquitetura, configurações específicas e integrações proprietárias).
+
+Caso tenha interesse comercial ou de parceria, entre em contato diretamente com o autor: **contato@appgear.io**
 
 ---
 

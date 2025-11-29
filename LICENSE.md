@@ -4,7 +4,7 @@ VERSÃO: 1
 DATA: 24/11/2025
 TITULAR: PAULO SÉRGIO SANTOS LIMA
 CNPJ/ID: 364.694.488-95
-CONTATO: eu.plima@outlook.com.br
+CONTATO: contato@appgear.io
 
 ESTADO ATUAL: aplica-se à linha estável v0 (contrato, auditoria, interoperabilidade) e aos retrofits v0.3 dos módulos 00–17 documentados em `development/v0.3/stack-unificada-v0.3.yaml`, bem como a quaisquer arquivos de código, documentação, arquitetura, prompts, automações e artefatos correlatos identificados como parte da “Arquitetura AppGear” ou da “Plataforma AppGear”.
 
