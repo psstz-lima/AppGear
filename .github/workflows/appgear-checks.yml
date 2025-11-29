@@ -36,4 +36,4 @@ jobs:
 
       - name: Run AppGear checks
         run: |
-          python scripts/run_all_checks.py
+          python scripts/checks/run_all_checks.py
